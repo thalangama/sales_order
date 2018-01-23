@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 //sameera
+=======
+//hello
 <!DOCTYPE html>
 <html lang="en">
 
