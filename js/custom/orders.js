@@ -95,7 +95,7 @@ function addItemIntoTable(){
         cellItemCount.innerHTML = cellCount.toString();
         cellItemCode.innerHTML = item_code;
         cellItemName.innerHTML = "Some name";
-        cellPrice.innerHTML = price;
+        cellPrice.innerHTML = "<input type='number'/>";
         cellAction.innerHTML = "Action Link";
 
         cellCount++;
