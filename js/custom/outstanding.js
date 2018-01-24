@@ -78,6 +78,7 @@ function clearMsgData() {
 
 function getOutstanding(){
 
+    total_out = 0;
     $('#tblOutstanding').dataTable().fnClearTable();
     $("#wait").fadeIn('fast');
     $.ajax
@@ -97,9 +98,9 @@ function getOutstanding(){
         "bAutoWidth": false,
         success: function (data, textStatus) {
             if (data[0] != null && data[0].order_no != null) {
-                row_count = 0;
-                total_out = 0;
+                row_count = 1;
                 $.each(data, function (counter, item) {
+                    console.log(data.length);
                     tblOutstanding.fnAddData([
                         row_count++,
                         item.order_no,
@@ -108,14 +109,18 @@ function getOutstanding(){
                         (item.to_paied - item.paied)
                     ]);
                     total_out += (item.to_paied - item.paied);
+                    if(data.length < row_count){
+                        tblOutstanding.fnAddData([
+                            row_count,
+                            '',
+                            '',
+                            'Total',
+                            total_out
+                        ]);
+                    }
                 });
-                tblOutstanding.fnAddData([
-                    '',
-                    '',
-                    '',
-                    'Total',
-                    total_out
-                ]);
+
+
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -124,7 +129,8 @@ function getOutstanding(){
         }
 
     }).done(function (data) {
-            $("#wait").fadeOut('slow');
+
+        $("#wait").fadeOut('slow');
     });
 
 }

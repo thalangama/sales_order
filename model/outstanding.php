@@ -35,13 +35,15 @@ class outstanding
                     AND off.id = o.recovery_officer_id
                     AND o.customer_id = c.id
                     ".$where."
+                GROUP BY p.order_id
                 ) outs
             WHERE
                 p.order_id = o.id
                 AND off.id = o.recovery_officer_id
                 AND o.customer_id = c.id
                 AND p.order_id = outs.order_id 
-                ".$where;
+                ".$where."
+            GROUP BY p.order_id";
 
         $DbManager = new DbManager();
         $data = $DbManager->select($sql);
