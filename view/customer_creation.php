@@ -44,7 +44,7 @@
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 							<label for="" class="col-sm-5 col-xs-5">NIC</label>
 							<div class="col-sm-7 col-xs-7">
-								<input class="form-control" id="NIC" name="NIC" type="text"> </div>
+								<input class="form-control" id="nic" name="nic" type="text"> </div>
 						</div>
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
 					</form>
@@ -62,7 +62,7 @@
 					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 						<label for="" class="col-sm-5 col-xs-5">ID No<span class="mandatory">*</span></label>
 						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="nic" name="nic" type="text">
+							<input class="form-control" id="customer_nic" name="customer_nic" type="text">
 						</div>
 					</div>
 					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
@@ -96,6 +96,8 @@
         <script src="../js/lib/jquery.dlmenu.min.js"></script>
         <script src="../js/lib/bootstrap-multiselect.min.js"></script>
 		<script src="../js/lib/w3.js"></script>
+		<script src="../js/lib/jquery.validate.js"></script>
+		<script src="../js/custom/common.js"></script>
 		<script src="../js/custom/customer_creation.js"></script>
 		<script>
 			w3.includeHTML();
