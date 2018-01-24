@@ -15,6 +15,9 @@
 </head>
 
 <body>
+    <div id="wait" style="display:none;width:100%;height:100%;position:absolute;top:25px;left:15px;z-index:5555; background: rgba(255,255,255,0.4)">
+        <img src="../images/ajax-loader.gif" alt=""/>
+    </div>
     <header>
         <div class="navbar navbar-fixed-top" role="navigation">
             <a class="logo" href="#"><img src="../images/logo.png" class="img-responsive"> </a>
@@ -56,14 +59,9 @@
 								<input class="form-control" type="text" id="recovery_officer_id" name="recovery_officer_id"> </div>
 						</div>
 						<div class="form-group col-lg-4 col-sm-4 col-xs-12">
-							<label for="" class="col-sm-5 col-xs-5">From Date</label>
+							<label for="" class="col-sm-5 col-xs-5">Date</label>
 							<div class="col-sm-7 col-xs-7">
-								<input class="form-control" type="text" id="from_date" name="from_date"> </div>
-						</div>
-						<div class="form-group col-lg-4 col-sm-4 col-xs-12">
-							<label for="" class="col-sm-5 col-xs-5">To Date</label>
-							<div class="col-sm-7 col-xs-7">
-								<input class="form-control" type="text" id="to_date" name="to_date"> </div>
+								<input class="form-control" type="text" id="date" name="date"> </div>
 						</div>
 						<div class="form-group col-lg-4 col-sm-4 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
                     </form>
@@ -72,8 +70,8 @@
                 <!-- Outstading Details -->
                 <div class="col-sm-12 col-xs-12 common-box">
                     <h2>Outstading</h2>
-                    <div class="dataTables_wrapper no-footer" id="tblOutstanding">
-                        <table class="display table footable dataTable no-footer footable-loaded" id="tblAccountDetails" role="grid" border="0" cellspacing="0" cellpadding="0">
+                    <div class=" col-sm-12 col-xs-12 col-lg-12 without-heading">
+                        <table cellpadding="0" cellspacing="0" border="0" class="display table footable" id="tblOutstanding">
                             <thead>
                                 <tr role="row">
                                     <th class="sorting_asc">No</th>
@@ -102,6 +100,8 @@
         <script src="../js/lib/jquery.dlmenu.min.js"></script>
         <script src="../js/lib/bootstrap-multiselect.min.js"></script>
 		<script src="../js/lib/w3.js"></script>
+		<script src="../js/lib/jquery.validate.js"></script>
+		<script src="../js/custom/common.js"></script>
 		<script src="../js/custom/outstanding.js"></script>
 		<script>
 			w3.includeHTML();
