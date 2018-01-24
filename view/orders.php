@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- update -->
+
 <head>
     <title>Udaya</title>
     <meta charset="utf-8">
@@ -12,7 +12,6 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/main_style.css" rel="stylesheet">
     <script type="text/javascript" src="../js/lib/CreateHTML5Elements.js"></script>
-	<script type="text/javascript" src="../js/custom/orders.js"></script>
 </head>
 
 <body>
@@ -100,9 +99,7 @@
 						<input class="form-control" id="price" name="price" type="text">
 					</div>
 				</div>
-				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading "> <a id="" class="btn btn-next pull-right draft " href="#" onclick="addItemIntoTable()">Add Item</a></div>
-
-
+				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading "> <a class="btn btn-next pull-right draft " href="#" id="btnAddItems">Add Item</a></div>
 				<div class="dataTables_wrapper no-footer" id="tblAccountDetails_wrapper">
 					<table class="display table footable dataTable no-footer footable-loaded" id="tblAddItems" role="grid" border="0" cellspacing="0" cellpadding="0">
 						<thead>
