@@ -81,23 +81,25 @@ function addItemIntoTable(){
     var item_code = document.getElementById("item_code").value;
     var price = document.getElementById("price").value;
 
-    var table = document.getElementById("tblAddItems");
+    if(item_code != "" && price != ""){
+        var table = document.getElementById("tblAddItems");
 
-    var row = table.insertRow(cellCount);
+        var row = table.insertRow(cellCount);
 
-    var cellItemCount = row.insertCell(0);
-    var cellItemCode = row.insertCell(1);
-    var cellItemName = row.insertCell(2);
-    var cellPrice = row.insertCell(3);
-    var cellAction = row.insertCell(4);
+        var cellItemCount = row.insertCell(0);
+        var cellItemCode = row.insertCell(1);
+        var cellItemName = row.insertCell(2);
+        var cellPrice = row.insertCell(3);
+        var cellAction = row.insertCell(4);
 
-    cellItemCount.innerHTML = cellCount.toString();
-    cellItemCode.innerHTML = item_code;
-    cellItemName.innerHTML = "Some name";
-    cellPrice.innerHTML = price;
-    cellAction.innerHTML = "Action Link";
+        cellItemCount.innerHTML = cellCount.toString();
+        cellItemCode.innerHTML = item_code;
+        cellItemName.innerHTML = "Some name";
+        cellPrice.innerHTML = price;
+        cellAction.innerHTML = "Action Link";
 
-    cellCount++;
+        cellCount++;
+    }
 }
 
 //ended newly created for testing
