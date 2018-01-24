@@ -1,4 +1,4 @@
-//sam
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,9 +49,9 @@
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
 					</form>
                 </div>
-			
+
 			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
-				<form id="frmCustomerSave" name="frmCustomerSave" action="" method="POST">
+				<form id="frmCustomerSave" name="frmCustomerSave" action="customer_creation.php" method="POST">
 					<input class="form-control" id="customer_id" name="customer_id" type="hidden">
 					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 						<label for="" class="col-sm-5 col-xs-5">Name<span class="mandatory">*</span></label>
