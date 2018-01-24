@@ -80,6 +80,13 @@ class DbManager
     }
 }
 
+//scoopz
+function insertUpdateDelete($query){
+    $connection = mysqli_connect("localhost","root","");
+    mysqli_select_db($connection,"udaya");
+    return mysqli_query($connection,$query);
+}
+
 
 //$sql = "INSERT INTO `items` (`id`, `code`, `description`) VALUES (NULL, 'ddfgh', 'hhh');";
 //$DbManager = new DbManager();

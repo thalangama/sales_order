@@ -10,6 +10,13 @@ jQuery(document).ready(function () {
     eventHandler();
 });
 
+function clearFields(){
+    document.getElementById('name').value = "";
+    document.getElementById('customer_nic').value = "";
+    document.getElementById('address').value = "";
+    document.getElementById('phone_no').value = "";
+}
+
 function pageInit(){
 }
 
