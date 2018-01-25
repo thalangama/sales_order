@@ -1,3 +1,37 @@
+<?php
+include '../dbManager/dbManager.php';
+
+$errors = null;
+
+if(isset($_POST['add']) || isset($_POST['update'])) {
+	$name = $_POST['name'];
+	$nic = $_POST['nic'];
+	$officer_id = $_POST['officer_id'];
+	$address = $_POST['address'];
+	$phone = $_POST['phone_no'];
+
+
+	if (isset($_POST['add'])) {
+		$result = insertUpdateDelete("INSERT INTO officer(name,address,phone,nic,officer_id) VALUES('$name','$address',$phone,'$nic','$officer_id')");
+		if ($result == 1) {
+			//success
+		} else {
+			$errors.="Save Error";
+		}
+	}
+	if (isset($_POST['update'])) {
+		$query = "UPDATE officer SET name='$name', address ='$address' ,officer_id='$officer_id', phone = $phone where nic='$nic' ";
+		$result = insertUpdateDelete($query);
+
+		if ($result == 1) {
+			//success
+		} else {
+			$errors.="Update Error";
+		}
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +66,18 @@
         <div class="row-offcanvas row-offcanvas-left">
             <!--detail panel-->
             <div id="detail-panel" class=" col-sm-10 col-xs-12 pull-right">
-				<div id="msg-area"></div>
+				<div id="msg-area">
+					<?php
+
+					if(isset($_POST['add']) || isset($_POST['update'])) {
+						if ($errors != null) {
+							echo '<p class="error-msg"> Error, Action is not Completed. </p> ';
+						} else {
+							echo '<p class="success-msg" > Success. </p> ';
+						}
+					}
+					?>
+				</div>
                 <p class="visible-xs">
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"> <span class="glyphicon glyphicon-align-justify"></span> Navigation </button>
                 </p>
@@ -87,10 +132,15 @@
 							<input class="form-control" id="phone_no" name="phone_no" type="text">
 						</div>
 					</div>
+					<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
+						<Button id="btnAdd" class="btn btn-next pull-right draft " name="add" type="submit">Add</Button>
+						<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
+						<Button id="btnUpdate" class="btn btn-next pull-right draft " name="update" type="submit">Update</Button>
+					</div>
 				</form>
 			</div>
                 <!-- /Expenses Details -->
-			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading "> <a id="btnProcess" class="btn btn-next pull-right draft " href="#">Process</a></div>
+<!--			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading "> <a id="btnProcess" class="btn btn-next pull-right draft " href="#">Process</a></div>-->
 		</div>
 		</div>
             <!--/detail panel-->
