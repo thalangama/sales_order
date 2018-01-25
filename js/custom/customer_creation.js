@@ -1,3 +1,4 @@
+
 var currencyMinValue = "-9999999999999999.99";
 var currencyMaxValue = "9999999999999999.99";
 var MSG_ERROR_ROOT = "msg-area";
@@ -57,8 +58,8 @@ function clearMsgData() {
 function getCustomer(){
 
     $("#wait").fadeIn('fast');
-    $.ajax
-    ({
+
+    var objData = {
         type: "POST",
         url: GET_CUSTOMER_URL,
         cache: false,
@@ -82,8 +83,10 @@ function getCustomer(){
             $("#wait").fadeOut('slow');
         }
 
-    }).done(function (data) {
+    }
 
+    $.ajax
+    (objData).done(function (data) {
         $("#wait").fadeOut('slow');
     });
 
