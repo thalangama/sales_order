@@ -27,7 +27,7 @@
     </header>
     <div id="main-wrap">
 		<!--sidebar-offcanvas-->
-		<div w3-include-html="menu.html"></div> 
+		<div w3-include-html="menu.html"></div>
 		<!--sidebar-offcanvas-->
         <div class="row-offcanvas row-offcanvas-left">
             <!--detail panel-->
@@ -43,17 +43,17 @@
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 							<label for="" class="col-sm-5 col-xs-5">NIC</label>
 							<div class="col-sm-7 col-xs-7">
-								<input class="form-control" id="NIC" name="NIC" type="text"> </div>
+								<input class="form-control" id="search_nic" name="search_nic" type="text"> </div>
 						</div>
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 							<label for="" class="col-sm-5 col-xs-5">Officer ID</label>
 							<div class="col-sm-7 col-xs-7">
-								<input class="form-control" id="officer_id" name="officer_id" type="text"> </div>
+								<input class="form-control" id="search_officer_id" name="search_officer_id" type="text"> </div>
 						</div>
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
                     </form/>
                 </div>
-			
+
 			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
 				<form id="frmOfficerSave" name="frmOfficerSave" action="" method="POST">
 					<input class="form-control" id="customer_id" name="customer_id" type="hidden">

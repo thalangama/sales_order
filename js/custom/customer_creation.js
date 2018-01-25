@@ -16,6 +16,7 @@ function clearFields(){
     document.getElementById('customer_nic').value = "";
     document.getElementById('address').value = "";
     document.getElementById('phone_no').value = "";
+    return false;
 }
 
 function pageInit(){

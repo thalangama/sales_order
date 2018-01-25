@@ -64,9 +64,13 @@ if(isset($_POST['add']) || isset($_POST['update'])) {
             <div id="detail-panel" class=" col-sm-10 col-xs-12 pull-right">
 			<div id="msg-area">
 				<?php
-					if($errors != null){
+				if(isset($_POST['add']) || isset($_POST['update'])) {
+					if ($errors != null) {
 						echo '<p class="error-msg"> Error, Action is not Completed. </p> ';
+					} else {
+						echo '<p class="success-msg" > Success. </p> ';
 					}
+				}
 				?>
 			</div>
                 <p class="visible-xs">
@@ -114,7 +118,7 @@ if(isset($_POST['add']) || isset($_POST['update'])) {
 					</div>
 					<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
 						<Button id="btnAdd" class="btn btn-next pull-right draft " name="add" type="submit">Add</Button>
-						<Button id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</Button>
+						<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
 						<Button id="btnUpdate" class="btn btn-next pull-right draft " name="update" type="submit">Update</Button>
 					</div>
 				</form>
