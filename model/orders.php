@@ -16,17 +16,17 @@ class Order
 
         $DbManager = new DbManager();
         $data = $DbManager->select($sql);
-
-        $sql = "SELECT 
+        if(isset($data[0])) {
+            $sql = "SELECT 
                   i.code, i.description, o.price 
                 FROM 
                   order_items o, 
                   items i 
                 WHERE 
                   i.id = o.item_id 
-                  AND o.order_id = '".$data[0]["id"]."'";
-        $data['items'] = $DbManager->select($sql);
-
+                  AND o.order_id = '" . $data[0]["id"] . "'";
+            $data['items'] = $DbManager->select($sql);
+        }
         return ($data);
     }
 }
