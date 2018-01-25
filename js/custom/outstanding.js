@@ -100,7 +100,6 @@ function getOutstanding(){
             if (data[0] != null && data[0].order_no != null) {
                 row_count = 1;
                 $.each(data, function (counter, item) {
-                    console.log(data.length);
                     tblOutstanding.fnAddData([
                         row_count++,
                         item.order_no,

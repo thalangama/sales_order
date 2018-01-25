@@ -33,6 +33,12 @@ function pageInit(){
         "oLanguage":{"sEmptyTable":"<div class='info-text'></div>"}
     });
 
+    $('#tblAddItems tbody').on( 'click', '#btnAddItems', function () {
+        $('#tblAddItems').DataTable()
+            .row( $(this).parents('tr') )
+            .remove()
+            .draw();
+    } );
 }
 
 function formValidation() {
@@ -53,7 +59,7 @@ function eventHandler() {
 
     $("#btnSearch").on('click', function (e) {
         clearMsg(MSG_ERROR_ROOT, MSG_ERROR_ROOT);
-        if ($("#frmOutstandingSearch").valid()) {
+        if ($("#frmOrdersSearch").valid()) {
             getOrder();
         }
     });
@@ -63,8 +69,6 @@ function eventHandler() {
     });
 
     $("#btnAddItems").on('click', function (e) {
-
-        alert(1);
         addItems();
     });
 
@@ -78,7 +82,7 @@ function clearMsgData() {
 function getOrder(){
 
     total_out = 0;
-    $('#tblOutstanding').dataTable().fnClearTable();
+    $('#tblAddItems').dataTable().fnClearTable();
     $("#wait").fadeIn('fast');
     $.ajax
     ({
@@ -87,14 +91,30 @@ function getOrder(){
         cache: false,
         async: false,
         data: ({
-            order_no: $('#order_no').val()
+            order_no: $('#search_order_no').val()
         }),
         dataType: "json",
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
-            if (data[0] != null && data[0].order_no != null) {
+            if (data[0] != null && data[0].id != null) {
+                $('#order_id').val(data[0].id);
+                $('#order_no').val(data[0].order_no);
+                $('#customer_nic').val(data[0].nic);
+                $('#sales_officer_id').val(data[0].sales_officer_id);
+                $('#recovery_officer_id').val(data[0].recovery_officer_id);
+                $('#date').val(data[0].date);
 
+                row_count = 1;
+                $.each(data.items, function (counter, item) {
+                    tblAddItems.fnAddData([
+                        row_count++,
+                        item.code,
+                        item.description,
+                        item.price,
+                        '<a id="btnAddItems" class="deleteFile pull-center" title="Remove" href="#"> </a>'
+                    ]);
+                });
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -103,7 +123,6 @@ function getOrder(){
         }
 
     }).done(function (data) {
-
         $("#wait").fadeOut('slow');
     });
 
@@ -112,10 +131,14 @@ function getOrder(){
 function addItems(){
     item = $("#item_code").val().split("::");
     tblAddItems.fnAddData([
-        (tblAddItems.data().count() ),
+        $('#tblAddItems >tbody >tr').length ,
         item[0],
         item[1],
         $("#price").val(),
-        '<a class="btn btn-next pull-center draft " href="#" id="btnAddItems">Remove</a>'
+        '<a id="btnAddItems" class="deleteFile pull-center" title="Remove" href="#"> </a>'
     ]);
+
 }
+
+
+

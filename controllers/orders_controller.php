@@ -1,6 +1,6 @@
 <?php
-include '../model/outstanding.php';
+include '../model/orders.php';
 
-$outstanding = new outstanding();
-$data = $outstanding->getOutstand();
+$Order = new Order();
+$data = $Order->getOrder();
 echo (json_encode($data));

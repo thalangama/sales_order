@@ -43,7 +43,7 @@
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 							<label for="" class="col-sm-5 col-xs-5">Order No</label>
 							<div class="col-sm-7 col-xs-7">
-								<input class="form-control" id="order_no" name="order_no" type="text"> </div>
+								<input class="form-control" id="search_order_no" name="search_order_no" type="text"> </div>
 						</div>
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
                     </form/>

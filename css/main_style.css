@@ -3907,11 +3907,9 @@
     
     .deleteFile {
         background: url(../images/close.png) no-repeat;
-        float: right;
         height: 20px;
         margin: -9px -5px 0 0;
         position: absolute;
-        right: 0;
         width: 20px;
     }
     
