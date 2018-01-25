@@ -10,6 +10,15 @@ jQuery(document).ready(function () {
     eventHandler();
 });
 
+function clearFields(){
+    document.getElementById('name').value = "";
+    document.getElementById('nic').value = "";
+    document.getElementById('officer_id').value = "";
+    document.getElementById('address').value = "";
+    document.getElementById('phone_no').value = "";
+    return false;
+}
+
 function pageInit(){
 
     tblPayments = $('#tblPayments').dataTable({
