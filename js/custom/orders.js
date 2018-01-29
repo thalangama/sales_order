@@ -1,5 +1,5 @@
-var MSG_ERROR_ROOT = "msg-area";
-var GET_ORDER_URL = "../controllers/orders_controller.php";
+var ORDER_URL = "../controllers/orders_controller.php";
+var CUSTOMER_URL = "../controllers/customer_creation_controller.php";
 var tblAddItems = null;
 
 jQuery(document).ready(function () {
@@ -58,9 +58,16 @@ function formValidation() {
 function eventHandler() {
 
     $("#btnSearch").on('click', function (e) {
-        clearMsg(MSG_ERROR_ROOT, MSG_ERROR_ROOT);
+        clearMsg();
         if ($("#frmOrdersSearch").valid()) {
             getOrder();
+        }
+    });
+
+    $("#btnSearchCus").on('click', function (e) {
+        clearMsg();
+        if ($("#frmCustomerSearch").valid()) {
+            getCustomer();
         }
     });
 
@@ -75,7 +82,7 @@ function eventHandler() {
 }
 
 function clearMsgData() {
-    clearMsg(MSG_ERROR_ROOT, MSG_ERROR_ROOT);
+    clearMsg();
 }
 
 
@@ -87,7 +94,7 @@ function getOrder(){
     $.ajax
     ({
         type: "POST",
-        url: GET_ORDER_URL,
+        url: ORDER_URL,
         cache: false,
         async: false,
         data: ({
@@ -101,6 +108,9 @@ function getOrder(){
                 $('#order_id').val(data[0].id);
                 $('#order_no').val(data[0].order_no);
                 $('#customer_nic').val(data[0].nic);
+                $('#name').val(data[0].name);
+                $('#address').val(data[0].address);
+                $('#phone_no').val(data[0].phone_no);
                 $('#sales_officer_id').val(data[0].sales_officer_id);
                 $('#recovery_officer_id').val(data[0].recovery_officer_id);
                 $('#date').val(data[0].date);
@@ -118,7 +128,7 @@ function getOrder(){
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            showMsgText(MSG_ERROR_ROOT, MSG_ERROR_ROOT, textStatus);
+            showMsgError(textStatus);
             $("#wait").fadeOut('slow');
         }
 
@@ -137,6 +147,55 @@ function addItems(){
         $("#price").val(),
         '<a id="btnAddItems" class="deleteFile pull-center" title="Remove" href="#"> </a>'
     ]);
+
+}
+
+function clearFieldsCus(){
+    $('#customer_id').val("");
+    $('#name').val("");
+    $('#customer_nic').val("");
+    $('#address').val("");
+    $('#phone_no').val("");
+    $('#nic').val("");
+    return false;
+}
+
+function getCustomer(){
+    clearMsg();
+    $("#wait").fadeIn('fast');
+
+    var objData = {
+        type: "POST",
+        url: CUSTOMER_URL,
+        cache: false,
+        async: false,
+        data: ({
+            REQUEST_TYPE: 'GET',
+            customer_nic: $('#nic').val()
+        }),
+        dataType: "json",
+        timeout: 180000,
+        "bAutoWidth": false,
+        success: function (data, textStatus) {
+            if (data.nic != null) {
+                $('#customer_id').val(data.id );
+                $('#customer_nic').val(data.nic );
+                $('#name').val(data.name );
+                $('#address').val(data.address );
+                $('#phone_no').val(data.phone_no );
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showMsgError( textStatus);
+            $("#wait").fadeOut('slow');
+        }
+
+    }
+
+    $.ajax
+    (objData).done(function (data) {
+        $("#wait").fadeOut('slow');
+    });
 
 }
 

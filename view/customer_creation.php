@@ -49,41 +49,41 @@
 					</form>
                 </div>
 
-			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
-				<form id="frmCustomerSave" name="frmCustomerSave" action="customer_creation.php" method="POST">
-					<input class="form-control" id="customer_id" name="customer_id" type="hidden">
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Name<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="name" name="name" type="text">
+				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
+					<form id="frmCustomerSave" name="frmCustomerSave" action="customer_creation.php" method="POST">
+						<input class="form-control" id="customer_id" name="customer_id" type="hidden">
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Name<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="name" name="name" type="text">
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">ID No<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="customer_nic" name="customer_nic" type="text">
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">ID No<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="customer_nic" name="customer_nic" type="text">
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Address<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="address" name="address" type="text">
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Address<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="address" name="address" type="text">
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Phone No <span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="phone_no" name="phone_no" type="text">
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Phone No <span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="phone_no" name="phone_no" type="text">
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
-						<a id="btnProcess" class="btn btn-next pull-right draft " >Process</a>
-						<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
-					</div>
-				</form>
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
+							<a id="btnProcess" class="btn btn-next pull-right draft " >Process</a>
+							<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
+						</div>
+					</form>
+				</div>
+					<!-- /Expenses Details -->
 			</div>
-                <!-- /Expenses Details -->
-		</div>
 		</div>
             <!--/detail panel-->
         </div>
