@@ -1,37 +1,3 @@
-<?php
-include '../dbManager/dbManager.php';
-
-$errors = null;
-
-if(isset($_POST['add']) || isset($_POST['update'])) {
-	$name = $_POST['name'];
-	$nic = $_POST['nic'];
-	$officer_id = $_POST['officer_id'];
-	$address = $_POST['address'];
-	$phone = $_POST['phone_no'];
-
-
-	if (isset($_POST['add'])) {
-		$result = insertUpdateDelete("INSERT INTO officer(name,address,phone,nic,officer_id) VALUES('$name','$address',$phone,'$nic','$officer_id')");
-		if ($result == 1) {
-			//success
-		} else {
-			$errors.="Save Error";
-		}
-	}
-	if (isset($_POST['update'])) {
-		$query = "UPDATE officer SET name='$name', address ='$address' ,officer_id='$officer_id', phone = $phone where nic='$nic' ";
-		$result = insertUpdateDelete($query);
-
-		if ($result == 1) {
-			//success
-		} else {
-			$errors.="Update Error";
-		}
-	}
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,18 +32,7 @@ if(isset($_POST['add']) || isset($_POST['update'])) {
         <div class="row-offcanvas row-offcanvas-left">
             <!--detail panel-->
             <div id="detail-panel" class=" col-sm-10 col-xs-12 pull-right">
-				<div id="msg-area">
-					<?php
-
-					if(isset($_POST['add']) || isset($_POST['update'])) {
-						if ($errors != null) {
-							echo '<p class="error-msg"> Error, Action is not Completed. </p> ';
-						} else {
-							echo '<p class="success-msg" > Success. </p> ';
-						}
-					}
-					?>
-				</div>
+				<div id="msg-area"></div>
                 <p class="visible-xs">
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"> <span class="glyphicon glyphicon-align-justify"></span> Navigation </button>
                 </p>
@@ -101,7 +56,7 @@ if(isset($_POST['add']) || isset($_POST['update'])) {
 
 			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
 				<form id="frmOfficerSave" name="frmOfficerSave" action="" method="POST">
-					<input class="form-control" id="customer_id" name="customer_id" type="hidden">
+					<input class="form-control" id="id" name="id" type="hidden">
 					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 						<label for="" class="col-sm-5 col-xs-5">Name<span class="mandatory">*</span></label>
 						<div class="col-sm-7 col-xs-7">
@@ -133,9 +88,8 @@ if(isset($_POST['add']) || isset($_POST['update'])) {
 						</div>
 					</div>
 					<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
-						<Button id="btnAdd" class="btn btn-next pull-right draft " name="add" type="submit">Add</Button>
 						<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
-						<Button id="btnUpdate" class="btn btn-next pull-right draft " name="update" type="submit">Update</Button>
+						<a id="btnProcess" class="btn btn-next pull-right draft " >Process</a>
 					</div>
 				</form>
 			</div>

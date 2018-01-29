@@ -23,7 +23,7 @@ class DbManager
             return "New record created successfully";
         } catch (PDOException $e) {
             $conn = null;
-            return $sql . "<br>" . $e->getMessage();
+            die($sql . "<br>" . $e->getMessage());
         }
     }
 
@@ -43,7 +43,7 @@ class DbManager
         }
         catch(PDOException $e) {
             $conn = null;
-            return "Error: " . $e->getMessage();
+            die("Error: " . $e->getMessage());
         }
     }
 
@@ -59,7 +59,7 @@ class DbManager
         catch(PDOException $e)
         {
             $conn = null;
-            return $sql . "<br>" . $e->getMessage();
+            die( $sql . "<br>" . $e->getMessage());
         }
     }
 
@@ -75,16 +75,9 @@ class DbManager
         catch(PDOException $e)
         {
             $conn = null;
-            return $sql . "<br>" . $e->getMessage();
+            die( $sql . "<br>" . $e->getMessage());
         }
     }
-}
-
-//scoopz
-function insertUpdateDelete($query){
-    $connection = mysqli_connect("localhost","root","");
-    mysqli_select_db($connection,"udaya");
-    return mysqli_query($connection,$query);
 }
 
 

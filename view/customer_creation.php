@@ -1,33 +1,3 @@
-<?php
-include '../dbManager/dbManager.php';
-
-$errors = null;
-
-if(isset($_POST['add']) || isset($_POST['update'])) {
-	$name = $_POST['name'];
-	$nic = $_POST['customer_nic'];
-	$address = $_POST['address'];
-	$phone = $_POST['phone_no'];
-
-	if (isset($_POST['add'])) {
-		$result = insertUpdateDelete("INSERT INTO customer_details(name,address,phone_no,nic) VALUES('$name','$address',$phone,'$nic')");
-		if ($result == 1) {
-			//success
-		} else {
-			$errors.="Save Error";
-		}
-	}
-	if (isset($_POST['update'])) {
-		//$db = new DbManager();
-		$result = insertUpdateDelete("UPDATE customer_details SET name='$name', address ='$address' , phone_no = $phone where nic='$nic' ");
-		if ($result == 1) {
-			//success
-		} else {
-			$errors.="Update Error";
-		}
-	}
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,17 +32,7 @@ if(isset($_POST['add']) || isset($_POST['update'])) {
         <div class="row-offcanvas row-offcanvas-left">
             <!--detail panel-->
             <div id="detail-panel" class=" col-sm-10 col-xs-12 pull-right">
-			<div id="msg-area">
-				<?php
-				if(isset($_POST['add']) || isset($_POST['update'])) {
-					if ($errors != null) {
-						echo '<p class="error-msg"> Error, Action is not Completed. </p> ';
-					} else {
-						echo '<p class="success-msg" > Success. </p> ';
-					}
-				}
-				?>
-			</div>
+				<div id="msg-area"></div>
                 <p class="visible-xs">
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"> <span class="glyphicon glyphicon-align-justify"></span> Navigation </button>
                 </p>
@@ -89,42 +49,41 @@ if(isset($_POST['add']) || isset($_POST['update'])) {
 					</form>
                 </div>
 
-			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
-				<form id="frmCustomerSave" name="frmCustomerSave" action="customer_creation.php" method="POST">
-					<input class="form-control" id="customer_id" name="customer_id" type="hidden">
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Name<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="name" name="name" type="text">
+				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
+					<form id="frmCustomerSave" name="frmCustomerSave" action="customer_creation.php" method="POST">
+						<input class="form-control" id="customer_id" name="customer_id" type="hidden">
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Name<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="name" name="name" type="text">
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">ID No<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="customer_nic" name="customer_nic" type="text">
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">ID No<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="customer_nic" name="customer_nic" type="text">
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Address<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="address" name="address" type="text">
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Address<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="address" name="address" type="text">
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Phone No <span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="phone_no" name="phone_no" type="text">
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Phone No <span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="phone_no" name="phone_no" type="text">
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
-						<Button id="btnAdd" class="btn btn-next pull-right draft " name="add" type="submit">Add</Button>
-						<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
-						<Button id="btnUpdate" class="btn btn-next pull-right draft " name="update" type="submit">Update</Button>
-					</div>
-				</form>
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
+							<a id="btnProcess" class="btn btn-next pull-right draft " >Process</a>
+							<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
+						</div>
+					</form>
+				</div>
+					<!-- /Expenses Details -->
 			</div>
-                <!-- /Expenses Details -->
-		</div>
 		</div>
             <!--/detail panel-->
         </div>

@@ -6,7 +6,7 @@ class Order
     function getOrder()
     {
         $sql = "SELECT 
-                  o.id, o.order_no, o.date, c.nic, o.sales_officer_id, o.recovery_officer_id 
+                  o.id, o.order_no, o.date, c.nic, c.name, c.address, c.phone_no, o.sales_officer_id, o.recovery_officer_id 
                 FROM 
                   orders o, 
                   customer_details c 

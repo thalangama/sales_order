@@ -1,8 +1,4 @@
-var currencyMinValue = "-9999999999999999.99";
-var currencyMaxValue = "9999999999999999.99";
-var MSG_ERROR_ROOT = "msg-area";
-var GET_CUSTOMER_URL = "customer.get";
-var PROCESS_CUSTOMER_URL = 'customer.save';
+var ITEMS_URL = "../controllers/items_controller.php";
 
 jQuery(document).ready(function () {
     pageInit();
@@ -11,42 +7,24 @@ jQuery(document).ready(function () {
 });
 
 function pageInit(){
+}
 
-    tblPayments = $('#tblPayments').dataTable({
-        "bFilter":false, "bInfo":false, "bPaginate":false, "bSortable":false,  "bDestroy":true,
-
-        "aoColumns": [
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""}
-        ],
-        "aoColumnDefs":[
-            { "bVisible":false, "aTargets":[7] },
-            { "bSortable": false, "aTargets":[ 0,1,2,3,4,5,6] }
-        ],
-        "oLanguage":{"sEmptyTable":"<div class='info-text'></div>"}
-    });
-
+function clearFields(){
+    $('#search_code').val("");
+    $('#item_id').val("");
+    $('#code').val("");
+    $('#description').val("");
+    return false;
 }
 
 function formValidation() {
-    $("#frmCustomerSave").validate({
+    $("#frmItemSearch").validate({
         errorPlacement: function (error, element) {
             error.insertAfter(element);
         },
         rules: {
-            "cmbLocation": {
+            "item_code": {
                 required: true
-            },
-            "txtCustomerCode":{
-                required: function (element) {
-                    return $('#cmbCodeType').val() != '';
-                }
             }
         },
         errorElement: "div"
@@ -56,9 +34,9 @@ function formValidation() {
 function eventHandler() {
 
     $("#btnSearch").on('click', function (e) {
-        clearMsgData();
-        if ($("#openChequeSpecialApprovalFrm").valid()) {
-            getFDDetails();
+        clearMsg();
+        if ($("#frmItemSearch").valid()) {
+            getItems();
         }
     });
 
@@ -68,6 +46,76 @@ function eventHandler() {
 
 }
 
-function clearMsgData() {
-    clearMsg(MSG_ERROR_ROOT, MSG_ERROR_ROOT);
+function getItems(){
+
+    $('#tblAddItems').dataTable().fnClearTable();
+    $("#wait").fadeIn('fast');
+    $.ajax
+    ({
+        type: "POST",
+        url: ITEMS_URL,
+        cache: false,
+        async: false,
+        data: ({
+            REQUEST_TYPE : 'GET',
+            code : $('#search_code').val()
+        }),
+        dataType: "json",
+        timeout: 180000,
+        "bAutoWidth": false,
+        success: function (data, textStatus) {
+            clearFields();
+            if (data[0] != null && data[0].id != null) {
+                $('#item_id').val(data[0].id);
+                $('#code').val(data[0].code);
+                $('#description').val(data[0].description);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showMsgError( textStatus);
+            $("#wait").fadeOut('slow');
+        }
+
+    }).done(function (data) {
+        $("#wait").fadeOut('slow');
+    });
+
+}
+
+function process() {
+
+    $("#wait").fadeIn('fast');
+    item_id = $('#item_id').val();
+    request_type = 'ADD';
+    if (item_id != '')
+        request_type = 'UPDATE';
+    var objData = {
+        type: "POST",
+        url: ITEMS_URL,
+        cache: false,
+        async: false,
+        data: ({
+            REQUEST_TYPE : request_type,
+            id : item_id,
+            code : $('#code').val(),
+            description : $('#description').val()
+        }),
+        dataType: "json",
+        timeout: 180000,
+        "bAutoWidth": false,
+        success: function (data, textStatus) {
+            clearMsg();
+            clearFields();
+            showMsgSuccess(data);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showMsgError(textStatus);
+            $("#wait").fadeOut('slow');
+        }
+    }
+    $.ajax
+    (objData).done(function (data) {
+        $("#wait").fadeOut('slow');
+    });
+
 }
