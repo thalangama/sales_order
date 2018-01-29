@@ -88,6 +88,8 @@ function insertUpdateDelete($query){
 }
 
 
+
+
 //$sql = "INSERT INTO `items` (`id`, `code`, `description`) VALUES (NULL, 'ddfgh', 'hhh');";
 //$DbManager = new DbManager();
 //echo $DbManager->save($sql);

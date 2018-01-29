@@ -2785,6 +2785,10 @@
         color: white;
     }
 
+    .login{
+        width:350px;margin:100px auto;
+    }
+
     #breadcrumb {
         background: none;
         float: right;
