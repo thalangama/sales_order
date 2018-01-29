@@ -1,5 +1,5 @@
 <?php
-include '../dbManager/dbManager.php';
+include_once '../dbManager/dbManager.php';
 
 class createCustomer
 {

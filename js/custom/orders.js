@@ -98,6 +98,7 @@ function getOrder(){
         cache: false,
         async: false,
         data: ({
+            REQUEST_TYPE: 'GET',
             order_no: $('#search_order_no').val()
         }),
         dataType: "json",
@@ -107,6 +108,7 @@ function getOrder(){
             if (data[0] != null && data[0].id != null) {
                 $('#order_id').val(data[0].id);
                 $('#order_no').val(data[0].order_no);
+                $('#customer_id').val(data[0].cus_id );
                 $('#customer_nic').val(data[0].nic);
                 $('#name').val(data[0].name);
                 $('#address').val(data[0].address);
@@ -199,5 +201,48 @@ function getCustomer(){
 
 }
 
+function process() {
 
+    $("#wait").fadeIn('fast');
+    order_id = $('#order_id').val();
+    request_type = 'ADD';
+    if (order_id != '')
+        request_type = 'UPDATE';
+    var objData = {
+        type: "POST",
+        url: ORDER_URL,
+        cache: false,
+        async: false,
+        data: ({
+            REQUEST_TYPE : request_type,
+            customer_nic : $('#customer_nic').val(),
+            customer_id : $('#customer_id').val(),
+            name: $('#name').val(),
+            address : $('#address').val(),
+            phone_no : $('#phone_no').val(),
+            order_id : $('#order_id').val(),
+            order_no : $('#order_no').val(),
+            sales_officer_id : $('#sales_officer_id').val(),
+            recovery_officer_id : $('#recovery_officer_id').val(),
+            date : $('#date').val(),
+            items : tblAddItems.fnGetData()
+        }),
+        dataType: "json",
+        timeout: 180000,
+        "bAutoWidth": false,
+        success: function (data, textStatus) {
+            clearMsg();
+            clearFields();
+            showMsgSuccess(data);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showMsgError(textStatus);
+            $("#wait").fadeOut('slow');
+        }
+    }
+    $.ajax
+    (objData).done(function (data) {
+        $("#wait").fadeOut('slow');
+    });
 
+}
