@@ -1,8 +1,4 @@
-var currencyMinValue = "-9999999999999999.99";
-var currencyMaxValue = "9999999999999999.99";
-var MSG_ERROR_ROOT = "msg-area";
-var GET_OFFICER_URL = "../controllers/officer_creation_controller.php";
-var PROCESS_CUSTOMER_URL = 'customer.save';
+var OFFICER_URL = "../controllers/officer_creation_controller.php";
 
 jQuery(document).ready(function () {
     pageInit();
@@ -11,35 +7,18 @@ jQuery(document).ready(function () {
 });
 
 function clearFields(){
-    document.getElementById('name').value = "";
-    document.getElementById('nic').value = "";
-    document.getElementById('officer_id').value = "";
-    document.getElementById('address').value = "";
-    document.getElementById('phone_no').value = "";
+    $('#name').val("");
+    $('#nic').val("");
+    $('#officer_id').val("");
+    $('#id').val("");
+    $('#address').val("");
+    $('#phone_no').val("");
+    $('#search_nic').val("");
+    $('#search_officer_id').val("");
     return false;
 }
 
 function pageInit(){
-
-    tblPayments = $('#tblPayments').dataTable({
-        "bFilter":false, "bInfo":false, "bPaginate":false, "bSortable":false,  "bDestroy":true,
-
-        "aoColumns": [
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""}
-        ],
-        "aoColumnDefs":[
-            { "bVisible":false, "aTargets":[7] },
-            { "bSortable": false, "aTargets":[ 0,1,2,3,4,5,6] }
-        ],
-        "oLanguage":{"sEmptyTable":"<div class='info-text'></div>"}
-    });
 
 }
 
@@ -48,11 +27,11 @@ function formValidation() {
         errorPlacement: function (error, element) {
             error.insertAfter(element);
         },
-        rules: {
-            "cmbLocation": {
-                required: true
-            }
-        },
+        // rules: {
+        //     "cmbLocation": {
+        //         required: true
+        //     }
+        // },
         errorElement: "div"
     });
 }
@@ -60,7 +39,7 @@ function formValidation() {
 function eventHandler() {
 
     $("#btnSearch").on('click', function (e) {
-        clearMsgData();
+        clearMsg();
         if ($("#frmOfficerSearch").valid()) {
             getOfficer();
         }
@@ -72,28 +51,27 @@ function eventHandler() {
 
 }
 
-function clearMsgData() {
-    clearMsg(MSG_ERROR_ROOT, MSG_ERROR_ROOT);
-}
-
 function getOfficer(){
 
     $("#wait").fadeIn('fast');
 
     var objData = {
         type: "POST",
-        url: GET_OFFICER_URL,
+        url: OFFICER_URL,
         cache: false,
         async: false,
         data: ({
-            nic: $('#search_nic').val(),
-            officer_id: $('#search_officer_id').val()
+            REQUEST_TYPE : 'GET',
+            nic : $('#search_nic').val(),
+            officer_id : $('#search_officer_id').val()
         }),
         dataType: "json",
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
+            clearFields();
             if (data.nic != null) {
+                $('#id').val(data.id );
                 $('#nic').val(data.nic );
                 $('#name').val(data.name );
                 $('#address').val(data.address );
@@ -102,12 +80,55 @@ function getOfficer(){
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            showMsgText(MSG_ERROR_ROOT, MSG_ERROR_ROOT, textStatus);
+            clearMsg();
+            clearFields();
+            showMsgError(textStatus);
             $("#wait").fadeOut('slow');
         }
 
     }
 
+    $.ajax
+    (objData).done(function (data) {
+        $("#wait").fadeOut('slow');
+    });
+
+}
+
+function process() {
+
+    $("#wait").fadeIn('fast');
+    var id = $('#id').val();
+    var request_type = 'ADD';
+    if (id != '')
+        request_type = 'UPDATE';
+    var objData = {
+        type: "POST",
+        url: OFFICER_URL,
+        cache: false,
+        async: false,
+        data: ({
+            REQUEST_TYPE: request_type,
+            officer_nic: $('#nic').val(),
+            id: id,
+            officer_id: $('#officer_id').val(),
+            name: $('#name').val(),
+            address: $('#address').val(),
+            phone_no: $('#phone_no').val()
+        }),
+        dataType: "json",
+        timeout: 180000,
+        "bAutoWidth": false,
+        success: function (data, textStatus) {
+            clearMsg();
+            clearFields();
+            showMsgSuccess(data);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showMsgError(textStatus);
+            $("#wait").fadeOut('slow');
+        }
+    }
     $.ajax
     (objData).done(function (data) {
         $("#wait").fadeOut('slow');
