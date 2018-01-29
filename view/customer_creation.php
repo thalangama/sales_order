@@ -32,8 +32,7 @@
         <div class="row-offcanvas row-offcanvas-left">
             <!--detail panel-->
             <div id="detail-panel" class=" col-sm-10 col-xs-12 pull-right">
-			<div id="msg-area">
-			</div>
+				<div id="msg-area"></div>
                 <p class="visible-xs">
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"> <span class="glyphicon glyphicon-align-justify"></span> Navigation </button>
                 </p>

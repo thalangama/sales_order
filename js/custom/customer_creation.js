@@ -1,10 +1,4 @@
-
-var currencyMinValue = "-9999999999999999.99";
-var currencyMaxValue = "9999999999999999.99";
-var MSG_ERROR_ROOT = "error-msg";
-var MSG_SUCCESS_ROOT = "success-msg";
 var CUSTOMER_URL = "../controllers/customer_creation_controller.php";
-var tblOutstanding = null;
 
 jQuery(document).ready(function () {
     pageInit();
@@ -13,11 +7,12 @@ jQuery(document).ready(function () {
 });
 
 function clearFields(){
-    document.getElementById('customer_id').value = "";
-    document.getElementById('name').value = "";
-    document.getElementById('customer_nic').value = "";
-    document.getElementById('address').value = "";
-    document.getElementById('phone_no').value = "";
+    $('#customer_id').val("");
+    $('#name').val("");
+    $('#customer_nic').val("");
+    $('#address').val("");
+    $('#phone_no').val("");
+    $('#nic').val("");
     return false;
 }
 
@@ -79,7 +74,7 @@ function getCustomer(){
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            showMsgText(MSG_ERROR_ROOT, textStatus);
+            showMsgError( textStatus);
             $("#wait").fadeOut('slow');
         }
 
@@ -91,7 +86,6 @@ function getCustomer(){
     });
 
 }
-
 
 function process() {
 
@@ -117,10 +111,11 @@ function process() {
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
-            showMsgText(MSG_SUCCESS_ROOT, data);
+            clearMsg();
+            showMsgSuccess(data);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            showMsgText(MSG_ERROR_ROOT, textStatus);
+            showMsgError(textStatus);
             $("#wait").fadeOut('slow');
         }
     }
