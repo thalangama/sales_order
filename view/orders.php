@@ -1,3 +1,8 @@
+<?php
+include '../controllers/session.php';
+checkAndAllow('orders.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

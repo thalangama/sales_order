@@ -1,3 +1,8 @@
+<?php
+include '../controllers/session.php';
+checkAndAllow('outstanding.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

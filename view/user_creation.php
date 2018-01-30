@@ -1,6 +1,16 @@
 <?php
+
     include '../dbManager/dbManager.php';
+    include '../controllers/session.php';
+
+    //checkAndAllow('user_creation.php');
+
+
     $db = new DbManager();
+
+    if(!isManager()){
+        header('location:user_login.php?logas=manager');
+    }
 
     $userExists = false;
     $passwordMissMatch = false;

@@ -5,12 +5,20 @@
  * Date: 1/29/2018
  * Time: 7:50 PM
  */
+session_start();
 include '../dbManager/dbManager.php';
 
+    $errors = array();
+
+    if(isset($_GET['logas'])){
+        if($_GET['logas']=='manager'){
+            $errors[] = "Please login as manager to access the page";
+        }
+    }
 
     if(isset($_POST['submit'])){
 
-        $errors = array();
+
 
         if(!isset($_POST['email']) || strlen(trim($_POST['email']))<1){
             $errors[] = "Username is missing or invalid";
@@ -29,15 +37,17 @@ include '../dbManager/dbManager.php';
 
             $query = "SELECT * FROM users WHERE username='{$username}' AND password='{$hashedPassword}' AND is_deleted=0 LIMIT 1";
 
-            $resultSet = insertUpdateDelete($query);
-
+            $db = new dbManager();
+            $resultSet = $db->select($query);
             if($resultSet){
-                if(mysqli_num_rows($resultSet) == 1){
+//                if(mysqli_num_rows($resultSet) == 1){
+                if($resultSet){
                     //valid user found
-                    $user = mysqli_fetch_assoc($resultSet);
-                    $_SESSION['username']=$user['username'];
-                    $_SESSION['fname']=$user['first_name'];
-                    $type = $user['user_type'];
+                    //$user = mysqli_fetch_assoc($resultSet);
+                    $user = $resultSet;
+                    $_SESSION['username']=$user[0]['username'];
+                    $_SESSION['user_type']=$user[0]['user_type'];
+                    $type = $_SESSION['user_type'];
 
                     //update last login date and time
                     //date_default_timezone_set("Asia/India_Standard_Time");
@@ -52,14 +62,23 @@ include '../dbManager/dbManager.php';
                     //mysqli_query($connection,$query);
 
                     if(strcmp($type,'M')==0){
-                        //redirect to manager
-                        //header('Location:admin-panel.php?audit=true');
-                        echo "success, a Manager";
+
+                        if($_POST['access'] != 'null'){
+                             header('Location:'.$_POST['access']);
+                        }
+                        else{
+                            header('Location:customer_creation.php');
+                        }
                     }
                     if(strcmp($type,'O')==0){
                         //redirect to operator
-                        //header('Location:cashier-panel.php');
-                        echo "success, an Operator";
+                        //header('Location:somefile.php');
+                        if($_POST['access'] != 'null'){
+                            header('Location:'.$_POST['access']);
+                        }
+                        else{
+                            header('Location:items.php');
+                        }
                     }
                 }else{
                     //username or password is invalid
@@ -98,7 +117,7 @@ include '../dbManager/dbManager.php';
 
                 <?php
                 if(isset($errors) &&!empty($errors)){
-                    echo "<p class=\"error-msg\">Username or Password is invalid!</p>";
+                    echo "<p class=\"error-msg\">$errors[0]</p>";
                 }
                 ?>
                 <?php
@@ -121,6 +140,14 @@ include '../dbManager/dbManager.php';
                     <label class="col-sm-5 col-xs-5">Password:</label>
                     <input class="form-control" type="password" name="password" placeholder="Password" required>
                 </p>
+
+                <input hidden name="access" value="<?php
+                    if(isset($_GET['access'])){
+                        echo $_GET['access'];
+                    }else{
+                        echo "null";
+                    }
+                    ?>"/>
 
                 <p>
                     <button class="form-control" type="sumbit" name=submit>Sign in</button>

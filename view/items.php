@@ -1,3 +1,8 @@
+<?php
+    include '../controllers/session.php';
+    checkAndAllow('items.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

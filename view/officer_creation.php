@@ -1,3 +1,8 @@
+<?php
+include '../controllers/session.php';
+checkAndAllow('officer_creation.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
