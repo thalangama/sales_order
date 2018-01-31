@@ -134,19 +134,28 @@ checkAndAllow('orders.php');
 				</div>
 				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
 					<h2>Order Items</h2>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+					<div class="form-group col-lg-3 col-sm-3 col-xs-12">
 						<label for="" class="col-sm-5 col-xs-5">Item Code<span class="mandatory">*</span></label>
 						<div class="col-sm-7 col-xs-7">
 							<input class="form-control" id="item_code" name="item_code" type="text">
 						</div>
 					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Price<span class="mandatory">*</span></label>
+					<div class="form-group col-lg-3 col-sm-3 col-xs-12">
+						<label for="" class="col-sm-5 col-xs-5">Quantity<span class="mandatory">*</span></label>
 						<div class="col-sm-7 col-xs-7">
 							<input class="form-control" id="price" name="price" type="text">
 						</div>
 					</div>
-					<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading "> <a class="btn btn-next pull-right draft " href="#" id="btnAddItems">Add Item</a></div>
+					<div class="form-group col-lg-3 col-sm-3 col-xs-12">
+						<label for="" class="col-sm-5 col-xs-5">Item Price<span class="mandatory">*</span></label>
+						<div class="col-sm-7 col-xs-7">
+							<input class="form-control" id="price" name="price" type="text">
+						</div>
+					</div>
+					<div class="form-group col-lg-3 col-sm-3 col-xs-12">
+						<a class="btn btn-next pull-right draft " href="#" id="btnAddItems">Add Item</a>
+					</div>
+
 					<div class="dataTables_wrapper no-footer" id="tblAccountDetails_wrapper">
 						<table class="display table footable dataTable no-footer footable-loaded" id="tblAddItems" role="grid" border="0" cellspacing="0" cellpadding="0">
 							<thead>
@@ -154,6 +163,7 @@ checkAndAllow('orders.php');
 									<th class="sorting_asc">No</th>
 									<th class="sorting">Item Id</th>
 									<th class="sorting">Name</th>
+									<th class="sorting">Quantity</th>
 									<th class="sorting">Price</th>
 									<th class="sorting">Action</th>
 								</tr>
@@ -161,6 +171,38 @@ checkAndAllow('orders.php');
 							<tbody>
 							</tbody>
 						</table>
+						<div class="col-4 col-sm-4 col-xs-4 col-lg-4 common-box without-heading ">
+							<table class="display table footable dataTable footable-loaded" role="grid" border="0" cellspacing="0" cellpadding="0">
+
+								<tr>
+									<td>Total</td>
+									<td><input width="20px" type="text" id="itemTotal" value="0.00"  style="text-align:right" disabled /></td>
+								</tr>
+								<tr>
+									<td>Payment</td>
+									<td><input width="20px" type="text" id="itemPayment"  style="text-align:right" /></td>
+								</tr>
+								<tr>
+									<td>Balance</td>
+									<td><input width="20px" type="text" id="itemBalance" value="0.00" style="text-align:right" disabled /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-7 col-sm-7 col-xs-7 col-lg-7 common-box without-heading "style="margin: 0px 0px 10px 15px!important">
+							<h2>Payment Details</h2>
+							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+								<label for="" class="col-sm-5 col-xs-5">Number Of Terms<span class="mandatory">*</span></label>
+								<div class="col-sm-7 col-xs-7">
+									<input class="form-control" id="terms" name="terms" type="text">
+								</div>
+							</div>
+							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+								<label for="" class="col-sm-5 col-xs-5">Payment Date<span class="mandatory">*</span></label>
+								<div class="col-sm-7 col-xs-7">
+									<input class="form-control" id="paymentDate" name="paymentDate" type="text">
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
                 <!-- /Expenses Details -->

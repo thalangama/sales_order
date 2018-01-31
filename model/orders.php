@@ -66,9 +66,9 @@ class Order
         $order_id = $DbManager->getLastInsertId();
 
         foreach ($items as $key => $value){
-            var_dump($value);
             $sql = "INSERT INTO `order_items` (`id`, `order_id`, `item_id`, `price`)
                     VALUES('','$order_id',(SELECT id FROM `items` WHERE `code`= $value[1]),'$value[3]')";
+            $data = $DbManager->save($sql);
         }
 
         return ($data);

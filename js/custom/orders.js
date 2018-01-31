@@ -16,10 +16,17 @@ function pageInit(){
         orientation: "top auto"
     });
 
+    $('#paymentDate').datepicker({
+        format: "yyyy-mm-dd",
+        todayHighlight: true  ,
+        orientation: "top auto"
+    });
+
     tblAddItems = $('#tblAddItems').dataTable({
         "bFilter":false, "bInfo":false, "bPaginate":false, "bSortable":false,  "bDestroy":true,
 
         "aoColumns": [
+            {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
@@ -146,6 +153,7 @@ function addItems(){
         $('#tblAddItems >tbody >tr').length ,
         item[0],
         item[1],
+        '<input type="itemQuantity"/>',
         $("#price").val(),
         '<a id="btnAddItems" class="deleteFile pull-center" title="Remove" href="#"> </a>'
     ]);
