@@ -7,7 +7,7 @@ class Order
     function getOrder()
     {
         $sql = "SELECT 
-                  o.id, o.order_no, o.date, c.nic, c.id cus_id, c.name, c.address, c.phone_no, o.sales_officer_id, o.recovery_officer_id 
+                  o.id, o.order_no, o.date, c.nic, c.id cus_id, c.name, c.address, c.phone_no, o.sales_officer_id, o.recovery_officer_id, o.payment, o.payment_date, o.no_of_terms
                 FROM 
                   orders o, 
                   customer_details c 
@@ -19,7 +19,7 @@ class Order
         $data = $DbManager->select($sql);
         if(isset($data[0])) {
             $sql = "SELECT 
-                  i.code, i.description, o.price 
+                  i.code, i.description, o.price , o.quantity
                 FROM 
                   order_items o, 
                   items i 

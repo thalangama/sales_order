@@ -10,6 +10,10 @@ jQuery(document).ready(function () {
 
 function pageInit(){
 
+    $( "#itemPayment" ).keyup(function() {
+        $("#itemBalance").val($("#itemTotal").val() - $("#itemPayment").val());
+    });
+
     $('#date').datepicker({
         format: "yyyy-mm-dd",
         todayHighlight: true  ,
@@ -31,20 +35,22 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
+            {"sClass": ""},
             {"sClass": ""}
         ],
         "aoColumnDefs":[
             // { "bVisible":false, "aTargets":[7] },
-            { "bSortable": false, "aTargets":[ 0,1,2,3,4] }
+            { "bSortable": false, "aTargets":[ 0,1,2,3,4,5,6] }
         ],
         "oLanguage":{"sEmptyTable":"<div class='info-text'></div>"}
     });
 
-    $('#tblAddItems tbody').on( 'click', '#btnAddItems', function () {
+    $('#tblAddItems tbody').on( 'click', '#btnRemoveItems', function () {
         $('#tblAddItems').DataTable()
             .row( $(this).parents('tr') )
             .remove()
             .draw();
+        updateBalance();
     } );
 }
 
@@ -84,6 +90,7 @@ function eventHandler() {
 
     $("#btnAddItems").on('click', function (e) {
         addItems();
+        updateBalance();
     });
 
 }
@@ -123,17 +130,28 @@ function getOrder(){
                 $('#sales_officer_id').val(data[0].sales_officer_id);
                 $('#recovery_officer_id').val(data[0].recovery_officer_id);
                 $('#date').val(data[0].date);
+                $('#itemPayment').val(data[0].payment);
+                $('#noOfterms').val(data[0].no_of_terms);
+                $('#paymentDate').val(data[0].payment_date);
 
                 row_count = 1;
+                itemTotal = 0;
                 $.each(data.items, function (counter, item) {
                     tblAddItems.fnAddData([
                         row_count++,
                         item.code,
                         item.description,
+                        item.quantity,
                         item.price,
-                        '<a id="btnAddItems" class="deleteFile pull-center" title="Remove" href="#"> </a>'
+                        item.price*item.quantity,
+                        '<a id="btnRemoveItems" class="deleteFile pull-center" title="Remove" href="#"> </a>'
                     ]);
+                    itemTotal = itemTotal + (item.price*item.quantity);
                 });
+
+                $('#itemTotal').val(itemTotal);
+                $('#itemBalance').val(itemTotal - data[0].payment);
+
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -153,11 +171,11 @@ function addItems(){
         $('#tblAddItems >tbody >tr').length ,
         item[0],
         item[1],
-        '<input type="itemQuantity"/>',
+        $("#quantity").val(),
         $("#price").val(),
-        '<a id="btnAddItems" class="deleteFile pull-center" title="Remove" href="#"> </a>'
+        $("#price").val()*$("#quantity").val(),
+        '<a id="btnRemoveItems" class="deleteFile pull-center" title="Remove" href="#"> </a>'
     ]);
-
 }
 
 function clearFieldsCus(){
@@ -206,7 +224,6 @@ function getCustomer(){
     (objData).done(function (data) {
         $("#wait").fadeOut('slow');
     });
-
 }
 
 function process() {
@@ -252,5 +269,17 @@ function process() {
     (objData).done(function (data) {
         $("#wait").fadeOut('slow');
     });
+}
 
+function updateBalance(){
+    table = $('#tblAddItems').DataTable();
+    sum = 0;
+    var plainArray = table
+        .column( 5 )
+        .data()
+        .toArray();
+    $.each(plainArray,function(){sum+=parseFloat(this) || 0;});
+    $('#itemTotal').val(sum);
+    balance =  sum - (parseFloat($('#itemPayment').val())||0);
+    $('#itemBalance').val(balance);
 }

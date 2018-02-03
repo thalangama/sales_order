@@ -1,6 +1,6 @@
 <?php
-include '../controllers/session.php';
-checkAndAllow('orders.php');
+//include '../controllers/session.php';
+//checkAndAllow('orders.php');
 ?>
 
 <!DOCTYPE html>
@@ -143,7 +143,7 @@ checkAndAllow('orders.php');
 					<div class="form-group col-lg-3 col-sm-3 col-xs-12">
 						<label for="" class="col-sm-5 col-xs-5">Quantity<span class="mandatory">*</span></label>
 						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="price" name="price" type="text">
+							<input class="form-control" id="quantity" name="quantity" type="text">
 						</div>
 					</div>
 					<div class="form-group col-lg-3 col-sm-3 col-xs-12">
@@ -161,10 +161,11 @@ checkAndAllow('orders.php');
 							<thead>
 								<tr role="row">
 									<th class="sorting_asc">No</th>
-									<th class="sorting">Item Id</th>
+									<th class="sorting">Item Code</th>
 									<th class="sorting">Name</th>
 									<th class="sorting">Quantity</th>
 									<th class="sorting">Price</th>
+									<th class="sorting">Total</th>
 									<th class="sorting">Action</th>
 								</tr>
 							</thead>
@@ -193,7 +194,7 @@ checkAndAllow('orders.php');
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 								<label for="" class="col-sm-5 col-xs-5">Number Of Terms<span class="mandatory">*</span></label>
 								<div class="col-sm-7 col-xs-7">
-									<input class="form-control" id="terms" name="terms" type="text">
+									<input class="form-control" id="noOfterms" name="noOfterms" type="text">
 								</div>
 							</div>
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
