@@ -12,6 +12,7 @@ class DbManager
     var $username = "root";
     var $password = "";
     var $dbname = "udaya";
+    var $last_insert_id = 0;
 
     function save($sql)
     {
@@ -19,6 +20,7 @@ class DbManager
             $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $conn->exec($sql);
+            $this->last_insert_id = $conn->lastInsertId();
             $conn = null;
             return "New record created successfully";
         } catch (PDOException $e) {
@@ -79,6 +81,9 @@ class DbManager
         }
     }
 
+    function getLastInsertId(){
+        return $this->last_insert_id;
+    }
 }
 
 

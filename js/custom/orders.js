@@ -119,6 +119,7 @@ function getOrder(){
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
+            clearFieldsCus();
             if (data[0] != null && data[0].id != null) {
                 $('#order_id').val(data[0].id);
                 $('#order_no').val(data[0].order_no);
@@ -155,6 +156,7 @@ function getOrder(){
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            clearFieldsCus();
             showMsgError(textStatus);
             $("#wait").fadeOut('slow');
         }
@@ -185,6 +187,15 @@ function clearFieldsCus(){
     $('#address').val("");
     $('#phone_no').val("");
     $('#nic').val("");
+    $('#order_id').val("");
+    $('#order_no').val("");
+    $('#sales_officer_id').val("");
+    $('#recovery_officer_id').val("");
+    $('#date').val("");
+    $('#itemPayment').val("");
+    $('#noOfterms').val("");
+    $('#paymentDate').val("");
+
     return false;
 }
 
@@ -250,7 +261,10 @@ function process() {
             sales_officer_id : $('#sales_officer_id').val(),
             recovery_officer_id : $('#recovery_officer_id').val(),
             date : $('#date').val(),
-            items : tblAddItems.fnGetData()
+            items : tblAddItems.fnGetData(),
+            payment : $('#itemPayment').val(),
+            no_of_terms : $('#noOfterms').val(),
+            payment_date : $('#paymentDate').val()
         }),
         dataType: "json",
         timeout: 180000,
