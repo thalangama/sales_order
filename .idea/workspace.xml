@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="041e523a-f2f1-48de-8b3a-3b7c85e3019f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/custom/customer_creation.js" afterPath="$PROJECT_DIR$/js/custom/customer_creation.js" />
     </list>
     <ignored path="sales_order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,7 +22,74 @@
     <favorites_list name="sales_order" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="orders.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/custom/orders.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2686">
+              <caret line="158" column="29" selection-start-line="158" selection-start-column="29" selection-end-line="158" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="udaya.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dbManager/udaya.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2040">
+              <caret line="120" column="2" selection-start-line="120" selection-start-column="2" selection-end-line="120" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="orders.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/orders.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="orders.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model/orders.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="517">
+              <caret line="179" column="1" selection-start-line="179" selection-start-column="1" selection-end-line="179" selection-end-column="1" />
+              <folding>
+                <marker date="1517852782683" expanded="true" signature="148:548" ph="SELECT o.id,... orders" />
+                <marker date="1517852782683" expanded="true" signature="682:988" ph="SELECT i.cod... order_items" />
+                <marker date="1517852782683" expanded="true" signature="2335:2620" ph="INSERT INTO orders... " />
+                <marker date="1517852782683" expanded="true" signature="2799:2992" ph="INSERT INTO `order_items`... " />
+                <marker date="1517852782683" expanded="true" signature="2920:2957" ph="SELECT id FR... items" />
+                <marker date="1517852782683" expanded="true" signature="3222:3390" ph="INSERT INTO `payment_plan`... " />
+                <marker date="1517852782683" expanded="true" signature="3233:3307" ph="SELECT * FRO... payment_plan" />
+                <marker date="1517852782683" expanded="true" signature="4751:5013" ph="UPDATE custo... " />
+                <marker date="1517852782683" expanded="true" signature="5075:5108" ph="UPDATE `orde... " />
+                <marker date="1517852782683" expanded="true" signature="5075:5124" ph="UPDATE `orde... " />
+                <marker date="1517852782683" expanded="true" signature="5263:5456" ph="INSERT INTO `order_items`... " />
+                <marker date="1517852782683" expanded="true" signature="5384:5421" ph="SELECT id FR... items" />
+                <marker date="1517852782683" expanded="true" signature="5585:5635" ph="UPDATE `paym... " />
+                <marker date="1517852782683" expanded="true" signature="5756:5925" ph="INSERT INTO payment_plan" />
+                <marker date="1517852782683" expanded="true" signature="6576:6748" ph="INSERT INTO payment_plan" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbManager.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dbManager/dbManager.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1700">
+              <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -31,12 +97,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/view/orders.php" />
-        <option value="$PROJECT_DIR$/js/custom/orders.js" />
-        <option value="$PROJECT_DIR$/dbManager/dbManager.php" />
         <option value="$PROJECT_DIR$/js/custom/customer_creation.js" />
         <option value="$PROJECT_DIR$/controllers/customer_creation_controller.php" />
         <option value="$PROJECT_DIR$/view/customer_creation.php" />
+        <option value="$PROJECT_DIR$/dbManager/dbManager.php" />
+        <option value="$PROJECT_DIR$/js/custom/orders.js" />
+        <option value="$PROJECT_DIR$/view/orders.php" />
+        <option value="$PROJECT_DIR$/model/orders.php" />
       </list>
     </option>
   </component>
@@ -81,7 +148,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -111,6 +177,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="sales_order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -155,6 +225,16 @@
               <option name="myItemId" value="sales_order" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sales_order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sales_order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dbManager" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
@@ -177,6 +257,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -251,6 +332,8 @@
       <workItem from="1516810986631" duration="5330000" />
       <workItem from="1516859182439" duration="1041000" />
       <workItem from="1516897413425" duration="19000" />
+      <workItem from="1517637438587" duration="8650000" />
+      <workItem from="1517847843665" duration="5068000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1516718765346</created>
@@ -294,17 +377,31 @@
       <option name="project" value="LOCAL" />
       <updated>1516816141378</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="orders">
+      <created>1517650613613</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1517650613613</updated>
+    </task>
+    <task id="LOCAL-00008" summary="orders">
+      <created>1517853159134</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1517853159134</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17823000" />
+    <option name="totallyTimeSpent" value="31541000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17423134" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2035139" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14645669" sideWeight="0.5087848" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -360,13 +457,70 @@
     <MESSAGE value="db Manager create" />
     <MESSAGE value="check" />
     <MESSAGE value="customer scene" />
-    <option name="LAST_COMMIT_MESSAGE" value="customer scene" />
+    <MESSAGE value="orders" />
+    <option name="LAST_COMMIT_MESSAGE" value="orders" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/js/custom/orders.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2686">
+          <caret line="158" column="29" selection-start-line="158" selection-start-column="29" selection-end-line="158" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbManager/udaya.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2040">
+          <caret line="120" column="2" selection-start-line="120" selection-start-column="2" selection-end-line="120" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/orders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2533">
+          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/orders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1517852782683" expanded="true" signature="148:548" ph="SELECT o.id,... orders" />
+            <marker date="1517852782683" expanded="true" signature="682:988" ph="SELECT i.cod... order_items" />
+            <marker date="1517852782683" expanded="true" signature="2335:2620" ph="INSERT INTO orders... " />
+            <marker date="1517852782683" expanded="true" signature="2799:2992" ph="INSERT INTO `order_items`... " />
+            <marker date="1517852782683" expanded="true" signature="2920:2957" ph="SELECT id FR... items" />
+            <marker date="1517852782683" expanded="true" signature="3222:3390" ph="INSERT INTO `payment_plan`... " />
+            <marker date="1517852782683" expanded="true" signature="3233:3307" ph="SELECT * FRO... payment_plan" />
+            <marker date="1517852782683" expanded="true" signature="4751:5013" ph="UPDATE custo... " />
+            <marker date="1517852782683" expanded="true" signature="5075:5108" ph="UPDATE `orde... " />
+            <marker date="1517852782683" expanded="true" signature="5075:5124" ph="UPDATE `orde... " />
+            <marker date="1517852782683" expanded="true" signature="5263:5456" ph="INSERT INTO `order_items`... " />
+            <marker date="1517852782683" expanded="true" signature="5384:5421" ph="SELECT id FR... items" />
+            <marker date="1517852782683" expanded="true" signature="5585:5635" ph="UPDATE `paym... " />
+            <marker date="1517852782683" expanded="true" signature="5756:5925" ph="INSERT INTO payment_plan" />
+            <marker date="1517852782683" expanded="true" signature="6576:6748" ph="INSERT INTO payment_plan" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbManager/dbManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1785">
+          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/customer_creation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -458,31 +612,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/custom/orders.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="79" column="27" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="105" column="89" selection-start-line="105" selection-start-column="89" selection-end-line="105" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/customer_creation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dbManager/dbManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -497,6 +630,70 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbManager/udaya.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2040">
+          <caret line="120" column="2" selection-start-line="120" selection-start-column="2" selection-end-line="120" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbManager/dbManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1700">
+          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/custom/orders.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2686">
+          <caret line="158" column="29" selection-start-line="158" selection-start-column="29" selection-end-line="158" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/calendar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="314" column="19" selection-start-line="314" selection-start-column="9" selection-end-line="314" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/orders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/orders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="179" column="1" selection-start-line="179" selection-start-column="1" selection-end-line="179" selection-end-column="1" />
+          <folding>
+            <marker date="1517852782683" expanded="true" signature="148:548" ph="SELECT o.id,... orders" />
+            <marker date="1517852782683" expanded="true" signature="682:988" ph="SELECT i.cod... order_items" />
+            <marker date="1517852782683" expanded="true" signature="2335:2620" ph="INSERT INTO orders... " />
+            <marker date="1517852782683" expanded="true" signature="2799:2992" ph="INSERT INTO `order_items`... " />
+            <marker date="1517852782683" expanded="true" signature="2920:2957" ph="SELECT id FR... items" />
+            <marker date="1517852782683" expanded="true" signature="3222:3390" ph="INSERT INTO `payment_plan`... " />
+            <marker date="1517852782683" expanded="true" signature="3233:3307" ph="SELECT * FRO... payment_plan" />
+            <marker date="1517852782683" expanded="true" signature="4751:5013" ph="UPDATE custo... " />
+            <marker date="1517852782683" expanded="true" signature="5075:5108" ph="UPDATE `orde... " />
+            <marker date="1517852782683" expanded="true" signature="5075:5124" ph="UPDATE `orde... " />
+            <marker date="1517852782683" expanded="true" signature="5263:5456" ph="INSERT INTO `order_items`... " />
+            <marker date="1517852782683" expanded="true" signature="5384:5421" ph="SELECT id FR... items" />
+            <marker date="1517852782683" expanded="true" signature="5585:5635" ph="UPDATE `paym... " />
+            <marker date="1517852782683" expanded="true" signature="5756:5925" ph="INSERT INTO payment_plan" />
+            <marker date="1517852782683" expanded="true" signature="6576:6748" ph="INSERT INTO payment_plan" />
+          </folding>
         </state>
       </provider>
     </entry>
