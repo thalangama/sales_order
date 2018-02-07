@@ -1,5 +1,5 @@
 <?php
-include '../dbManager/dbManager.php';
+include_once '../dbManager/dbManager.php';
 
 class Items
 {
@@ -11,6 +11,21 @@ class Items
         $data = $DbManager->select($sql);
 
         return ($data);
+    }
+
+    function getItemCode()
+    {
+        $sql = "SELECT * FROM items";
+
+        $DbManager = new DbManager();
+        $data = $DbManager->select($sql);
+
+        $item_code = '[';
+        foreach($data as $key => $val){
+            $item_code .= '"' .$val['code'] . '::' . $val['description'] . '", ';
+        }
+        $item_code .= ']';
+        return ($item_code);
     }
 
     function addItems()

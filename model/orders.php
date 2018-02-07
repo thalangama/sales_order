@@ -89,6 +89,34 @@ class Order
                 VALUES ('', '$payment_date', '$payment_amount','$i','$order_id' )";
             $data = $DbManager->save($sql);
         }
+
+        $payment_amount = $total / $no_of_terms;
+
+        $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
+                VALUES ('', '$payment_date', '$payment_amount','1','$order_id' )";
+        $data = $DbManager->save($sql);
+
+        $d = date_parse_from_format("Y-m-d", $payment_date);
+        $month = $d["month"];
+        $year = $d["year"];
+        $day = $d["day"];
+        for($i = 0; $i < $no_of_terms; $i++){
+            $month++;
+            if($month > 12) {
+                $month = $month - 12;
+                $year++;
+            }
+            $next_mnth_days = cal_days_in_month(CAL_GREGORIAN,$month, $year);
+            if($next_mnth_days < $day)
+                $day = $next_mnth_days;
+            else
+                $day = $d["day"];
+            $payment_date = $year .'-'.$month .'-'.$day ;
+
+            $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
+                VALUES ('', '$payment_date', '$payment_amount',$i+2,'$order_id' )";
+            $data = $DbManager->save($sql);
+        }
         return ($data);
     }
 
@@ -171,7 +199,7 @@ class Order
             $payment_date = $year .'-'.$month .'-'.$day ;
 
             $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
-                VALUES ('', '$payment_date', '$payment_amount','$i+2','$order_id' )";
+                VALUES ('', '$payment_date', '$payment_amount',$i+2,'$order_id' )";
             $data = $DbManager->save($sql);
         }
         return ($data);

@@ -15,15 +15,15 @@ function pageInit(){
     });
 
     $('#date').datepicker({
-        format: "yyyy-mm-dd",
+        dateFormat: "yy-mm-dd",
         todayHighlight: true  ,
-        orientation: "top auto"
+        orientation: "auto"
     });
 
     $('#paymentDate').datepicker({
-        format: "yyyy-mm-dd",
+        dateFormat: "yy-mm-dd",
         todayHighlight: true  ,
-        orientation: "top auto"
+        orientation: 'auto'
     });
 
     tblAddItems = $('#tblAddItems').dataTable({
@@ -52,6 +52,10 @@ function pageInit(){
             .draw();
         updateBalance();
     } );
+
+    $( "#item_code" ).autocomplete({
+        source: item_code
+    });
 }
 
 function formValidation() {
@@ -119,7 +123,7 @@ function getOrder(){
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
-            clearFieldsCus();
+            clearFields();
             if (data[0] != null && data[0].id != null) {
                 $('#order_id').val(data[0].id);
                 $('#order_no').val(data[0].order_no);
@@ -156,7 +160,7 @@ function getOrder(){
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            clearFieldsCus();
+            clearFields();
             showMsgError(textStatus);
             $("#wait").fadeOut('slow');
         }
@@ -180,7 +184,8 @@ function addItems(){
     ]);
 }
 
-function clearFieldsCus(){
+function clearFields(){
+    $('#search_order_no').val("")
     $('#customer_id').val("");
     $('#name').val("");
     $('#customer_nic').val("");
@@ -195,7 +200,8 @@ function clearFieldsCus(){
     $('#itemPayment').val("");
     $('#noOfterms').val("");
     $('#paymentDate').val("");
-
+    $('#itemTotal').val("");
+    $('#itemBalance').val("");
     return false;
 }
 
@@ -270,6 +276,7 @@ function process() {
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
+            $('#tblAddItems').dataTable().fnClearTable();
             clearMsg();
             clearFields();
             showMsgSuccess(data);

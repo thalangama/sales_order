@@ -1,8 +1,8 @@
 <?php
-//include '../controllers/session.php';
+include_once '../controllers/session.php';
+include_once '../model/items.php';
+
 //checkAndAllow('orders.php');
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +17,7 @@
     <link rel="icon" type="image/png" href="images/alt_favicon.png" sizes="16x16" />
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/main_style.css" rel="stylesheet">
+    <link href="../css/jquery-ui/jquery-ui.css" rel="stylesheet">
     <script type="text/javascript" src="../js/lib/CreateHTML5Elements.js"></script>
 </head>
 
@@ -201,6 +202,7 @@
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 								<label for="" class="col-sm-5 col-xs-5">Payment Date<span class="mandatory">*</span></label>
 								<div class="col-sm-7 col-xs-7">
+                                    <div class="clearfix"></div>
 									<input class="form-control" id="paymentDate" name="paymentDate" type="text">
 								</div>
 							</div>
@@ -215,9 +217,10 @@
         </div>
         <!--/.container-->
         <!-- bootdtrap-->
+
         <script src="../js/lib/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
-        <script src="../js/lib/bootstrap-datepicker.js"></script>
+        <script src="../js/lib/jquery-ui/jquery-ui.js"></script>
         <script src="../js/lib/jquery.dataTables.min.js"></script>
         <script src="../js/lib/footable.min.js"></script>
         <script src="../js/lib/modernizr.custom.js"></script>
@@ -229,6 +232,8 @@
 		<script src="../js/custom/orders.js"></script>
 		<script>
 			w3.includeHTML();
+            <?php $items = new Items() ?>
+            var item_code = <?php echo $items->getItemCode(); ?>;
 		</script>
 </body>
 <!-- Preloader -->

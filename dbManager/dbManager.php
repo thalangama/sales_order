@@ -85,21 +85,3 @@ class DbManager
         return $this->last_insert_id;
     }
 }
-
-
-//$sql = "INSERT INTO `items` (`id`, `code`, `description`) VALUES (NULL, 'ddfgh', 'hhh');";
-//$DbManager = new DbManager();
-//echo $DbManager->save($sql);
-
-//$sql = "SELECT * FROM items";
-//$DbManager = new DbManager();
-//var_dump($DbManager->select($sql));
-
-//$sql = "UPDATE items SET code='haUUha' WHERE id=2";
-//$DbManager = new DbManager();
-//var_dump($DbManager->update($sql));
-
-
-//$sql = "DELETE FROM items WHERE id=1";
-//$DbManager = new DbManager();
-//var_dump($DbManager->delete($sql));

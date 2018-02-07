@@ -13,9 +13,9 @@ jQuery(document).ready(function () {
 function pageInit(){
 	
 	$('#date').datepicker({
-        format: "yyyy-mm-dd",
+        dateFormat: "yy-mm-dd",
         todayHighlight: true  ,
-        orientation: "top auto"
+        orientation: "auto"
     });
 	
     tblOutstanding = $('#tblOutstanding').dataTable({
