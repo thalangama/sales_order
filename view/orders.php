@@ -2,7 +2,7 @@
 include_once '../controllers/session.php';
 include_once '../model/items.php';
 
-//checkAndAllow('orders.php');
+checkAndAllow('orders.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -20,7 +20,7 @@ function isManager(){
 
 function checkAndAllow($filename){
     if(!isset($_SESSION['username'])){
-        header('Location:user_login.php?access='.$filename);
+//        header('Location:user_login.php?access='.$filename);
     }/*else{
         header('Location:'.$filename);
     }*/

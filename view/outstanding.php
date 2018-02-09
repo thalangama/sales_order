@@ -100,6 +100,7 @@ checkAndAllow('outstanding.php');
         <script src="../js/lib/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script src="../js/lib/bootstrap-datepicker.js"></script>
+        <script src="../js/lib/jquery.dataTables.min.js"></script>
         <script src="../js/lib/jquery-ui/jquery-ui.js"></script>
         <script src="../js/lib/footable.min.js"></script>
         <script src="../js/lib/modernizr.custom.js"></script>

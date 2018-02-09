@@ -44,7 +44,7 @@ class outstanding
                 AND p.order_id = outs.order_id 
                 ".$where."
             GROUP BY p.order_id";
-
+die($sql);
         $DbManager = new DbManager();
         $data = $DbManager->select($sql);
         return ($data);
