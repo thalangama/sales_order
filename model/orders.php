@@ -83,7 +83,7 @@ class Order
             $total = $total + ($value[4] * $value[3]);
         }
 
-        $payment_amount = $total / $no_of_terms;
+        $payment_amount = ( $total - $payment) / $no_of_terms;
         for($i = 1; $i <= $no_of_terms; $i++) {
             $sql = "INSERT INTO `payment_plan` (`id`,`payment_date`, `payment_amount`, `term`, `order_id`)
                 VALUES ('', '$payment_date', '$payment_amount','$i','$order_id' )";
@@ -94,6 +94,10 @@ class Order
 
         $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
                 VALUES ('', '$payment_date', '$payment_amount','1','$order_id' )";
+        $data = $DbManager->save($sql);
+
+        $sql = "INSERT INTO  `payments` (`id`, `payment_date`, `amount`, `order_id`,`officer_id`)
+                VALUES ('', '', '0', '$order_id', '$sales_officer_id' )";
         $data = $DbManager->save($sql);
 
         $d = date_parse_from_format("Y-m-d", $payment_date);
