@@ -12,6 +12,16 @@ function pageInit(){
 
     $( "#itemPayment" ).keyup(function() {
         $("#itemBalance").val($("#itemTotal").val() - $("#itemPayment").val());
+        $("#noOfterms").trigger('keyup');
+    });
+
+    $("#noOfterms").keyup( function () {
+        balance = $('#itemBalance').val();
+        noOfterms = $('#noOfterms').val();
+        if(noOfterms != ''){
+            installment = balance / noOfterms;
+            $('#installment').val(installment);
+        }
     });
 
     $('#date').datepicker({
@@ -70,12 +80,91 @@ function formValidation() {
         },
         errorElement: "div"
     });
+
     $("#frmCustomerSearch").validate({
         errorPlacement: function (error, element) {
             error.insertAfter(element);
         },
         rules: {
             "nic": {
+                required: true
+            }
+        },
+        errorElement: "div"
+    });
+
+    $("#frmAddItems").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "item_code": {
+                required: true
+            },
+            "quantity": {
+                required: true
+            },
+            "price": {
+                required: true
+            }
+        },
+        errorElement: "div"
+    });
+
+    $("#frmOrdersDetails").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "order_no": {
+                required: true
+            },
+            "sales_officer_id": {
+                required: true
+            },
+            "date": {
+                required: true
+            },
+            "recovery_officer_id": {
+                required: true
+            }
+        },
+        errorElement: "div"
+    });
+
+    $("#frmCustomerDetail").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "name": {
+                required: true
+            },
+            "customer_nic": {
+                required: true
+            },
+            "address": {
+                required: true
+            },
+            "phone_no": {
+                required: true
+            }
+        },
+        errorElement: "div"
+    });
+
+    $("#frmPaymentDetails").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "itemPayment": {
+                required: true
+            },
+            "noOfterms": {
+                required: true
+            },
+            "paymentDate": {
                 required: true
             }
         },
@@ -100,12 +189,22 @@ function eventHandler() {
     });
 
     $("#btnProcess").on('click', function (e) {
-        process();
+        var items = tblAddItems.fnGetData();
+        if(items.length == 0) {
+            showMsgError("Select Atleast one item");
+            return false;
+        }
+
+        if($('#frmOrdersDetails').valid() && $('#frmCustomerDetail').valid() && $('#frmPaymentDetails').valid()){
+            process();
+        }
     });
 
     $("#btnAddItems").on('click', function (e) {
-        addItems();
-        updateBalance();
+        if ($("#frmAddItems").valid()) {
+            addItems();
+            updateBalance();
+        }
     });
 
 }
@@ -193,8 +292,11 @@ function addItems(){
         $("#quantity").val(),
         $("#price").val(),
         $("#price").val()*$("#quantity").val(),
-        '<a id="btnRemoveItems" class="deleteFile pull-center" title="Remove" href="#"> </a>'
+        '<a id="btnRemoveItems" class="deleteFile pull-center" title="Remove" > </a>'
     ]);
+    $("#item_code").val("");
+    $("#quantity").val("");
+    $("#price").val("");
 }
 
 function clearFields(){
@@ -319,4 +421,10 @@ function updateBalance(){
     $('#itemTotal').val(sum);
     balance =  sum - (parseFloat($('#itemPayment').val())||0);
     $('#itemBalance').val(balance);
+    noOfterms = $('#noOfterms').val();
+    if(noOfterms != ''){
+        installment = balance / noOfterms;
+        $('#installment').val(installment);
+    }
+
 }
