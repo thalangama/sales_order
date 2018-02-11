@@ -64,7 +64,18 @@ function formValidation() {
             error.insertAfter(element);
         },
         rules: {
-            "order_no": {
+            "search_order_no": {
+                required: true
+            }
+        },
+        errorElement: "div"
+    });
+    $("#frmCustomerSearch").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "nic": {
                 required: true
             }
         },
@@ -157,6 +168,8 @@ function getOrder(){
                 $('#itemTotal').val(itemTotal);
                 $('#itemBalance').val(itemTotal - data[0].payment);
 
+            }else{
+                showMsgError("No Order Found.");
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -228,7 +241,10 @@ function getCustomer(){
                 $('#name').val(data.name );
                 $('#address').val(data.address );
                 $('#phone_no').val(data.phone_no );
+            }else{
+                showMsgError("No Customer Found.");
             }
+            $('#nic').val("");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             showMsgError( textStatus);

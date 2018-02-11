@@ -23,7 +23,7 @@ function formValidation() {
             error.insertAfter(element);
         },
         rules: {
-            "item_code": {
+            "search_code": {
                 required: true
             }
         },
@@ -69,6 +69,8 @@ function getItems(){
                 $('#item_id').val(data[0].id);
                 $('#code').val(data[0].code);
                 $('#description').val(data[0].description);
+            }else{
+                showMsgError( "No Item Found.");
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {

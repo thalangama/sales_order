@@ -46,7 +46,7 @@
                     <h2>Search Item</h2>
 					<form id="frmItemSearch" name="frmItemSearch" action="" method="POST">
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-							<label for="" class="col-sm-5 col-xs-5">Item Code</label>
+							<label for="" class="col-sm-5 col-xs-5">Item Code<span class="mandatory">*</span></label>
 							<div class="col-sm-7 col-xs-7">
 								<input class="form-control" id="search_code" name="search_code" type="text"> </div>
 						</div>

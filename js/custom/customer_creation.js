@@ -71,11 +71,15 @@ function getCustomer(){
                 $('#name').val(data.name );
                 $('#address').val(data.address );
                 $('#phone_no').val(data.phone_no );
+            }else{
+                showMsgError( "No Customer Found.");
             }
+            $('#nic').val("");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             showMsgError( textStatus);
             $("#wait").fadeOut('slow');
+            $('#nic').val("");
         }
 
     }
@@ -112,6 +116,7 @@ function process() {
         "bAutoWidth": false,
         success: function (data, textStatus) {
             clearMsg();
+            clearFields();
             showMsgSuccess(data);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {

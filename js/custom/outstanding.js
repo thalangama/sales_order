@@ -1,6 +1,3 @@
-var currencyMinValue = "-9999999999999999.99";
-var currencyMaxValue = "9999999999999999.99";
-var MSG_ERROR_ROOT = "msg-area";
 var GET_OUTSTANDING_URL = "../controllers/outstanding_controller.php";
 var tblOutstanding = null;
 
@@ -26,11 +23,12 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
+            {"sClass": ""},
             {"sClass": ""}
         ],
         "aoColumnDefs":[
             // { "bVisible":false, "aTargets":[7] },
-            { "bSortable": false, "aTargets":[ 0,1,2,3,4] }
+            { "bSortable": false, "aTargets":[ 0,1,2,3,4,5] }
         ],
         "oLanguage":{"sEmptyTable":"<div class='info-text'></div>"}
     });
@@ -59,7 +57,7 @@ function formValidation() {
 function eventHandler() {
 
     $("#btnSearch").on('click', function (e) {
-        clearMsg(MSG_ERROR_ROOT, MSG_ERROR_ROOT);
+        clearMsg();
         if ($("#frmOutstandingSearch").valid()) {
             getOutstanding();
         }
@@ -70,11 +68,6 @@ function eventHandler() {
     });
 
 }
-
-function clearMsgData() {
-    clearMsg(MSG_ERROR_ROOT, MSG_ERROR_ROOT);
-}
-
 
 function getOutstanding(){
 
@@ -88,6 +81,7 @@ function getOutstanding(){
         cache: false,
         async: false,
         data: ({
+            REQUEST_TYPE: 'GET_OUTSTANDING',
             customer_nic: $('#customer_nic').val(),
             order_no: $('#order_no').val(),
             recovery_officer_id: $('#recovery_officer_id').val(),
@@ -105,7 +99,8 @@ function getOutstanding(){
                         item.order_no,
                         item.nic,
                         item.name,
-                        (item.to_paied - item.paied)
+                        (item.to_paied - item.paied),
+                        '<a class="detail-open pull-center" title="Remove" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                     ]);
                     total_out += (item.to_paied - item.paied);
                     if(data.length < row_count){
@@ -114,16 +109,17 @@ function getOutstanding(){
                             '',
                             '',
                             'Total',
-                            total_out
+                            total_out,
+                            ''
                         ]);
                     }
                 });
-
-
+            }else{
+                showMsgError("No Record Found.");
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            showMsgText(MSG_ERROR_ROOT, MSG_ERROR_ROOT, textStatus);
+            showMsgError(textStatus);
             $("#wait").fadeOut('slow');
         }
 

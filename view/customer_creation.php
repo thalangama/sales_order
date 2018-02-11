@@ -46,7 +46,7 @@
                     <h2>Search Customer</h2>
 					<form id="frmCustomerSearch" name="frmCustomerSearch" action="" method="POST">
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-							<label for="" class="col-sm-5 col-xs-5">NIC</label>
+							<label for="" class="col-sm-5 col-xs-5">NIC<span class="mandatory">*</span></label>
 							<div class="col-sm-7 col-xs-7">
 								<input class="form-control" id="nic" name="nic" type="text"> </div>
 						</div>
