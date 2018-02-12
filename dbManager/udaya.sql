@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2018 at 05:26 PM
+-- Generation Time: Feb 12, 2018 at 11:14 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -42,7 +42,8 @@ CREATE TABLE `customer_details` (
 
 INSERT INTO `customer_details` (`id`, `nic`, `name`, `address`, `phone_no`) VALUES
 (1, '851202439v', 'sam HAR THA', 'medirigiriya', 774231616),
-(2, '851202440V', 'SHANI', '11 11', 123456792);
+(2, '851202440V', 'SHANI', '11 11', 123456792),
+(15, '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_no`, `date`, `customer_id`, `sales_officer_id`, `recovery_officer_id`, `payment`, `payment_date`, `no_of_terms`) VALUES
-(6, '0004', '2018-02-11', 14, 1, 2, 100, '2018-02-12', 10);
+(6, '0004', '2018-02-11', 1, 1, 3, 100, '2018-02-12', 10),
+(7, '', '0000-00-00', 15, 0, 0, 0, '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -149,15 +151,20 @@ CREATE TABLE `payments` (
   `order_id` int(11) NOT NULL,
   `amount` double NOT NULL,
   `payment_date` date NOT NULL,
-  `officer_id` int(11) NOT NULL
+  `officer_id` int(11) NOT NULL,
+  `record_status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`id`, `order_id`, `amount`, `payment_date`, `officer_id`) VALUES
-(1, 6, 0, '0000-00-00', 1);
+INSERT INTO `payments` (`id`, `order_id`, `amount`, `payment_date`, `officer_id`, `record_status`) VALUES
+(1, 6, 0, '0000-00-00', 1, 1),
+(2, 7, 0, '0000-00-00', 0, 1),
+(3, 6, 1000, '2018-02-13', 3, 1),
+(4, 6, 200, '2018-02-28', 3, 1),
+(5, 6, 500, '2018-03-29', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -179,16 +186,17 @@ CREATE TABLE `payment_plan` (
 --
 
 INSERT INTO `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`, `status`) VALUES
-(42, '2018-02-12', 300, 1, 6, 1),
-(43, '2018-03-12', 300, 2, 6, 1),
-(44, '2018-04-12', 300, 3, 6, 1),
-(45, '2018-05-12', 300, 4, 6, 1),
-(46, '2018-06-12', 300, 5, 6, 1),
-(47, '2018-07-12', 300, 6, 6, 1),
-(48, '2018-08-12', 300, 7, 6, 1),
-(49, '2018-09-12', 300, 8, 6, 1),
-(50, '2018-10-12', 300, 9, 6, 1),
-(51, '2018-11-12', 300, 10, 6, 1);
+(42, '2018-02-12', 290, 1, 6, 1),
+(43, '2018-03-12', 290, 2, 6, 1),
+(44, '2018-04-12', 290, 3, 6, 1),
+(45, '2018-05-12', 290, 4, 6, 1),
+(46, '2018-06-12', 290, 5, 6, 1),
+(47, '2018-07-12', 290, 6, 6, 1),
+(48, '2018-08-12', 290, 7, 6, 1),
+(49, '2018-09-12', 290, 8, 6, 1),
+(50, '2018-10-12', 290, 9, 6, 1),
+(51, '2018-11-12', 290, 10, 6, 1),
+(53, '0000-00-00', 0, 1, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -276,7 +284,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `customer_details`
 --
 ALTER TABLE `customer_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `items`
 --
@@ -291,7 +299,7 @@ ALTER TABLE `officer`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `order_items`
 --
@@ -301,12 +309,12 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `payment_plan`
 --
 ALTER TABLE `payment_plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
