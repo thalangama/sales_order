@@ -99,7 +99,7 @@ function getOutstanding(){
                         item.order_no,
                         item.nic,
                         item.name,
-                        (item.to_paied - item.paied),
+                        (item.to_paied ),
                         '<a class="detail-open pull-center" title="Remove" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                     ]);
                     total_out += (item.to_paied - item.paied);
