@@ -84,6 +84,22 @@ checkAndAllow('orders.php');
 								<input class="form-control" id="recovery_officer_id" name="recovery_officer_id" type="text">
 							</div>
 						</div>
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Payment Date<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="payment_date" name="payment_date" type="text">
+							</div>
+						</div>
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Amount<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="payment" name="payment" type="text">
+							</div>
+						</div>
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
+							<a id="btnProcess" class="btn btn-next pull-right draft " >Process</a>
+							<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
+						</div>
 					</form>
 				</div>
 
@@ -104,7 +120,7 @@ checkAndAllow('orders.php');
 		<script src="../js/lib/w3.js"></script>
 		<script src="../js/lib/jquery.validate.js"></script>
 		<script src="../js/custom/common.js"></script>
-		<script src="../js/custom/orders.js"></script>
+		<script src="../js/custom/installment.js"></script>
 		<script>
 			w3.includeHTML();
 		</script>

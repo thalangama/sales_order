@@ -1,10 +1,9 @@
 <?php
 include_once '../dbManager/dbManager.php';
-include_once 'customer_creation.php';
 
-class Order
+class Installment
 {
-    function getOrder()
+    function getInstallment()
     {
         $sql = "SELECT 
                   o.id, o.order_no, o.date, c.nic, c.id cus_id, c.name, c.address, c.phone_no, o.sales_officer_id, o.recovery_officer_id, o.payment, o.payment_date, o.no_of_terms
@@ -21,7 +20,7 @@ class Order
         return ($data);
     }
 
-    function updateOrder()
+    function updateInstallment()
     {
         $payment = '';
         $payment_date = '';

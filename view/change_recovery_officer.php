@@ -108,7 +108,7 @@ checkAndAllow('orders.php');
 		<script src="../js/lib/w3.js"></script>
 		<script src="../js/lib/jquery.validate.js"></script>
 		<script src="../js/custom/common.js"></script>
-		<script src="../js/custom/orders.js"></script>
+		<script src="../js/custom/change_recovery_officer.js"></script>
 		<script>
 			w3.includeHTML();
 		</script>
