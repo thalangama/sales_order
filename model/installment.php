@@ -29,4 +29,29 @@ class Installment
         return ($data);
     }
 
+    function getInstallment(){
+
+        $order_id = '';
+        if($_POST["order_id"] != '')
+            $order_id = $_POST['order_id'];
+
+        $sql = "SELECT  `id`, `amount`, `payment_date`, `officer_id` 
+                FROM `payments` 
+                WHERE order_id = '$order_id' AND amount > 0 AND record_status=1";
+        $DbManager = new DbManager();
+        $data = $DbManager->select($sql);
+        return ($data);
+    }
+
+    function deleteInstallment(){
+        $installment_id = '';
+        if($_POST["installment_id"] != '')
+            $installment_id = $_POST['installment_id'];
+
+        $sql = "UPDATE payments SET record_status = 0 WHERE id = '$installment_id'";
+
+        $DbManager = new DbManager();
+        $data = $DbManager->delete($sql);
+        return ($data);
+    }
 }

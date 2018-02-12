@@ -102,7 +102,21 @@ checkAndAllow('orders.php');
 						</div>
 					</form>
 				</div>
-
+				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
+					<table class="display table footable dataTable no-footer footable-loaded" id="tblInstallment" role="grid" border="0" cellspacing="0" cellpadding="0">
+						<thead>
+						<tr role="row">
+							<th class="sorting_asc">No</th>
+							<th class="sorting">Amount</th>
+							<th class="sorting">Payment Date</th>
+							<th class="sorting">Recovery Officer ID</th>
+							<th class="sorting">Action</th>
+						</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
 			</div>
             <!--/detail panel-->
         </div>
