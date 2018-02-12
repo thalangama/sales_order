@@ -2,10 +2,10 @@
 include_once '../dbManager/dbManager.php';
 include_once 'customer_creation.php';
 
-class Order
+class ChangeRecoveryOfficer
 {
 
-    function updateOrder()
+    function updateRecoveryOfficer()
     {
         $order_id = '';
         $recovery_officer_id = '';

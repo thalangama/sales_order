@@ -22,7 +22,7 @@ class Installment
 
         $DbManager = new DbManager();
 
-        $sql = "INSERT INTO  `payment_plan` (`id`, `order_id`, `amount`, `payment_date`, `order_id`)
+        $sql = "INSERT INTO  `payments` (`id`, `order_id`, `amount`, `payment_date`, `officer_id`)
                 VALUES ('', '$order_id', '$payment', '$payment_date','$recovery_officer_id' )";
         $data = $DbManager->save($sql);
 

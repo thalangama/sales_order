@@ -99,9 +99,7 @@ function getOrder(){
     }).done(function (data) {
         $("#wait").fadeOut('slow');
     });
-
 }
-
 
 function clearFields(){
     $('#search_order_no').val("");
