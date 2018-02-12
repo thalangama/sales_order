@@ -125,7 +125,7 @@ checkAndAllow('outstanding.php');
                             <tbody>
                             </tbody>
                         </table>
-                        <div class="col-4 col-sm-4 col-xs-4 col-lg-4 common-box without-heading ">
+                        <div class="col-3 col-sm-3 col-xs-3 col-lg-3 common-box without-heading ">
                             <table class="display table footable dataTable footable-loaded" role="grid" border="0" cellspacing="0" cellpadding="0">
 
                                 <tr>
@@ -142,19 +142,40 @@ checkAndAllow('outstanding.php');
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-7 col-sm-7 col-xs-7 col-lg-7 common-box without-heading "style="margin: 0px 0px 10px 15px!important">
+                        <div class="col-8 col-sm-8 col-xs-8 col-lg-8 common-box without-heading "style="margin: 0px 0px 10px 15px!important">
                             <h2>Payment Details</h2>
-                            <div class="form-group col-lg-6 col-sm-6 col-xs-12">
-                                <label for="" class="col-sm-5 col-xs-5">Number Of Terms</label>
-                                <div class="col-sm-7 col-xs-7">
+                            <div class="form-group col-lg-4 col-sm-4 col-xs-12">
+                                <label for="" class="col-sm-6 col-xs-6">Number Of Terms</label>
+                                <div class="col-sm-6 col-xs-6">
                                     <input class="form-control" id="noOfterms" name="noOfterms" type="text" disabled>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-6 col-sm-6 col-xs-12">
-                                <label for="" class="col-sm-5 col-xs-5">Payment Date</label>
-                                <div class="col-sm-7 col-xs-7">
+                            <div class="form-group col-lg-4 col-sm-4 col-xs-12">
+                                <label for="" class="col-sm-6 col-xs-6">Payment Date</label>
+                                <div class="col-sm-6 col-xs-6">
                                     <div class="clearfix"></div>
                                     <input class="form-control" id="paymentDate" name="paymentDate" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-4 col-xs-12">
+                                <label for="" class="col-sm-6 col-xs-6">Monthly Installment</label>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="clearfix"></div>
+                                    <input class="form-control" id="installment" name="installment" type="text" value="0.00" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-4 col-xs-12">
+                                <label for="" class="col-sm-6 col-xs-6">Total Outstanding</label>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="clearfix"></div>
+                                    <input class="form-control" id="TotalOutstanding" name="TotalOutstanding" type="text" value="0.00" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-4 col-xs-12">
+                                <label for="" class="col-sm-6 col-xs-6">Current Outstanding</label>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="clearfix"></div>
+                                    <input class="form-control" id="currentOutstanding" name="currentOutstanding" type="text" value="0.00" disabled>
                                 </div>
                             </div>
                         </div>

@@ -108,7 +108,7 @@ function getOutstanding(){
                             row_count,
                             '',
                             '',
-                            'Total',
+                            'Total Outstanding',
                             total_out,
                             ''
                         ]);

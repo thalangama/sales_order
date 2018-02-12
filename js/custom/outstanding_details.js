@@ -72,7 +72,7 @@ function getDetails(){
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
-            console.log(data);
+            var outstanding = 0;
             if (data[0] != null && data[0].id != null) {
                 $('#order_id').val(data[0].id);
                 $('#order_no').val(data[0].order_no);
@@ -104,10 +104,13 @@ function getDetails(){
 
                 $('#itemTotal').val(itemTotal);
                 $('#itemBalance').val(itemTotal - data[0].payment);
+                $('#installment').val((itemTotal - data[0].payment) / data[0].no_of_terms);
+                outstanding = itemTotal - data[0].payment;
 
             }
             if(data[2] != null ){
                 row_count = 1;
+                paymentTotal = 0;
                 $.each(data[2], function (counter, item) {
                     tblPaymentHistory.fnAddData([
                         row_count++,
@@ -115,9 +118,12 @@ function getDetails(){
                         item.payment_date,
                         item.name
                     ]);
-                    itemTotal = itemTotal + (item.price*item.quantity);
+                    outstanding = outstanding - item.amount;
                 });
-
+            }
+            $('#TotalOutstanding').val(outstanding);
+            if(data[1] != null ){
+                $('#currentOutstanding').val(data[1][0].to_paied);
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {

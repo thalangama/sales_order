@@ -84,7 +84,7 @@ checkAndAllow('outstanding.php');
                                     <th class="sorting">Order No</th>
                                     <th class="sorting">Customer Nic</th>
                                     <th class="sorting">Customer Name</th>
-                                    <th class="sorting">Amount</th>
+                                    <th class="sorting">Outstanding Amount</th>
                                     <th class="sorting">Details</th>
                                 </tr>
                             </thead>
