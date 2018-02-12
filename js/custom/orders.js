@@ -266,6 +266,7 @@ function getOrder(){
 
                 $('#itemTotal').val(itemTotal);
                 $('#itemBalance').val(itemTotal - data[0].payment);
+                $('#installment').val((itemTotal - data[0].payment) / data[0].no_of_terms);
 
             }else{
                 showMsgError("No Order Found.");

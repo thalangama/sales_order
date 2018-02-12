@@ -64,6 +64,22 @@ class DbManager
         }
     }
 
+    function updateOperator($sql){
+        try {
+            $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $conn = null;
+            return $stmt->rowCount() . " records UPDATED successfully";
+        }
+        catch(PDOException $e)
+        {
+            $conn = null;
+            die( $sql . "<br>" . $e->getMessage());
+        }
+    }
+
     function delete($sql){
 
         try {
