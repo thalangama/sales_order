@@ -58,7 +58,7 @@ checkAndAllow('orders.php');
 
 				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
 					<h2>Order Details</h2>
-					<form id="frmOrdersDetails" name="frmOrdersDetails" action="" method="POST">
+					<form id="frmInstallment" name="frmInstallment" action="" method="POST">
 						<input class="form-control" id="order_id" name="order_id" type="hidden">
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 							<label for="" class="col-sm-5 col-xs-5">Order No<span class="mandatory">*</span></label>
