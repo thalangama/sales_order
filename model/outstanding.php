@@ -18,7 +18,7 @@ class outstanding
 
         $where .= " AND p.payment_date <= '".$date."'";
 
-        $sql = "SELECT o.order_no, sum(p.amount) paied, (outs.outstand - sum(p.amount) -o.payment )to_paied, c.nic, c.name
+        $sql = "SELECT o.order_no, sum(p.amount) paied, (outs.outstand - sum(p.amount) ) to_paied, c.nic, c.name
             FROM
                 payments p,
                 customer_details c,
@@ -34,6 +34,7 @@ class outstanding
                     p.order_id = o.id
                     AND off.id = o.recovery_officer_id
                     AND o.customer_id = c.id
+                    AND p.status = 1 
                     ".$where."
                 GROUP BY p.order_id
                 ) outs
@@ -59,7 +60,7 @@ class outstanding
 
         $where .= " AND p.payment_date <= '".$date."'";
 
-        $sql = "SELECT o.order_no, sum(p.amount) paied, outs.outstand to_paied, c.nic, c.name
+        $sql = "SELECT o.order_no, sum(p.amount) paied,  (outs.outstand - sum(p.amount) )  to_paied, c.nic, c.name
             FROM
                 payments p,
                 customer_details c,
@@ -75,6 +76,7 @@ class outstanding
                     p.order_id = o.id
                     AND off.id = o.recovery_officer_id
                     AND o.customer_id = c.id
+                    AND p.status = 1 
                     ".$where."
                 GROUP BY p.order_id
                 ) outs
@@ -83,6 +85,7 @@ class outstanding
                 AND off.id = o.recovery_officer_id
                 AND o.customer_id = c.id
                 AND p.order_id = outs.order_id 
+                AND p.record_status = 1 
                 ".$where."
             GROUP BY p.order_id";
 
