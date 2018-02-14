@@ -202,7 +202,7 @@ function process() {
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
-            $('#tblAddItems').dataTable().fnClearTable();
+            $('#tblInstallment').dataTable().fnClearTable();
             clearMsg();
             clearFields();
             showMsgSuccess(data);

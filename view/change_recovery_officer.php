@@ -1,7 +1,5 @@
 <?php
 include_once '../controllers/session.php';
-include_once '../model/installment.php';
-
 checkAndAllow('orders.php');
 ?>
 <!DOCTYPE html>

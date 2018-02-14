@@ -1,9 +1,9 @@
 <?php
 
-    include '../dbManager/dbManager.php';
-    include '../controllers/session.php';
+    include_once '../dbManager/dbManager.php';
+    include_once '../controllers/session.php';
 
-    //checkAndAllow('user_creation.php');
+    checkAndAllow('user_creation.php');
 
 
     $db = new DbManager();

@@ -6,7 +6,7 @@
  * Time: 7:50 PM
  */
 session_start();
-include '../dbManager/dbManager.php';
+include_once '../dbManager/dbManager.php';
 
     $errors = array();
 

@@ -5,6 +5,7 @@
  * Date: 1/23/2018
  * Time: 9:49 PM
  */
+include_once  '../controllers/session.php';
 
 class DbManager
 {
@@ -49,6 +50,10 @@ class DbManager
     }
 
     function update($sql){
+        if(!isManager()){
+            echo('you dont have permission to perform this action');
+            return false;
+        }
         try {
             $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
