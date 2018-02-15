@@ -102,10 +102,12 @@ function formValidation() {
                 required: true
             },
             "quantity": {
-                required: true
+                required: true,
+                number : true
             },
             "price": {
-                required: true
+                required: true,
+                number:true
             }
         },
         errorElement: "div"
@@ -123,7 +125,8 @@ function formValidation() {
                 required: true
             },
             "date": {
-                required: true
+                required: true,
+                date:true
             },
             "recovery_officer_id": {
                 required: true
@@ -147,7 +150,8 @@ function formValidation() {
                 required: true
             },
             "phone_no": {
-                required: true
+                required: true,
+                number: true
             }
         },
         errorElement: "div"
@@ -159,13 +163,16 @@ function formValidation() {
         },
         rules: {
             "itemPayment": {
-                required: true
+                required: true,
+                number:true
             },
             "noOfterms": {
-                required: true
+                required: true,
+                number:true
             },
             "paymentDate": {
-                required: true
+                required: true,
+                date:true
             }
         },
         errorElement: "div"
