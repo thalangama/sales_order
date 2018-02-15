@@ -41,14 +41,9 @@ function formValidation() {
             error.insertAfter(element);
         },
         rules: {
-            // "cmbLocation": {
-            //     required: true
-            // },
-            // "txtCustomerCode":{
-            //     required: function (element) {
-            //         return $('#cmbCodeType').val() != '';
-            //     }
-            // }
+            "date": {
+                date: true
+            }
         },
         errorElement: "div"
     });
@@ -62,11 +57,6 @@ function eventHandler() {
             getOutstanding();
         }
     });
-
-    $("#btnProcess").on('click', function (e) {
-        process();
-    });
-
 }
 
 function getOutstanding(){
@@ -100,7 +90,7 @@ function getOutstanding(){
                         item.nic,
                         item.name,
                         (item.to_paied ),
-                        '<a class="detail-open pull-center" title="Remove" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
+                        '<a class="detail-open pull-center" title="Remove" target="_blank" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                     ]);
                     total_out += (item.to_paied - item.paied);
                     if(data.length < row_count){
