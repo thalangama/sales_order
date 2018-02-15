@@ -26,8 +26,33 @@ function formValidation() {
         },
         rules: {
             "nic": {
+                required: true,
+                minlength:10,
+            },
+        },
+        errorElement: "div"
+    });
+
+    $("#frmCustomerSave").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "name": {
                 required: true
             },
+            "customer_nic": {
+                required: true
+            },
+            "address": {
+                required: true
+            },
+            "phone_no": {
+                required: true,
+                number: true,
+                minlength:9,
+                maxlength:10
+            }
         },
         errorElement: "div"
     });
@@ -43,7 +68,9 @@ function eventHandler() {
     });
 
     $("#btnProcess").on('click', function (e) {
-        process();
+        if($('#frmCustomerSave').valid()) {
+            process();
+        }
     });
 
 }
