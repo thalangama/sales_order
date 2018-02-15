@@ -5,7 +5,7 @@
  * Date: 1/29/2018
  * Time: 7:50 PM
  */
-session_start();
+//session_start();
 include_once '../dbManager/dbManager.php';
 
     $errors = array();

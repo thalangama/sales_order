@@ -7,7 +7,6 @@
  */
 session_start();
 
-
 function isManager(){
     if(isset($_SESSION['username'])){
         if($_SESSION['user_type'] == 'M'){
