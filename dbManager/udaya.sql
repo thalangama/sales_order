@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2018 at 11:14 AM
+-- Generation Time: Feb 15, 2018 at 12:24 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -205,6 +205,7 @@ INSERT INTO `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `ord
 --
 
 CREATE TABLE `users` (
+  `id` int(10) NOT NULL,
   `username` varchar(100) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
@@ -217,8 +218,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`username`, `first_name`, `last_name`, `user_type`, `password`, `is_deleted`) VALUES
-('Dilsh', 'Dilshan', 'Madushanka', 'M', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0);
+INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `user_type`, `password`, `is_deleted`) VALUES
+(1, 'udaya', 'Udaya', 'Kumara', 'M', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', 0),
+(2, 'sameera', 'sameera', 'harshana', 'O', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', 0);
 
 --
 -- Indexes for dumped tables
@@ -274,7 +276,8 @@ ALTER TABLE `payment_plan`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`username`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -314,7 +317,12 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `payment_plan`
 --
 ALTER TABLE `payment_plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
