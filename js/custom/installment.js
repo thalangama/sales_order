@@ -236,7 +236,7 @@ function deletePayment(installment_id){
             "bAutoWidth": false,
             success: function (data, textStatus) {
                 clearMsg();
-                showMsgSuccess('Successfully Delete Installment');
+                showMsgSuccess(data);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 showMsgError(textStatus);

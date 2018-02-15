@@ -29,6 +29,21 @@ function formValidation() {
         },
         errorElement: "div"
     });
+
+    $("#frmItemSave").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "code": {
+                required: true
+            },
+            "description": {
+                required: true
+            }
+        },
+        errorElement: "div"
+    });
 }
 
 function eventHandler() {
@@ -41,7 +56,9 @@ function eventHandler() {
     });
 
     $("#btnProcess").on('click', function (e) {
-        process();
+        if($('#frmItemSave').valid()) {
+            process();
+        }
     });
 
 }
