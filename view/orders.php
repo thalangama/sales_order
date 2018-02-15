@@ -29,6 +29,17 @@ checkAndAllow('orders.php');
                 <!-- page header -->
                 <h1>Order</h1>
                 <!-- /page header -->
+				<div class="nav-info">
+					<div class="dropdown">
+						<a class="btn btn-default" href="#" data-toggle="dropdown">
+							<?php echo $_SESSION['username']; ?>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+							<li><a href="user_login.php?logout=logout">Logout</a></li>
+						</ul>
+					</div>
+				</div>
             </div>
         </div>
     </header>

@@ -33,6 +33,7 @@ function formValidation() {
 function eventHandler() {
 
     $("#btnProcess").on('click', function (e) {
+        //alert(e.getMessage());
         if($('#frmChangePassword').valid()){
             process();
         }
