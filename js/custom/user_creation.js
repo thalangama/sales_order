@@ -1,16 +1,168 @@
-/**
- * Created by Madushanka on 1/29/2018.
- */
+var USER_URL = "../controllers/user_controller.php";
 
-function checkPassword(){
-    var newPassword = document.getElementById("newPassword");
-    var confirmPassword = document.getElementById("confirmPassword");
-    if(newPassword.value != confirmPassword.value){
-        confirmPassword.value="";
-        newPassword.value="";
-        alert("Password confirmation is invalid, Please try again!");
-        return false;
+jQuery(document).ready(function () {
+    pageInit();
+    formValidation();
+    eventHandler();
+});
+
+function clearFields(){
+    $('#search_user_id').val("");
+    $('#username').val("");
+    $('#firstName').val("");
+    $('#lastName').val("");
+    $('#empType').val("");
+    $('#newPassword').val("");
+    $('#confirmPassword').val("");
+    return false;
+}
+
+function pageInit(){
+}
+
+function formValidation() {
+    $("#frmUserSearch").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "search_user_id": {
+                required: true
+            },
+        },
+        errorElement: "div"
+    });
+
+    $("#frmUserSave").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "username": {
+                required: true
+            },
+            "firstName": {
+                required: true
+            },
+            "lastName": {
+                required: true
+            },
+            "empType": {
+                required: true
+            },
+            "newPassword": {
+                required: true
+            },
+            "confirmPassword": {
+                required: true
+            },
+        },
+        errorElement: "div"
+    });
+}
+
+function eventHandler() {
+
+    $("#btnSearch").on('click', function (e) {
+        clearMsg();
+        if ($("#frmUserSearch").valid()) {
+            getUser();
+        }
+    });
+
+    $("#btnProcess").on('click', function (e) {
+        if($("#frmUserSave").valid()) {
+            process();
+        }
+    });
+
+}
+
+function getUser(){
+    clearMsg();
+    clearFields();
+    $("#wait").fadeIn('fast');
+
+    var objData = {
+        type: "POST",
+        url: USER_URL,
+        cache: false,
+        async: false,
+        data: ({
+            REQUEST_TYPE: 'GET_USER',
+            username: $('#search_user_id').val()
+        }),
+        dataType: "json",
+        timeout: 180000,
+        "bAutoWidth": false,
+        success: function (data, textStatus) {
+            if (data.length != 0) {
+                data = data[0];
+                $('#search_user_id').val("");
+                $('#id').val(data.id);
+                $('#username').val(data.username);
+                $('#firstName').val(data.first_name);
+                $('#lastName').val(data.last_name);
+                $('#empType').val(data.user_type);
+                $('#newPassword').val("");
+                $('#confirmPassword').val("");
+            }else{
+                showMsgError( "No User Found.");
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showMsgError( textStatus);
+            $("#wait").fadeOut('slow');
+            $('#nic').val("");
+        }
     }
-    else
-        return true;
+
+    $.ajax
+    (objData).done(function (data) {
+        $("#wait").fadeOut('slow');
+    });
+
+}
+
+function process() {
+
+    $("#wait").fadeIn('fast');
+    id = $('#id').val();
+    request_type = 'ADD_USER';
+    if(id != '')
+        request_type = 'UPDATE_USER';
+
+    var objData = {
+        type: "POST",
+        url: USER_URL,
+        cache: false,
+        async: false,
+        data: ({
+            REQUEST_TYPE : request_type,
+            id : id,
+            username : $('#username').val(),
+            firstName : $('#firstName').val(),
+            lastName : $('#lastName').val(),
+            empType : $('#empType').val(),
+            newPassword : $('#newPassword').val(),
+            confirmPassword : $('#confirmPassword').val()
+        }),
+        dataType: "json",
+        timeout: 180000,
+        "bAutoWidth": false,
+        success: function (data, textStatus) {
+            clearMsg();
+            clearFields();
+            showMsgSuccess(data);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showMsgError(textStatus);
+            $("#wait").fadeOut('slow');
+        }
+    }
+    $.ajax
+    (objData).done(function (data) {
+        $("#wait").fadeOut('slow');
+    });
+
 }
