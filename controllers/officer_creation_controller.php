@@ -7,6 +7,8 @@ if($_POST["REQUEST_TYPE"] == 'GET'){
     $data = $createOfficer->getOfficer();
     if(isset($data[0]))
         echo (json_encode($data[0]));
+    else
+        echo '[]';
 }elseif($_POST["REQUEST_TYPE"] == 'ADD'){
     $data = $createOfficer->addOfficer();
     echo (json_encode($data));

@@ -27,11 +27,51 @@ function formValidation() {
         errorPlacement: function (error, element) {
             error.insertAfter(element);
         },
-        // rules: {
-        //     "cmbLocation": {
-        //         required: true
-        //     }
-        // },
+        rules: {
+            "search_nic": {
+                atleast_one_required: true
+            }
+        },
+        rules: {
+            "search_officer_id": {
+                atleast_one_required: true
+            }
+        },
+        errorElement: "div"
+    });
+    $.validator.addMethod("atleast_one_required", function(value, element) {
+        search_nic = $('#search_nic').val();
+        search_officer_id = $('#search_officer_id').val();
+        if(search_nic != '' || search_officer_id != '')
+            return true;
+        else
+            return false;
+    }, "Please Enter at least one of Search input");
+
+    $("#frmOfficerSave").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "nic": {
+                required: true
+            },
+            "name": {
+                required: true
+            },
+            "address": {
+                required: true
+            },
+            "phone_no": {
+                required: true,
+                number:true,
+                minlength:9,
+                maxlength:10
+            },
+            "officer_id": {
+                required: true
+            }
+        },
         errorElement: "div"
     });
 }
@@ -46,13 +86,14 @@ function eventHandler() {
     });
 
     $("#btnProcess").on('click', function (e) {
-        process();
+        if ($("#frmOfficerSave").valid()) {
+            process();
+        }
     });
 
 }
 
 function getOfficer(){
-
     $("#wait").fadeIn('fast');
 
     var objData = {
@@ -77,6 +118,9 @@ function getOfficer(){
                 $('#address').val(data.address );
                 $('#phone_no').val(data.phone );
                 $('#officer_id').val(data.officer_id );
+            }else{
+                showMsgError("No Officer Found.");
+                clearFields();
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
