@@ -80,7 +80,6 @@ function eventHandler() {
 
 function getUser(){
     clearMsg();
-    clearFields();
     $("#wait").fadeIn('fast');
 
     var objData = {
@@ -96,6 +95,7 @@ function getUser(){
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
+            clearFields();
             if (data.length != 0) {
                 data = data[0];
                 $('#search_user_id').val("");

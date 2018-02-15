@@ -1,27 +1,83 @@
-/**
- * Created by Madushanka on 2/15/2018.
- */
-function clearFields() {
-    document.getElementById('current_password').value = "";
-    document.getElementById('new_password').value = "";
-    document.getElementById('confirm_password').value = "";
+var CHANGE_PASSWORD_URL = "../controllers/change_password_controller.php";
+
+jQuery(document).ready(function () {
+    pageInit();
+    formValidation();
+    eventHandler();
+});
+
+function pageInit(){
 }
 
-function validateForm(){
-    var current_password = document.getElementById('current_password');
-    var new_password = document.getElementById('new_password');
-    var confirm_password = document.getElementById('confirm_password');
+function formValidation() {
 
-    if(current_password.value == "" || new_password.value == "" || confirm_password.value =="" ){
-        alert('please fill all fields!');
-        clearFields();
-        return false;
-    }
-    if(new_password.value != confirm_password.value ){
-        alert('password confirmation is invalid. please try again!');
-        clearFields();
-        return false;
-    }
+    $("#frmChangePassword").validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+        rules: {
+            "current_password": {
+                required: true
+            },
+            "new_password": {
+                required: true
+            },
+            "confirm_password": {
+                required: true
+            }
+        },
+        errorElement: "div"
+    });
+}
 
-    return true;
+function eventHandler() {
+
+    $("#btnProcess").on('click', function (e) {
+        if($('#frmChangePassword').valid()){
+            process();
+        }
+    });
+
+}
+
+function clearFields(){
+    $('#current_password').val("");
+    $('#new_password').val("");
+    $('#confirm_password').val("");
+    return false;
+}
+
+function process() {
+
+    $("#wait").fadeIn('fast');
+
+    var objData = {
+        type: "POST",
+        url: CHANGE_PASSWORD_URL,
+        cache: false,
+        async: false,
+        data: ({
+            REQUEST_TYPE : 'UPDATE_PASSWORD',
+            current_password : $('#current_password').val(),
+            new_password : $('#new_password').val(),
+            confirm_password : $('#confirm_password').val()
+        }),
+        dataType: "json",
+        timeout: 180000,
+        "bAutoWidth": false,
+        success: function (data, textStatus) {
+            $('#tblAddItems').dataTable().fnClearTable();
+            clearMsg();
+            clearFields();
+            showMsgSuccess(data);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showMsgError(textStatus);
+            $("#wait").fadeOut('slow');
+        }
+    }
+    $.ajax
+    (objData).done(function (data) {
+        $("#wait").fadeOut('slow');
+    });
 }

@@ -36,16 +36,9 @@
             <p class="visible-xs">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"> <span class="glyphicon glyphicon-align-justify"></span> Navigation </button>
             </p>
-            <?php
-                if(isset($_GET['success']))
-                    echo "<p class=\"success-msg\">Password has been changed successfully!</p>";
-                if(isset($_GET['error']))
-                    echo "<p class=\"error-msg\">Password you entered is invalid!</p>";
-            ?>
 
             <div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
-                <form id="frmCustomerSave" name="frmCustomerSave" action="../controllers/change_password.php" method="POST">
-                    <input class="form-control" id="customer_id" name="customer_id" type="hidden">
+                <form id="frmChangePassword" name="frmChangePassword" method="POST">
                     <div class="form-group col-lg-6 col-sm-6 col-xs-12">
                         <label for="" class="col-sm-5 col-xs-5">Current Password<span class="mandatory">*</span></label>
                         <div class="col-sm-7 col-xs-7">
@@ -58,16 +51,14 @@
                             <input class="form-control" id="new_password" name="new_password" type="password">
                         </div>
                     </div>
-
                     <div class="form-group col-lg-6 col-sm-6 col-xs-12">
                         <label for="" class="col-sm-5 col-xs-5">Confirm New Password<span class="mandatory">*</span></label>
                         <div class="col-sm-7 col-xs-7">
                             <input class="form-control" id="confirm_password" name="confirm_password" type="password">
                         </div>
                     </div>
-
                     <div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
-                        <Button id="btnProcess" type="submit" class="btn btn-next pull-right draft " onclick="return validateForm();" >Process</Button>
+                        <a id="btnProcess" class="btn btn-next pull-right draft ">Process</a>
                         <a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
                     </div>
                 </form>
