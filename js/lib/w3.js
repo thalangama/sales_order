@@ -249,6 +249,10 @@ w3.includeHTML = function(cb) {
     }
   }
   if (cb) cb();
+  var session_user_type = $('#session_user_type').val();
+  if(session_user_type == 'O'){
+    $('#user_creation').hide();
+  }
 };
 w3.getHttpData = function (file, func) {
   w3.http(file, function () {

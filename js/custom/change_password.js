@@ -30,10 +30,11 @@ function formValidation() {
         },
         errorElement: "div"
     });
+
     $.validator.addMethod("compare_password", function(value, element) {
-        search_nic = $('#search_nic').val();
-        search_officer_id = $('#search_officer_id').val();
-        if(search_nic == search_officer_id )
+        new_password = $('#new_password').val();
+        confirm_password = $('#confirm_password').val();
+        if(new_password == confirm_password )
             return true;
         else
             return false;
