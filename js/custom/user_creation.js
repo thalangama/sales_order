@@ -51,14 +51,25 @@ function formValidation() {
                 required: true
             },
             "newPassword": {
-                required: true
+                required: true,
+                compare_password: true
             },
             "confirmPassword": {
-                required: true
+                required: true,
+                compare_password: true
             },
         },
         errorElement: "div"
     });
+
+    $.validator.addMethod("compare_password", function(value, element) {
+        new_password = $('#newPassword').val();
+        confirm_password = $('#confirmPassword').val();
+        if(new_password == confirm_password )
+            return true;
+        else
+            return false;
+    }, "New Password and Confirm Password mismatch");
 }
 
 function eventHandler() {
