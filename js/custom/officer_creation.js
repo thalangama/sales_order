@@ -29,10 +29,9 @@ function formValidation() {
         },
         rules: {
             "search_nic": {
-                atleast_one_required: true
-            }
-        },
-        rules: {
+                atleast_one_required: true,
+                minlength:10
+            },
             "search_officer_id": {
                 atleast_one_required: true
             }

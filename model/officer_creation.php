@@ -21,6 +21,9 @@ class createOfficer
 
     function addOfficer()
     {
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
         $name = "";
         $nic = "";
         $officer_id = "";
@@ -48,6 +51,9 @@ class createOfficer
 
     function updateOfficer()
     {
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
         $name = "";
         $nic = "";
         $officer_id = "";

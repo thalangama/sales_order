@@ -96,7 +96,7 @@ class Order
             $total = $total + ($value[4] * $value[3]);
         }
 
-        $payment_amount = ( $total - $payment) / $no_of_terms;
+        $payment_amount = round(( $total - $payment) / $no_of_terms , 2);
 
         $sql = "INSERT INTO  `payments` (`id`, `payment_date`, `amount`, `order_id`,`officer_id`)
                 VALUES ('', '', '0', '$order_id', '$sales_officer_id' )";
@@ -132,6 +132,9 @@ class Order
 
     function updateOrder()
     {
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
         $officer = new createOfficer();
 
         $payment = '';
@@ -195,7 +198,7 @@ class Order
         $sql = "UPDATE `payment_plan` SET status=0 WHERE order_id=$order_id AND `payment_amount` > 0";
         $data = $DbManager->update($sql);
 
-        $payment_amount = ( $total - $payment) / $no_of_terms;
+        $payment_amount = round(( $total - $payment) / $no_of_terms , 2);
 
         $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
                 VALUES ('', '$payment_date', '$payment_amount',1,'$order_id' )";

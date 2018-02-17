@@ -42,7 +42,8 @@ function formValidation() {
                 required: true
             },
             "customer_nic": {
-                required: true
+                required: true,
+                minlength:10,
             },
             "address": {
                 required: true

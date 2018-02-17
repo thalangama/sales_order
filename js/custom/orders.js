@@ -20,7 +20,7 @@ function pageInit(){
         noOfterms = $('#noOfterms').val();
         if(noOfterms != ''){
             installment = balance / noOfterms;
-            $('#installment').val(installment);
+            $('#installment').val(installment.toFixed(2));
         }
     });
 
@@ -273,7 +273,8 @@ function getOrder(){
 
                 $('#itemTotal').val(itemTotal);
                 $('#itemBalance').val(itemTotal - data[0].payment);
-                $('#installment').val((itemTotal - data[0].payment) / data[0].no_of_terms);
+                ins = (itemTotal - data[0].payment) / data[0].no_of_terms;
+                $('#installment').val(ins.toFixed(2));
 
             }else{
                 showMsgError("No Order Found.");
