@@ -115,6 +115,7 @@ checkAndAllow('orders.php');
 					</form>
 				</div>
 				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
+					<h2>Payment History</h2>
 					<table class="display table footable dataTable no-footer footable-loaded" id="tblInstallment" role="grid" border="0" cellspacing="0" cellpadding="0">
 						<thead>
 						<tr role="row">

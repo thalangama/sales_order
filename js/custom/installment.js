@@ -159,7 +159,7 @@ function getInstallment(order_id){
                     ]);
                 });
             }else{
-                showMsgError("No Order Found.");
+                showMsgError("No Payment Found.");
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {

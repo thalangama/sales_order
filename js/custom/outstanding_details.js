@@ -123,7 +123,7 @@ function getDetails(){
                 });
             }
             $('#TotalOutstanding').val(outstanding);
-            if(data[1] != null ){
+            if(data[1] != null && data[1].length != 0 ){
                 $('#currentOutstanding').val(data[1][0].to_paied);
             }
         },
