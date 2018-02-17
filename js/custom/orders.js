@@ -43,9 +43,9 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
+            {"sClass": "numericCol "},
+            {"sClass": "numericCol "},
+            {"sClass": "numericCol "},
             {"sClass": ""}
         ],
         "aoColumnDefs":[

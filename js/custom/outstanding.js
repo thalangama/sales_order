@@ -23,7 +23,7 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
-            {"sClass": ""},
+            {"sClass": "numericCol "},
             {"sClass": ""}
         ],
         "aoColumnDefs":[

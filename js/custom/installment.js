@@ -20,7 +20,7 @@ function pageInit(){
 
         "aoColumns": [
             {"sClass": ""},
-            {"sClass": ""},
+            {"sClass": "numericCol "},
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""}

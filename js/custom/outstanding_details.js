@@ -16,9 +16,9 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""}
+            {"sClass": "numericCol "},
+            {"sClass": "numericCol "},
+            {"sClass": "numericCol "}
         ],
         "aoColumnDefs":[
             // { "bVisible":false, "aTargets":[7] },
