@@ -23,7 +23,7 @@ class Installment
         $DbManager = new DbManager();
 
         $sql = "INSERT INTO  `payments` (`id`, `order_id`, `amount`, `payment_date`, `officer_id`)
-                VALUES ('', '$order_id', '$payment', '$payment_date','$recovery_officer_id' )";
+                VALUES ('', '$order_id', '$payment', '$payment_date',(SELECT id FROM `officer` WHERE officer_id='$recovery_officer_id') )";
         $data = $DbManager->save($sql);
 
         return ($data);

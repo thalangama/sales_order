@@ -87,7 +87,8 @@ function formValidation() {
         },
         rules: {
             "nic": {
-                required: true
+                required: true,
+                minlength:10
             }
         },
         errorElement: "div"
@@ -144,14 +145,16 @@ function formValidation() {
                 required: true
             },
             "customer_nic": {
-                required: true
+                required: true,
+                minlength:10
             },
             "address": {
                 required: true
             },
             "phone_no": {
                 required: true,
-                number: true
+                number: true,
+                minlength:9
             }
         },
         errorElement: "div"

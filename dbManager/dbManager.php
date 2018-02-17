@@ -12,7 +12,7 @@ class DbManager
     var $servername = "localhost";
     var $username = "root";
     var $password = "";
-    var $dbname = "udaya";
+    var $dbname = "sales_order";
 
     function save($sql)
     {
