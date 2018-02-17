@@ -326,6 +326,12 @@ function clearFields(){
     $('#paymentDate').val("");
     $('#itemTotal').val("");
     $('#itemBalance').val("");
+    $('#item_code').val("");
+    $('#quantity').val("");
+    $('#price').val("");
+    $('#installment').val("");
+
+    $('#tblAddItems').dataTable().fnClearTable();
     return false;
 }
 

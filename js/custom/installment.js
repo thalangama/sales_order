@@ -172,6 +172,7 @@ function getInstallment(order_id){
 }
 
 function clearFields(){
+    $('#tblInstallment').dataTable().fnClearTable();
     $('#search_order_no').val("")
     $('#order_id').val("");
     $('#order_no').val("");

@@ -92,7 +92,7 @@ function getOutstanding(){
                         (item.to_paied ),
                         '<a class="detail-open pull-center" title="Remove" target="_blank" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                     ]);
-                    total_out += (item.to_paied - item.paied);
+                    total_out += parseFloat(item.to_paied);
                     if(data.length < row_count){
                         tblOutstanding.fnAddData([
                             row_count,
