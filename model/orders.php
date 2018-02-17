@@ -103,6 +103,9 @@ class Order
         $data = $DbManager->save($sql);
 
         $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
+                VALUES ('', '$date', 0,0,'$order_id' )";
+        $data = $DbManager->save($sql);
+        $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
                 VALUES ('', '$payment_date', '$payment_amount',1,'$order_id' )";
         $data = $DbManager->save($sql);
 
@@ -200,6 +203,9 @@ class Order
 
         $payment_amount = round(( $total - $payment) / $no_of_terms , 2);
 
+        $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
+                VALUES ('', '$date', 0,0,'$order_id' )";
+        $data = $DbManager->save($sql);
         $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
                 VALUES ('', '$payment_date', '$payment_amount',1,'$order_id' )";
         $data = $DbManager->save($sql);

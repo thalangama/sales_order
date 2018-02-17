@@ -84,12 +84,13 @@ function getOutstanding(){
             if (data[0] != null && data[0].order_no != null) {
                 row_count = 1;
                 $.each(data, function (counter, item) {
+                    out_amt = parseFloat(item.to_paied);
                     tblOutstanding.fnAddData([
                         row_count++,
                         item.order_no,
                         item.nic,
                         item.name,
-                        (item.to_paied ),
+                        out_amt.toFixed(2),
                         '<a class="detail-open pull-center" title="Remove" target="_blank" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                     ]);
                     total_out += parseFloat(item.to_paied);
@@ -99,7 +100,7 @@ function getOutstanding(){
                             '',
                             '',
                             'Total Outstanding',
-                            total_out,
+                            total_out.toFixed(2),
                             ''
                         ]);
                     }
