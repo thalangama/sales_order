@@ -49,7 +49,7 @@ function clearFields(){
 }
 
 function process() {
-
+    //test
     $("#wait").fadeIn('fast');
 
     var objData = {
