@@ -1,12 +1,12 @@
 <?php
-include '../dbManager/dbManager.php';
+include_once '../dbManager/dbManager.php';
 
 class createOfficer
 {
     function getOfficer()
     {
         $where = ' 1=1';
-        if($_POST["nic"] != '')
+        if(isset($_POST["nic"]) && $_POST["nic"] != '')
             $where .= ' AND nic = "' .$_POST["nic"].'"';
         if($_POST["officer_id"] != '')
             $where .= ' AND officer_id = "' .$_POST["officer_id"].'"';
@@ -21,6 +21,9 @@ class createOfficer
 
     function addOfficer()
     {
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
         $name = "";
         $nic = "";
         $officer_id = "";
@@ -48,6 +51,9 @@ class createOfficer
 
     function updateOfficer()
     {
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
         $name = "";
         $nic = "";
         $officer_id = "";

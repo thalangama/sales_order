@@ -20,7 +20,7 @@ function pageInit(){
 
         "aoColumns": [
             {"sClass": ""},
-            {"sClass": ""},
+            {"sClass": "numericCol "},
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""}
@@ -62,7 +62,8 @@ function formValidation() {
                 required: true
             },
             "payment_date": {
-                required: true
+                required: true,
+                date: true
             },
             "payment": {
                 required: true
@@ -158,7 +159,7 @@ function getInstallment(order_id){
                     ]);
                 });
             }else{
-                showMsgError("No Order Found.");
+                showMsgError("No Payment Found.");
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -171,6 +172,7 @@ function getInstallment(order_id){
 }
 
 function clearFields(){
+    $('#tblInstallment').dataTable().fnClearTable();
     $('#search_order_no').val("")
     $('#order_id').val("");
     $('#order_no').val("");
@@ -184,7 +186,11 @@ function clearFields(){
 }
 
 function process() {
-
+    order_id = $('#order_id').val();
+    if(order_id == '') {
+        showMsgError("Search Order before submit");
+        return false;
+    }
     $("#wait").fadeIn('fast');
     var objData = {
         type: "POST",
@@ -236,7 +242,7 @@ function deletePayment(installment_id){
             "bAutoWidth": false,
             success: function (data, textStatus) {
                 clearMsg();
-                showMsgSuccess('Successfully Delete Installment');
+                showMsgSuccess(data);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 showMsgError(textStatus);

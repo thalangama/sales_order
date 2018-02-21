@@ -32,6 +32,8 @@ checkAndAllow('orders.php');
 				<div class="nav-info">
 					<div class="dropdown">
 						<a class="btn btn-default" href="#" data-toggle="dropdown">
+							<input type="hidden" value="<?php echo $_SESSION['user_type']; ?>" id="session_user_type" >
+							<input type="hidden" value="<?php echo $_SESSION['username']; ?>" id="session_user_name" >
 							<?php echo $_SESSION['username']; ?>
 							<span class="caret"></span>
 						</a>
@@ -231,7 +233,10 @@ checkAndAllow('orders.php');
 					</div>
 				</div>
                 <!-- /Expenses Details -->
-				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading "> <a id="btnProcess" class="btn btn-next pull-right draft " href="#">Process</a></div>
+				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading ">
+					<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()">Clear</a>
+					<a id="btnProcess" class="btn btn-next pull-right draft " href="#">Process</a>
+				</div>
 			</div>
 		</div>
             <!--/detail panel-->

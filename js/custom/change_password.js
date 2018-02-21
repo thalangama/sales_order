@@ -20,20 +20,30 @@ function formValidation() {
                 required: true
             },
             "new_password": {
-                required: true
+                required: true,
+                compare_password: true
             },
             "confirm_password": {
-                required: true
+                required: true,
+                compare_password: true
             }
         },
         errorElement: "div"
     });
+
+    $.validator.addMethod("compare_password", function(value, element) {
+        new_password = $('#new_password').val();
+        confirm_password = $('#confirm_password').val();
+        if(new_password == confirm_password )
+            return true;
+        else
+            return false;
+    }, "New Password and Confirm Password mismatch");
 }
 
 function eventHandler() {
 
     $("#btnProcess").on('click', function (e) {
-        //alert(e.getMessage());
         if($('#frmChangePassword').valid()){
             process();
         }

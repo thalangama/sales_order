@@ -12,7 +12,7 @@ class DbManager
     var $servername = "localhost";
     var $username = "root";
     var $password = "";
-    var $dbname = "udaya";
+    var $dbname = "sales_order";
 
     function save($sql)
     {
@@ -51,8 +51,7 @@ class DbManager
 
     function update($sql){
         if(!isManager()){
-            echo('you dont have permission to perform this action');
-            return false;
+            return ('You don\'t have permission to perform this action');
         }
         try {
             $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
@@ -87,6 +86,9 @@ class DbManager
 
     function delete($sql){
 
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
         try {
             $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

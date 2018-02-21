@@ -48,6 +48,9 @@ class Items
 
     function updateItems()
     {
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
         $id = '';
         $code = '';
         $description = '';
@@ -62,7 +65,7 @@ class Items
         $sql = "UPDATE items SET code='$code', description ='$description' WHERE id='$id'";
 
         $DbManager = new DbManager();
-        $data = $DbManager->update($sql);
+        $data = $DbManager->updateOperator($sql);
 
         return ($data);
     }

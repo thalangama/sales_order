@@ -23,7 +23,7 @@ class Installment
         $DbManager = new DbManager();
 
         $sql = "INSERT INTO  `payments` (`id`, `order_id`, `amount`, `payment_date`, `officer_id`)
-                VALUES ('', '$order_id', '$payment', '$payment_date','$recovery_officer_id' )";
+                VALUES ('', '$order_id', '$payment', '$payment_date',(SELECT id FROM `officer` WHERE officer_id='$recovery_officer_id') )";
         $data = $DbManager->save($sql);
 
         return ($data);
@@ -35,9 +35,9 @@ class Installment
         if($_POST["order_id"] != '')
             $order_id = $_POST['order_id'];
 
-        $sql = "SELECT  `id`, `amount`, `payment_date`, `officer_id` 
-                FROM `payments` 
-                WHERE order_id = '$order_id' AND amount > 0 AND record_status=1";
+        $sql = "SELECT  p.`id`, p.`amount`, p.`payment_date`, o.`officer_id` 
+                FROM `payments` p, officer o
+                WHERE order_id = '$order_id' AND amount > 0 AND record_status=1 AND o.id = p.officer_id";
         $DbManager = new DbManager();
         $data = $DbManager->select($sql);
         return ($data);

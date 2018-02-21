@@ -20,7 +20,7 @@ function pageInit(){
         noOfterms = $('#noOfterms').val();
         if(noOfterms != ''){
             installment = balance / noOfterms;
-            $('#installment').val(installment);
+            $('#installment').val(installment.toFixed(2));
         }
     });
 
@@ -43,9 +43,9 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
+            {"sClass": "numericCol "},
+            {"sClass": "numericCol "},
+            {"sClass": "numericCol "},
             {"sClass": ""}
         ],
         "aoColumnDefs":[
@@ -87,7 +87,8 @@ function formValidation() {
         },
         rules: {
             "nic": {
-                required: true
+                required: true,
+                minlength:10
             }
         },
         errorElement: "div"
@@ -102,10 +103,12 @@ function formValidation() {
                 required: true
             },
             "quantity": {
-                required: true
+                required: true,
+                number : true
             },
             "price": {
-                required: true
+                required: true,
+                number:true
             }
         },
         errorElement: "div"
@@ -123,7 +126,8 @@ function formValidation() {
                 required: true
             },
             "date": {
-                required: true
+                required: true,
+                date:true
             },
             "recovery_officer_id": {
                 required: true
@@ -141,13 +145,16 @@ function formValidation() {
                 required: true
             },
             "customer_nic": {
-                required: true
+                required: true,
+                minlength:10
             },
             "address": {
                 required: true
             },
             "phone_no": {
-                required: true
+                required: true,
+                number: true,
+                minlength:9
             }
         },
         errorElement: "div"
@@ -159,13 +166,16 @@ function formValidation() {
         },
         rules: {
             "itemPayment": {
-                required: true
+                required: true,
+                number:true
             },
             "noOfterms": {
-                required: true
+                required: true,
+                number:true
             },
             "paymentDate": {
-                required: true
+                required: true,
+                date:true
             }
         },
         errorElement: "div"
@@ -266,7 +276,8 @@ function getOrder(){
 
                 $('#itemTotal').val(itemTotal);
                 $('#itemBalance').val(itemTotal - data[0].payment);
-                $('#installment').val((itemTotal - data[0].payment) / data[0].no_of_terms);
+                ins = (itemTotal - data[0].payment) / data[0].no_of_terms;
+                $('#installment').val(ins.toFixed(2));
 
             }else{
                 showMsgError("No Order Found.");
@@ -318,6 +329,12 @@ function clearFields(){
     $('#paymentDate').val("");
     $('#itemTotal').val("");
     $('#itemBalance').val("");
+    $('#item_code').val("");
+    $('#quantity').val("");
+    $('#price').val("");
+    $('#installment').val("");
+
+    $('#tblAddItems').dataTable().fnClearTable();
     return false;
 }
 

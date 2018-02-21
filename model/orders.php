@@ -1,16 +1,20 @@
 <?php
 include_once '../dbManager/dbManager.php';
 include_once 'customer_creation.php';
+include_once 'officer_creation.php';
 
 class Order
 {
     function getOrder()
     {
         $sql = "SELECT 
-                  o.id, o.order_no, o.date, c.nic, c.id cus_id, c.name, c.address, c.phone_no, o.sales_officer_id, o.recovery_officer_id, o.payment, o.payment_date, o.no_of_terms
+                  o.id, o.order_no, o.date, c.nic, c.id cus_id, c.name, c.address, c.phone_no, 
+                  (select officer_id from officer where id = o.sales_officer_id) sales_officer_id, 
+                  (select officer_id from officer where id = o.recovery_officer_id) recovery_officer_id,
+                   o.payment, o.payment_date, o.no_of_terms
                 FROM 
                   orders o, 
-                  customer_details c 
+                  customer_details c
                 WHERE 
                   c.id = o.customer_id
                   AND o.order_no = '". $_POST["order_no"] . "'";
@@ -36,6 +40,7 @@ class Order
     {
 
         $DbManager = new DbManager();
+        $officer = new createOfficer();
         $date = '';
         $items = '';
         $order_no = '';
@@ -59,10 +64,18 @@ class Order
             $items = $_POST['items'];
         if($_POST["order_no"] != '')
             $order_no = $_POST['order_no'];
-        if($_POST["recovery_officer_id"] != '')
-            $recovery_officer_id = $_POST['recovery_officer_id'];
-        if($_POST["sales_officer_id"] != '')
-            $sales_officer_id = $_POST['sales_officer_id'];
+        if($_POST["recovery_officer_id"] != ''){
+            $_POST['officer_id'] = $_POST['recovery_officer_id'];
+            $data = $officer->getOfficer();
+            if(isset($data[0]['id']))
+                $recovery_officer_id = $data[0]['id'];
+        }
+        if($_POST["sales_officer_id"] != '') {
+            $_POST['officer_id'] = $_POST['sales_officer_id'];
+            $data = $officer->getOfficer();
+            if(isset($data[0]['id']))
+                $sales_officer_id = $data[0]['id'];
+        }
         if($_POST["payment"] != '')
             $payment = $_POST['payment'];
         if($_POST["payment_date"] != '')
@@ -83,12 +96,15 @@ class Order
             $total = $total + ($value[4] * $value[3]);
         }
 
-        $payment_amount = ( $total - $payment) / $no_of_terms;
+        $payment_amount = round(( $total - $payment) / $no_of_terms , 2);
 
         $sql = "INSERT INTO  `payments` (`id`, `payment_date`, `amount`, `order_id`,`officer_id`)
                 VALUES ('', '', '0', '$order_id', '$sales_officer_id' )";
         $data = $DbManager->save($sql);
 
+        $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
+                VALUES ('', '$date', 0,0,'$order_id' )";
+        $data = $DbManager->save($sql);
         $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
                 VALUES ('', '$payment_date', '$payment_amount',1,'$order_id' )";
         $data = $DbManager->save($sql);
@@ -119,6 +135,11 @@ class Order
 
     function updateOrder()
     {
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
+        $officer = new createOfficer();
+
         $payment = '';
         $payment_date = '';
         $no_of_terms = '';
@@ -145,10 +166,18 @@ class Order
             $payment_date = $_POST['payment_date'];
         if($_POST["no_of_terms"] != '')
             $no_of_terms = $_POST['no_of_terms'];
-        if($_POST["recovery_officer_id"] != '')
-            $recovery_officer_id = $_POST['recovery_officer_id'];
-        if($_POST["sales_officer_id"] != '')
-            $sales_officer_id = $_POST['sales_officer_id'];
+        if($_POST["recovery_officer_id"] != ''){
+            $_POST['officer_id'] = $_POST['recovery_officer_id'];
+            $data = $officer->getOfficer();
+            if(isset($data[0]['id']))
+                $recovery_officer_id = $data[0]['id'];
+        }
+        if($_POST["sales_officer_id"] != ''){
+            $_POST['officer_id'] = $_POST['sales_officer_id'];
+            $data = $officer->getOfficer();
+            if(isset($data[0]['id']))
+                $sales_officer_id = $data[0]['id'];
+        }
 
         $cus = new createCustomer();
         $cus->updateCustomer();
@@ -172,8 +201,11 @@ class Order
         $sql = "UPDATE `payment_plan` SET status=0 WHERE order_id=$order_id AND `payment_amount` > 0";
         $data = $DbManager->update($sql);
 
-        $payment_amount = ( $total - $payment) / $no_of_terms;
+        $payment_amount = round(( $total - $payment) / $no_of_terms , 2);
 
+        $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
+                VALUES ('', '$date', 0,0,'$order_id' )";
+        $data = $DbManager->save($sql);
         $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
                 VALUES ('', '$payment_date', '$payment_amount',1,'$order_id' )";
         $data = $DbManager->save($sql);

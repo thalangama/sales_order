@@ -23,7 +23,7 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
-            {"sClass": ""},
+            {"sClass": "numericCol "},
             {"sClass": ""}
         ],
         "aoColumnDefs":[
@@ -41,14 +41,9 @@ function formValidation() {
             error.insertAfter(element);
         },
         rules: {
-            // "cmbLocation": {
-            //     required: true
-            // },
-            // "txtCustomerCode":{
-            //     required: function (element) {
-            //         return $('#cmbCodeType').val() != '';
-            //     }
-            // }
+            "date": {
+                date: true
+            }
         },
         errorElement: "div"
     });
@@ -62,11 +57,6 @@ function eventHandler() {
             getOutstanding();
         }
     });
-
-    $("#btnProcess").on('click', function (e) {
-        process();
-    });
-
 }
 
 function getOutstanding(){
@@ -94,22 +84,23 @@ function getOutstanding(){
             if (data[0] != null && data[0].order_no != null) {
                 row_count = 1;
                 $.each(data, function (counter, item) {
+                    out_amt = parseFloat(item.to_paied);
                     tblOutstanding.fnAddData([
                         row_count++,
                         item.order_no,
                         item.nic,
                         item.name,
-                        (item.to_paied ),
-                        '<a class="detail-open pull-center" title="Remove" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
+                        out_amt.toFixed(2),
+                        '<a class="detail-open pull-center" title="Remove" target="_blank" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                     ]);
-                    total_out += (item.to_paied - item.paied);
+                    total_out += parseFloat(item.to_paied);
                     if(data.length < row_count){
                         tblOutstanding.fnAddData([
                             row_count,
                             '',
                             '',
                             'Total Outstanding',
-                            total_out,
+                            total_out.toFixed(2),
                             ''
                         ]);
                     }

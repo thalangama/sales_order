@@ -29,6 +29,8 @@ checkAndAllow('orders.php');
             <div class="nav-info">
                 <div class="dropdown">
                     <a class="btn btn-default" href="#" data-toggle="dropdown">
+                        <input type="hidden" value="<?php echo $_SESSION['user_type']; ?>" id="session_user_type" >
+                        <input type="hidden" value="<?php echo $_SESSION['username']; ?>" id="session_user_name" >
                         <?php echo $_SESSION['username']; ?>
                         <span class="caret"></span>
                     </a>

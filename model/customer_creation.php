@@ -43,6 +43,9 @@ class createCustomer
 
     function updateCustomer()
     {
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
         $name = '';
         $nic = '';
         $address = '';

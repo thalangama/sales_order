@@ -113,6 +113,11 @@ function clearFields(){
 
 function process() {
 
+    order_id = $('#order_id').val();
+    if(order_id == '') {
+        showMsgError("Search Order before submit");
+        return false;
+    }
     $("#wait").fadeIn('fast');
 
     var objData = {

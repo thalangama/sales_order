@@ -16,9 +16,9 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": ""},
             {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""},
-            {"sClass": ""}
+            {"sClass": "numericCol "},
+            {"sClass": "numericCol "},
+            {"sClass": "numericCol "}
         ],
         "aoColumnDefs":[
             // { "bVisible":false, "aTargets":[7] },
@@ -104,7 +104,8 @@ function getDetails(){
 
                 $('#itemTotal').val(itemTotal);
                 $('#itemBalance').val(itemTotal - data[0].payment);
-                $('#installment').val((itemTotal - data[0].payment) / data[0].no_of_terms);
+                ins = ((itemTotal - data[0].payment) / data[0].no_of_terms);
+                $('#installment').val(ins.toFixed(2));
                 outstanding = itemTotal - data[0].payment;
 
             }
@@ -122,7 +123,7 @@ function getDetails(){
                 });
             }
             $('#TotalOutstanding').val(outstanding);
-            if(data[1] != null ){
+            if(data[1] != null && data[1].length != 0 ){
                 $('#currentOutstanding').val(data[1][0].to_paied);
             }
         },

@@ -48,6 +48,9 @@ class User
 
     function updateUser()
     {
+        if(!isManager()){
+            return ('You don\'t have permission to perform this action');
+        }
         $id = $_POST['id'];
         $username_reg = $_POST['username'];
         $firstName_reg = $_POST['firstName'];

@@ -20,7 +20,7 @@ class ChangePassword
         if($value[0]['password'] === $hashedPassword){
             $hashedPassword = sha1($new_password);
             $query = "update users set password='$hashedPassword'  where username='$username' ";
-            $data = $db->update($query);
+            $data = $db->updateOperator($query);
         }else{
             $data = 'Wrong Password';
         }

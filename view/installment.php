@@ -31,6 +31,8 @@ checkAndAllow('orders.php');
 				<div class="nav-info">
 					<div class="dropdown">
 						<a class="btn btn-default" href="#" data-toggle="dropdown">
+							<input type="hidden" value="<?php echo $_SESSION['user_type']; ?>" id="session_user_type" >
+							<input type="hidden" value="<?php echo $_SESSION['username']; ?>" id="session_user_name" >
 							<?php echo $_SESSION['username']; ?>
 							<span class="caret"></span>
 						</a>
@@ -113,6 +115,7 @@ checkAndAllow('orders.php');
 					</form>
 				</div>
 				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
+					<h2>Payment History</h2>
 					<table class="display table footable dataTable no-footer footable-loaded" id="tblInstallment" role="grid" border="0" cellspacing="0" cellpadding="0">
 						<thead>
 						<tr role="row">
