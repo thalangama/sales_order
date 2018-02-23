@@ -91,7 +91,7 @@ class Order
         $total = 0;
         foreach ($items as $key => $value){
             $sql = "INSERT INTO `order_items` (`id`, `order_id`, `item_id`, `price`, `quantity` )
-                    VALUES('','$order_id',(SELECT id FROM `items` WHERE `code`= $value[1]),'$value[4]','$value[3]')";
+                    VALUES('','$order_id',(SELECT id FROM `items` WHERE `code`= '$value[1]'),'$value[4]','$value[3]')";
             $data = $DbManager->save($sql);
             $total = $total + ($value[4] * $value[3]);
         }
@@ -187,13 +187,13 @@ class Order
         $sql = "UPDATE orders SET order_no='$order_no', date='$date', customer_id ='$customer_id' , sales_officer_id = '$sales_officer_id', recovery_officer_id='$recovery_officer_id',payment='$payment',payment_date='$payment_date',no_of_terms='$no_of_terms' WHERE id='$order_id'";
         $data = $DbManager->update($sql);
 
-        $sql = "UPDATE `order_items` SET status=0 WHERE order_id=$order_id";
+        $sql = "UPDATE `order_items` SET status=0 WHERE order_id='$order_id'";
         $data = $DbManager->update($sql);
 
         $total = 0;
         foreach ($items as $key => $value){
             $sql = "INSERT INTO `order_items` (`id`, `order_id`, `item_id`, `price`, `quantity` )
-                    VALUES('','$order_id',(SELECT id FROM `items` WHERE `code`= $value[1]),'$value[4]','$value[3]')";
+                    VALUES('','$order_id',(SELECT id FROM `items` WHERE `code`= '$value[1]'),'$value[4]','$value[3]')";
             $data = $DbManager->save($sql);
             $total = $total + ($value[4] * $value[3]);
         }
