@@ -72,30 +72,23 @@ checkAndAllow('orders.php');
 				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
 					<!-- common search -->
 					<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box">
-						<h2>Search Customer</h2>
+						<h2>Customer</h2>
 						<form id="frmCustomerSearch" name="frmCustomerSearch" action="" method="POST">
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 								<label for="" class="col-sm-5 col-xs-5">NIC<span class="mandatory">*</span></label>
 								<div class="col-sm-7 col-xs-7">
 									<input class="form-control" id="nic" name="nic" type="text"> </div>
 							</div>
-							<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right"> <a id="btnSearchCus" class="btn btn-add pull-right" href="#">Customer Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
+							<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-left">
+								<a id="btnSearchCus" class="btn btn-add pull-left" href="#">Customer Search <span class="glyphicon glyphicon glyphicon-search"></span></a>
+							</div>
 						</form>
-					</div>
-
-					<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
 						<form id="frmCustomerDetail" name="frmCustomerDetail" action="customer_creation.php" method="POST">
 							<input class="form-control" id="customer_id" name="customer_id" type="hidden">
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 								<label for="" class="col-sm-5 col-xs-5">Name<span class="mandatory">*</span></label>
 								<div class="col-sm-7 col-xs-7">
 									<input class="form-control" id="name" name="name" type="text">
-								</div>
-							</div>
-							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-								<label for="" class="col-sm-5 col-xs-5">ID No<span class="mandatory">*</span></label>
-								<div class="col-sm-7 col-xs-7">
-									<input class="form-control" id="customer_nic" name="customer_nic" type="text">
 								</div>
 							</div>
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12">

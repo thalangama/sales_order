@@ -1,6 +1,7 @@
 var ORDER_URL = "../controllers/orders_controller.php";
 var CUSTOMER_URL = "../controllers/customer_creation_controller.php";
 var tblAddItems = null;
+var customerSerched = false;
 
 jQuery(document).ready(function () {
     pageInit();
@@ -144,10 +145,6 @@ function formValidation() {
             "name": {
                 required: true
             },
-            "customer_nic": {
-                required: true,
-                minlength:10
-            },
             "address": {
                 required: true
             },
@@ -217,15 +214,19 @@ function eventHandler() {
         }
     });
 
+    $('#nic').on('input', function(){
+        customerSerched = false;
+        $('#name').prop('disabled', true);
+        $('#address').prop('disabled', true);
+        $('#phone_no').prop('disabled', true);
+    });
 }
 
 function clearMsgData() {
     clearMsg();
 }
 
-
 function getOrder(){
-
     total_out = 0;
     $('#tblAddItems').dataTable().fnClearTable();
     $("#wait").fadeIn('fast');
@@ -245,10 +246,11 @@ function getOrder(){
         success: function (data, textStatus) {
             clearFields();
             if (data[0] != null && data[0].id != null) {
+                customerSerched == true;
                 $('#order_id').val(data[0].id);
                 $('#order_no').val(data[0].order_no);
                 $('#customer_id').val(data[0].cus_id );
-                $('#customer_nic').val(data[0].nic);
+                $('#nic').val(data[0].nic);
                 $('#name').val(data[0].name);
                 $('#address').val(data[0].address);
                 $('#phone_no').val(data[0].phone_no);
@@ -315,10 +317,9 @@ function clearFields(){
     $('#search_order_no').val("")
     $('#customer_id').val("");
     $('#name').val("");
-    $('#customer_nic').val("");
+    $('#nic').val("");
     $('#address').val("");
     $('#phone_no').val("");
-    $('#nic').val("");
     $('#order_id').val("");
     $('#order_no').val("");
     $('#sales_officer_id').val("");
@@ -341,7 +342,11 @@ function clearFields(){
 function getCustomer(){
     clearMsg();
     $("#wait").fadeIn('fast');
-
+    $('#name').val('');
+    $('#address').val('');
+    $('#phone_no').val('');
+    $('#customer_id').val('');
+    customerSerched = true;
     var objData = {
         type: "POST",
         url: CUSTOMER_URL,
@@ -357,14 +362,15 @@ function getCustomer(){
         success: function (data, textStatus) {
             if (data.nic != null) {
                 $('#customer_id').val(data.id );
-                $('#customer_nic').val(data.nic );
                 $('#name').val(data.name );
                 $('#address').val(data.address );
                 $('#phone_no').val(data.phone_no );
             }else{
+                $('#name').prop('disabled', false);
+                $('#address').prop('disabled', false);
+                $('#phone_no').prop('disabled', false);
                 showMsgError("No Customer Found.");
             }
-            $('#nic').val("");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             showMsgError( textStatus);
@@ -381,6 +387,10 @@ function getCustomer(){
 
 function process() {
 
+    if(customerSerched == false){
+        showMsgError("Search Customer Before Submit.");
+        return false;
+    }
     $("#wait").fadeIn('fast');
     order_id = $('#order_id').val();
     request_type = 'ADD';
@@ -393,7 +403,7 @@ function process() {
         async: false,
         data: ({
             REQUEST_TYPE : request_type,
-            customer_nic : $('#customer_nic').val(),
+            customer_nic : $('#nic').val(),
             customer_id : $('#customer_id').val(),
             name: $('#name').val(),
             address : $('#address').val(),
@@ -445,4 +455,12 @@ function updateBalance(){
         $('#installment').val(installment);
     }
 
+}
+
+function clearFieldsCus(){
+    $('#customer_id').val('');
+    $('#nic').val('');
+    $('#name').val('');
+    $('#address').val('');
+    $('#phone_no').val('');
 }
