@@ -11,7 +11,7 @@ class Order
                   o.id, o.order_no, o.date, c.nic, c.id cus_id, c.name, c.address, c.phone_no, 
                   (select officer_id from officer where id = o.sales_officer_id) sales_officer_id, 
                   (select officer_id from officer where id = o.recovery_officer_id) recovery_officer_id,
-                   o.payment, o.payment_date, o.no_of_terms
+                   o.payment, o.payment_date, o.no_of_terms, o.invoice_no
                 FROM 
                   orders o, 
                   customer_details c
@@ -47,6 +47,7 @@ class Order
         $recovery_officer_id = '';
         $sales_officer_id = '';
         $payment = '';
+        $invoice_no = '';
         $payment_date = '';
         $no_of_terms = '';
 
@@ -78,13 +79,15 @@ class Order
         }
         if($_POST["payment"] != '')
             $payment = $_POST['payment'];
+        if($_POST["invoice_no"] != '')
+            $invoice_no = $_POST['invoice_no'];
         if($_POST["payment_date"] != '')
             $payment_date = $_POST['payment_date'];
         if($_POST["no_of_terms"] != '')
             $no_of_terms = $_POST['no_of_terms'];
 
-        $sql = "INSERT INTO orders(`id`,`order_no`,`date`,`customer_id`,`sales_officer_id`,`recovery_officer_id`,`payment`, `payment_date`, `no_of_terms`)
-                VALUES('','$order_no','$date','$customer_id','$sales_officer_id','$recovery_officer_id','$payment','$payment_date','$no_of_terms')";
+        $sql = "INSERT INTO orders(`id`,`order_no`,`date`,`customer_id`,`sales_officer_id`,`recovery_officer_id`,`payment`, `payment_date`, `no_of_terms`,invoice_no)
+                VALUES('','$order_no','$date','$customer_id','$sales_officer_id','$recovery_officer_id','$payment','$payment_date','$no_of_terms', '$invoice_no')";
         $data = $DbManager->save($sql);
         $order_id = $DbManager->getLastInsertId();
 
@@ -162,6 +165,8 @@ class Order
             $customer_id = $_POST['customer_id'];
         if($_POST["payment"] != '')
             $payment = $_POST['payment'];
+        if($_POST["invoice_no"] != '')
+            $invoice_no = $_POST['invoice_no'];
         if($_POST["payment_date"] != '')
             $payment_date = $_POST['payment_date'];
         if($_POST["no_of_terms"] != '')
@@ -184,7 +189,7 @@ class Order
 
         $DbManager = new DbManager();
 
-        $sql = "UPDATE orders SET order_no='$order_no', date='$date', customer_id ='$customer_id' , sales_officer_id = '$sales_officer_id', recovery_officer_id='$recovery_officer_id',payment='$payment',payment_date='$payment_date',no_of_terms='$no_of_terms' WHERE id='$order_id'";
+        $sql = "UPDATE orders SET order_no='$order_no', date='$date', customer_id ='$customer_id' , sales_officer_id = '$sales_officer_id', recovery_officer_id='$recovery_officer_id',payment='$payment',payment_date='$payment_date',no_of_terms='$no_of_terms', invoice_no='$invoice_no' WHERE id='$order_id'";
         $data = $DbManager->update($sql);
 
         $sql = "UPDATE `order_items` SET status=0 WHERE order_id='$order_id'";

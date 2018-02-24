@@ -166,6 +166,10 @@ function formValidation() {
                 required: true,
                 number:true
             },
+            "invoiceNo": {
+                required: true,
+                number:true
+            },
             "noOfterms": {
                 required: true,
                 number:true
@@ -246,7 +250,7 @@ function getOrder(){
         success: function (data, textStatus) {
             clearFields();
             if (data[0] != null && data[0].id != null) {
-                customerSerched == true;
+                customerSerched = true;
                 $('#order_id').val(data[0].id);
                 $('#order_no').val(data[0].order_no);
                 $('#customer_id').val(data[0].cus_id );
@@ -260,6 +264,7 @@ function getOrder(){
                 $('#itemPayment').val(data[0].payment);
                 $('#noOfterms').val(data[0].no_of_terms);
                 $('#paymentDate').val(data[0].payment_date);
+                $('#invoiceNo').val(data[0].invoice_no);
 
                 row_count = 1;
                 itemTotal = 0;
@@ -330,6 +335,7 @@ function clearFields(){
     $('#paymentDate').val("");
     $('#itemTotal').val("");
     $('#itemBalance').val("");
+    $('#invoiceNo').val("");
     $('#item_code').val("");
     $('#quantity').val("");
     $('#price').val("");
@@ -387,6 +393,7 @@ function getCustomer(){
 
 function process() {
 
+    clearMsg();
     if(customerSerched == false){
         showMsgError("Search Customer Before Submit.");
         return false;
@@ -416,7 +423,8 @@ function process() {
             items : tblAddItems.fnGetData(),
             payment : $('#itemPayment').val(),
             no_of_terms : $('#noOfterms').val(),
-            payment_date : $('#paymentDate').val()
+            payment_date : $('#paymentDate').val(),
+            invoice_no : $('#invoiceNo').val()
         }),
         dataType: "json",
         timeout: 180000,

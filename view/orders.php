@@ -197,6 +197,10 @@ checkAndAllow('orders.php');
 										<td>Balance</td>
 										<td><input width="20px" type="text" id="itemBalance" value="0.00" style="text-align:right" disabled /></td>
 									</tr>
+									<tr>
+										<td>Invoice No</td>
+										<td><input width="20px" type="text" id="invoiceNo" name="invoiceNo" value="0.00" style="text-align:right" /></td>
+									</tr>
 								</table>
 							</div>
 							<div class="col-8 col-sm-8 col-xs-8 col-lg-8 common-box without-heading "style="margin: 0px 0px 10px 15px!important">
