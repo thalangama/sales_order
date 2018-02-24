@@ -199,7 +199,7 @@ checkAndAllow('orders.php');
 									</tr>
 									<tr>
 										<td>Invoice No</td>
-										<td><input width="20px" type="text" id="invoiceNo" name="invoiceNo" value="0.00" style="text-align:right" /></td>
+										<td><input width="20px" type="text" id="invoiceNo" name="invoiceNo" value="" style="text-align:right" /></td>
 									</tr>
 								</table>
 							</div>
