@@ -103,7 +103,7 @@ class outstanding
             $where .= " AND o.order_no = '".$_POST["order_no"]."'";
 
         $sql = "SELECT 
-                  p.amount, p.payment_date, off.name 
+                  p.amount, p.payment_date, off.name, p.invoice_no 
                 FROM 
                   payments p, 
                   officer off,

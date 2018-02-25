@@ -34,11 +34,12 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": "numericCol"},
             {"sClass": ""},
+            {"sClass": ""},
             {"sClass": ""}
         ],
         "aoColumnDefs":[
             // { "bVisible":false, "aTargets":[7] },
-            { "bSortable": false, "aTargets":[ 0,1,2,3] }
+            { "bSortable": false, "aTargets":[ 0,1,2,3,4] }
         ],
         "oLanguage":{"sEmptyTable":"<div class='info-text'></div>"}
     });
@@ -117,6 +118,7 @@ function getDetails(){
                     tblPaymentHistory.fnAddData([
                         row_count++,
                         item.amount,
+                        item.invoice_no,
                         item.payment_date,
                         item.name
                     ]);

@@ -207,6 +207,7 @@ checkAndAllow('outstanding.php');
                             <tr role="row">
                                 <th class="sorting_asc">No</th>
                                 <th class="sorting">Amount</th>
+                                <th class="sorting">Invoice No</th>
                                 <th class="sorting">Payment Date</th>
                                 <th class="sorting">Recovery Officer</th>
                             </tr>
