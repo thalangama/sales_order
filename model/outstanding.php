@@ -44,6 +44,7 @@ class outstanding
                 AND o.customer_id = c.id
                 AND p.order_id = outs.order_id 
                 AND p.record_status = 1 
+                AND o.status = 1 
                 ".$where."
             GROUP BY p.order_id";
 
