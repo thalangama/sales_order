@@ -17,13 +17,15 @@ class Installment
             $payment = $_POST['payment'];
         if($_POST["payment_date"] != '')
             $payment_date = $_POST['payment_date'];
+        if($_POST["invoice_no"] != '')
+            $invoice_no = $_POST['invoice_no'];
         if($_POST["recovery_officer_id"] != '')
             $recovery_officer_id = $_POST['recovery_officer_id'];
 
         $DbManager = new DbManager();
 
-        $sql = "INSERT INTO  `payments` (`id`, `order_id`, `amount`, `payment_date`, `officer_id`)
-                VALUES ('', '$order_id', '$payment', '$payment_date',(SELECT id FROM `officer` WHERE officer_id='$recovery_officer_id') )";
+        $sql = "INSERT INTO  `payments` (`id`, `order_id`, `amount`,`invoice_no`, `payment_date`, `officer_id`)
+                VALUES ('', '$order_id', '$payment', '$invoice_no', '$payment_date',(SELECT id FROM `officer` WHERE officer_id='$recovery_officer_id') )";
         $data = $DbManager->save($sql);
 
         return ($data);
@@ -35,7 +37,7 @@ class Installment
         if($_POST["order_id"] != '')
             $order_id = $_POST['order_id'];
 
-        $sql = "SELECT  p.`id`, p.`amount`, p.`payment_date`, o.`officer_id` 
+        $sql = "SELECT  p.`id`, p.`amount`,p.invoice_no, p.`payment_date`, o.`officer_id` 
                 FROM `payments` p, officer o
                 WHERE order_id = '$order_id' AND amount > 0 AND record_status=1 AND o.id = p.officer_id";
         $DbManager = new DbManager();

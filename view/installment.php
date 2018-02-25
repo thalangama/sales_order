@@ -85,6 +85,12 @@ checkAndAllow('orders.php');
 							</div>
 						</div>
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Invoice No<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="invoiceNo" name="invoiceNo" type="text">
+							</div>
+						</div>
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 							<label for="" class="col-sm-5 col-xs-5">Order Date<span class="mandatory">*</span></label>
 							<div class="col-sm-7 col-xs-7">
 								<input class="form-control" id="date" name="date" type="text" disabled>
@@ -122,6 +128,7 @@ checkAndAllow('orders.php');
 							<th class="sorting_asc">No</th>
 							<th class="sorting">Amount</th>
 							<th class="sorting">Payment Date</th>
+							<th class="sorting">Invoice No</th>
 							<th class="sorting">Recovery Officer ID</th>
 							<th class="sorting">Action</th>
 						</tr>

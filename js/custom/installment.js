@@ -23,11 +23,12 @@ function pageInit(){
             {"sClass": "numericCol "},
             {"sClass": ""},
             {"sClass": ""},
+            {"sClass": ""},
             {"sClass": ""}
         ],
         "aoColumnDefs":[
             // { "bVisible":false, "aTargets":[7] },
-            { "bSortable": false, "aTargets":[ 0,1,2,3,4] }
+            { "bSortable": false, "aTargets":[ 0,1,2,3,4,5] }
         ],
         "oLanguage":{"sEmptyTable":"<div class='info-text'></div>"}
     });
@@ -66,6 +67,9 @@ function formValidation() {
                 date: true
             },
             "payment": {
+                required: true
+            },
+            "invoiceNo": {
                 required: true
             }
         },
@@ -153,6 +157,7 @@ function getInstallment(order_id){
                     tblInstallment.fnAddData([
                         row_count++,
                         item.amount,
+                        item.invoice_no,
                         item.payment_date,
                         item.officer_id,
                         '<a onclick="deletePayment('+ item.id +')" class="deleteFile pull-center" title="Delete" href="#"> </a>'
@@ -182,6 +187,7 @@ function clearFields(){
     $('#payment_date').val("");
     $('#recovery_officer_id').val("");
     $('#payment').val("");
+    $('#invoiceNo').val("");
     return false;
 }
 
@@ -203,6 +209,7 @@ function process() {
             payment_date : $('#payment_date').val(),
             recovery_officer_id : $('#recovery_officer_id').val(),
             payment : $('#payment').val(),
+            invoice_no : $('#invoiceNo').val(),
         }),
         dataType: "json",
         timeout: 180000,

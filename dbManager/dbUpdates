@@ -1,2 +1,3 @@
 ALTER TABLE `orders` ADD `status` INT(1) NULL DEFAULT '1' AFTER `invoice_no`;
 ALTER TABLE `orders` ADD `invoice_no` varchar(10) NULL AFTER `no_of_terms`;
+ALTER TABLE `payments` ADD `invoice_no` VARCHAR(10) NOT NULL AFTER `amount`;
