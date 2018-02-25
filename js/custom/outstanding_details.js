@@ -153,3 +153,37 @@ function updateBalance(){
     balance =  sum - (parseFloat($('#itemPayment').val())||0);
     $('#itemBalance').val(balance);
 }
+
+function closeOrder(){
+    if($('#TotalOutstanding').val() >= 0){
+        $("#wait").fadeIn('fast');
+        $.ajax
+        ({
+            type: "POST",
+            url: OUTSTANDING_URL,
+            cache: false,
+            async: false,
+            data: ({
+                REQUEST_TYPE: 'CLOSE_ORDER',
+                order_no: order_number
+            }),
+            dataType: "json",
+            timeout: 180000,
+            "bAutoWidth": false,
+            success: function (data, textStatus) {
+                showMsgSuccess(textStatus);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                showMsgError(textStatus);
+                $("#wait").fadeOut('slow');
+            }
+
+        }).done(function (data) {
+            $("#wait").fadeOut('slow');
+        });
+
+    } else {
+        showMsgError("Total Outstanding should be Zero.");
+    }
+
+}

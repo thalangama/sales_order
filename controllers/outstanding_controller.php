@@ -16,4 +16,9 @@ if($_POST["REQUEST_TYPE"] == 'GET_OUTSTANDING'){
 
     if(isset($data))
         echo (json_encode($data));
+}elseif($_POST["REQUEST_TYPE"] == 'CLOSE_ORDER'){
+    $Order = new Order();
+    $data = $Order->closeOrder();
+    if(isset($data))
+        echo (json_encode($data));
 }

@@ -239,4 +239,10 @@ class Order
         return ($data);
     }
 
+    function closeOrder(){
+        $DbManager = new DbManager();
+        $sql = "UPDATE `orders` SET status=0 WHERE order_no='". $_POST['order_no'] . "'";
+        $data = $DbManager->update($sql);
+        return ($data);
+    }
 }

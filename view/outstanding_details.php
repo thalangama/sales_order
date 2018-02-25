@@ -217,7 +217,12 @@ checkAndAllow('outstanding.php');
                         </table>
                     </div>
                 </div>
-            </div>
+                <div class="form-group col-lg-4 col-sm-4 col-xs-12 pull-right">
+                    <a id="btnSearch" class="btn btn-add pull-right" href="#" onclick="closeOrder()">Close Order <span class="glyphicon glyphicon "></span>
+                    </a>
+                </div>
+
+        </div>
             <!--/detail panel-->
         </div>
         <!--/.container-->
