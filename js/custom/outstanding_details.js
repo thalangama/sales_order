@@ -87,6 +87,7 @@ function getDetails(){
                 $('#itemPayment').val(data[0].payment);
                 $('#noOfterms').val(data[0].no_of_terms);
                 $('#paymentDate').val(data[0].payment_date);
+                $('#invoiceNo').val(data[0].invoice_no);
 
                 row_count = 1;
                 itemTotal = 0;
