@@ -167,8 +167,7 @@ function formValidation() {
                 number:true
             },
             "invoiceNo": {
-                required: true,
-                number:true
+                required: true
             },
             "noOfterms": {
                 required: true,
