@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2018 at 04:50 PM
+-- Generation Time: Feb 26, 2018 at 03:28 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -81,7 +81,9 @@ CREATE TABLE `orders` (
   `recovery_officer_id` int(11) NOT NULL,
   `payment` int(11) NOT NULL,
   `payment_date` date NOT NULL,
-  `no_of_terms` int(11) NOT NULL
+  `no_of_terms` int(11) NOT NULL,
+  `invoice_no` varchar(10) NOT NULL,
+  `status` int(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -109,6 +111,7 @@ CREATE TABLE `payments` (
   `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `amount` double NOT NULL,
+  `invoice_no` varchar(10) NOT NULL,
   `payment_date` date NOT NULL,
   `officer_id` int(11) NOT NULL,
   `record_status` int(1) NOT NULL DEFAULT '1'
