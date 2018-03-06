@@ -130,6 +130,7 @@ function search() {
         success: function (data, textStatus) {
             $('#tblReportsLedger').dataTable().fnClearTable();
             $('#totalLedger').html("");
+            $('#totalRecovery').html("");
             var row_count = 1;
             var totalLedger = 0;
             var totalRecovery = 0;
@@ -140,11 +141,11 @@ function search() {
                     item.date,
                     item.amount,
                     item.payment,
-                    item.customer_nic,
+                    item.nic,
                     '<a class="detail-open pull-center" title="Remove" target="_blank" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                 ]);
                 totalLedger = parseFloat(totalLedger) + parseFloat(item.amount);
-                totalRecovery = parseFloat(totalRecovery) + parseFloat(item.amount);
+                totalRecovery = parseFloat(totalRecovery) + parseFloat(item.payment);
             });
             clearMsg();
             clearFields();

@@ -67,7 +67,7 @@ class Reports
     {
         $db = new DbManager();
 
-        $recovery_officer_id = $_POST['recovery_officer_id'];
+        $recovery_officer_id = $_POST['customer_nic'];
         $from_date = $_POST['from_date'];
         $to_date = $_POST['to_date'];
         $where = '';
@@ -75,20 +75,20 @@ class Reports
             $where = " AND off.`officer_id` = '$recovery_officer_id'";
         }
         $query = "SELECT 
-                      P.`amount`, 
-                      P.`payment_date`,  
-                      off.`officer_id`,
-                      O.`order_no`
+                    O.`order_no`, 
+                    O.`date`,  
+                    (O.`payment` + ( SELECT SUM(P.`amount`) FROM `payments` P WHERE P.`order_id` = O.`id` AND P.`record_status` = 1 GROUP BY P.`order_id`) ) payment,
+                    CD.`nic` ,
+                    (SELECT SUM(OI.`price` * OI.`quantity`) FROM `order_items` OI WHERE OI.`status`=1 AND O.`id`= OI.`order_id` GROUP BY OI.`order_id` ) amount 
                   FROM 
-                      `payments` P,
-                      `orders` O,
-                      `officer` off
+                    `orders` O,
+                    `officer` off,
+                    `customer_details` CD
                   WHERE
-                      off.`id` = P.`officer_id`
-                      AND O.`id` = P.`order_id`
-                      AND P.`amount` > 0
-                      AND P.`payment_date` BETWEEN '$from_date' AND '$to_date' 
-                      $where ";
+                    off.`id` = O.`sales_officer_id`
+                    AND O.`customer_id` = CD.`id`
+                    AND O.`date` BETWEEN '$from_date' AND '$to_date' 
+                    $where ";
         $data = $db->select($query);
 
         return ($data);
