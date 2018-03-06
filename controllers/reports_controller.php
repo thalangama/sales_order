@@ -9,6 +9,9 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
 }elseif($_POST["REQUEST_TYPE"] == 'GET_RECOVERIES'){
     $data = $reports->getRecoveries();
     echo (json_encode($data));
+}elseif($_POST["REQUEST_TYPE"] == 'GET_LEDGER'){
+    $data = $reports->getLedger();
+    echo (json_encode($data));
 }
 
 
