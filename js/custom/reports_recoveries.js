@@ -129,15 +129,15 @@ function search() {
         success: function (data, textStatus) {
             $('#tblReportsRecoveries').dataTable().fnClearTable();
             $('#totalRecovery').html("");
-            var row_count = 0;
+            var row_count = 1;
             var totalRecovery = 0;
             $.each(data, function (counter, item) {
                 tblReportsRecoveries.fnAddData([
                     row_count++,
                     item.order_no,
-                    item.date,
-                    item.officer_id,
+                    item.payment_date,
                     item.amount,
+                    item.officer_id,
                     '<a class="detail-open pull-center" title="Remove" target="_blank" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                 ]);
                 totalRecovery = parseFloat(totalRecovery) + parseFloat(item.amount);

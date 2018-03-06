@@ -44,17 +44,20 @@ class Reports
             $where = " AND off.`officer_id` = '$recovery_officer_id'";
         }
         $query = "SELECT 
-                    O.`order_no`, 
-                    O.`date`,  
-                    off.`officer_id` ,
-                    (SELECT SUM(OI.`price` * OI.`quantity`) FROM `order_items` OI WHERE OI.`status`=1 AND O.`id`= OI.`order_id` GROUP BY OI.`order_id` ) amount 
+                      P.`amount`, 
+                      P.`payment_date`,  
+                      off.`officer_id`,
+                      O.`order_no`
                   FROM 
-                    `orders` O,
-                    `officer` off
+                      `payments` P,
+                      `orders` O,
+                      `officer` off
                   WHERE
-                    off.`id` = O.`sales_officer_id`
-                    AND O.`date` BETWEEN '$from_date' AND '$to_date' 
-                    $where ";
+                      off.`id` = P.`officer_id`
+                      AND O.`id` = P.`order_id`
+                      AND P.`amount` > 0
+                      AND P.`payment_date` BETWEEN '$from_date' AND '$to_date' 
+                      $where ";
         $data = $db->select($query);
 
         return ($data);

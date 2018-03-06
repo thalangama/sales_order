@@ -1,4 +1,4 @@
-var GET_SALES_URL = "../controllers/reports_controller.php";
+var GET_REPORT_URL = "../controllers/reports_controller.php";
 var tblReportsSales = "";
 
 jQuery(document).ready(function () {
@@ -114,7 +114,7 @@ function search() {
 
     var objData = {
         type: "POST",
-        url: GET_SALES_URL,
+        url: GET_REPORT_URL,
         cache: false,
         async: false,
         data: ({
@@ -129,15 +129,15 @@ function search() {
         success: function (data, textStatus) {
             $('#tblReportsSales').dataTable().fnClearTable();
             $('#totalSale').html("");
-            var row_count = 0;
+            var row_count = 1;
             var totalSale = 0;
             $.each(data, function (counter, item) {
                 tblReportsSales.fnAddData([
                     row_count++,
                     item.order_no,
                     item.date,
-                    item.officer_id,
                     item.amount,
+                    item.officer_id,
                     '<a class="detail-open pull-center" title="Remove" target="_blank" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                 ]);
                 totalSale = parseFloat(totalSale) + parseFloat(item.amount);
