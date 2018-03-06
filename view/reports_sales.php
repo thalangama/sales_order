@@ -98,6 +98,7 @@ checkAndAllow('orders.php');
                     <tbody>
                     </tbody>
                 </table>
+                <h3><div id="totalSale"></div></h3>
             </div>
             <!-- /Expenses Details -->
         </div>

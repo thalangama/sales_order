@@ -110,7 +110,6 @@ function clearFields(){
 }
 
 function search() {
-    //test
     $("#wait").fadeIn('fast');
 
     var objData = {
@@ -128,10 +127,28 @@ function search() {
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
-            $('#tblAddItems').dataTable().fnClearTable();
+            $('#tblReportsSales').dataTable().fnClearTable();
+            $('#totalSale').html("");
+            var row_count = 0;
+            var totalSale = 0;
+            $.each(data, function (counter, item) {
+                tblReportsSales.fnAddData([
+                    row_count++,
+                    item.order_no,
+                    item.date,
+                    item.officer_id,
+                    item.amount,
+                    '<a class="detail-open pull-center" title="Remove" target="_blank" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
+                ]);
+                totalSale = parseFloat(totalSale) + parseFloat(item.amount);
+                $('#totalSale').val(totalSale);
+            });
             clearMsg();
             clearFields();
-            showMsgSuccess(data);
+            if(data.length == 0)
+                showMsgSuccess("No records found.");
+            var msg = "Total Sale is " + totalSale;
+            $('#totalSale').html(msg);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             showMsgError(textStatus);
