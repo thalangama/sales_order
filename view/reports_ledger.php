@@ -99,8 +99,20 @@ checkAndAllow('orders.php');
                     <tbody>
                     </tbody>
                 </table>
-                <h3><div id="totalLedger"></div></h3>
-                <h3><div id="totalRecovery"></div></h3>
+                <table>
+                    <tr>
+                        <td>Total Sale</td>
+                        <td class="numericCol"><div id="totalLedger">0</div></td>
+                    </tr>
+                    <tr>
+                        <td>Total Recovery</td>
+                        <td class="numericCol"><div id="totalRecovery">0</div></td>
+                    </tr>
+                    <tr>
+                        <td>Total Outstanding&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td class="numericCol"><div id="totalOutstanding">0</div></td>
+                    </tr>
+                </table>
             </div>
             <!-- /Expenses Details -->
         </div>

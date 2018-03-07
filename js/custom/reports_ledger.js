@@ -49,11 +49,15 @@ function formValidation() {
         },
         rules: {
             "from_date": {
-                required: true,
+                required: function(){
+                    return ($('#customer_nic').val() == '');
+                },
                 compare_date_from:true
             },
             "to_date": {
-                required: true,
+                required:  function(){
+                    return ($('#customer_nic').val() == '');
+                },
                 compare_date_to: true
             }
         },
@@ -70,7 +74,7 @@ function formValidation() {
         to_date = to_date.split("-");
         to_date = to_date[0]+"/"+to_date[1]+"/"+to_date[2];
         to_date = new Date(to_date).getTime();
-        if(from_date <= to_date )
+        if(from_date <= to_date || $('#customer_nic').val() != '')
             return true;
         else
             return false;
@@ -86,7 +90,7 @@ function formValidation() {
         to_date = to_date.split("-");
         to_date = to_date[0]+"/"+to_date[1]+"/"+to_date[2];
         to_date = new Date(to_date).getTime();
-        if(from_date <= to_date )
+        if(from_date <= to_date  || $('#customer_nic').val() != '')
             return true;
         else
             return false;
@@ -131,6 +135,7 @@ function search() {
             $('#tblReportsLedger').dataTable().fnClearTable();
             $('#totalLedger').html("");
             $('#totalRecovery').html("");
+            $('#totalOutstanding').html("");
             var row_count = 1;
             var totalLedger = 0;
             var totalRecovery = 0;
@@ -151,10 +156,9 @@ function search() {
             clearFields();
             if(data.length == 0)
                 showMsgSuccess("No records found.");
-            var msg = "Total Sale is " + totalLedger;
-            $('#totalLedger').html(msg);
-            var msg = "Total Recovery is " + totalRecovery;
-            $('#totalRecovery').html(msg);
+            $('#totalLedger').html(totalLedger);
+            $('#totalRecovery').html(totalRecovery);
+            $('#totalOutstanding').html(totalLedger - totalRecovery);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             showMsgError(textStatus);

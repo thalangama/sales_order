@@ -67,12 +67,16 @@ class Reports
     {
         $db = new DbManager();
 
-        $recovery_officer_id = $_POST['customer_nic'];
+        $customer_nic = $_POST['customer_nic'];
         $from_date = $_POST['from_date'];
+        if($from_date == '')
+            $from_date = '2000-01-01';
         $to_date = $_POST['to_date'];
+        if($to_date == '')
+            $to_date = '2100-01-01';
         $where = '';
-        if($recovery_officer_id != ''){
-            $where = " AND off.`officer_id` = '$recovery_officer_id'";
+        if($customer_nic != ''){
+            $where = " AND CD.`nic` = '$customer_nic'";
         }
         $query = "SELECT 
                     O.`order_no`, 
@@ -88,7 +92,8 @@ class Reports
                     off.`id` = O.`sales_officer_id`
                     AND O.`customer_id` = CD.`id`
                     AND O.`date` BETWEEN '$from_date' AND '$to_date' 
-                    $where ";
+                    $where 
+                    ORDER BY O.`date` DESC";
         $data = $db->select($query);
 
         return ($data);
