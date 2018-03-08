@@ -12,8 +12,11 @@ jQuery(document).ready(function () {
 function pageInit(){
 
     $( "#itemPayment" ).keyup(function() {
-        $("#itemBalance").val($("#itemTotal").val() - $("#itemPayment").val());
+        $("#itemBalance").val($("#itemTotal").val() - $("#itemPayment").val() - $("#discount").val());
         $("#noOfterms").trigger('keyup');
+    });
+    $( "#discount" ).keyup(function() {
+        $("#itemPayment").trigger('keyup');
     });
 
     $("#noOfterms").keyup( function () {
@@ -281,8 +284,9 @@ function getOrder(){
                 });
 
                 $('#itemTotal').val(itemTotal);
-                $('#itemBalance').val(itemTotal - data[0].payment);
-                ins = (itemTotal - data[0].payment) / data[0].no_of_terms;
+                $('#itemBalance').val(itemTotal - data[0].payment - data[0].discount);
+                $('#discount').val(data[0].discount);
+                ins = (itemTotal - data[0].payment - data[0].discount) / data[0].no_of_terms;
                 $('#installment').val(ins.toFixed(2));
 
             }else{
@@ -333,6 +337,7 @@ function clearFields(){
     $('#noOfterms').val("");
     $('#paymentDate').val("");
     $('#itemTotal').val("");
+    $('#discount').val("");
     $('#itemBalance').val("");
     $('#invoiceNo').val("");
     $('#item_code').val("");
@@ -421,6 +426,7 @@ function process() {
             date : $('#date').val(),
             items : tblAddItems.fnGetData(),
             payment : $('#itemPayment').val(),
+            discount : $('#discount').val(),
             no_of_terms : $('#noOfterms').val(),
             payment_date : $('#paymentDate').val(),
             invoice_no : $('#invoiceNo').val()
@@ -454,7 +460,7 @@ function updateBalance(){
         .toArray();
     $.each(plainArray,function(){sum+=parseFloat(this) || 0;});
     $('#itemTotal').val(sum);
-    balance =  sum - (parseFloat($('#itemPayment').val())||0);
+    balance =  sum - (parseFloat($('#itemPayment').val())||0) - (parseFloat($('#discount').val())||0);
     $('#itemBalance').val(balance);
     noOfterms = $('#noOfterms').val();
     if(noOfterms != ''){

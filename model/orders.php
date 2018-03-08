@@ -8,7 +8,7 @@ class Order
     function getOrder()
     {
         $sql = "SELECT 
-                  o.id, o.order_no, o.date, c.nic, c.id cus_id, c.name, c.address, c.phone_no, 
+                  o.id, o.order_no, o.date, o.discount, c.nic, c.id cus_id, c.name, c.address, c.phone_no, 
                   (select officer_id from officer where id = o.sales_officer_id) sales_officer_id, 
                   (select officer_id from officer where id = o.recovery_officer_id) recovery_officer_id,
                    o.payment, o.payment_date, o.no_of_terms, o.invoice_no
@@ -47,6 +47,7 @@ class Order
         $recovery_officer_id = '';
         $sales_officer_id = '';
         $payment = '';
+        $discount = 0;
         $invoice_no = '';
         $payment_date = '';
         $no_of_terms = '';
@@ -79,6 +80,8 @@ class Order
         }
         if($_POST["payment"] != '')
             $payment = $_POST['payment'];
+        if($_POST["discount"] != '')
+            $discount = $_POST['discount'];
         if($_POST["invoice_no"] != '')
             $invoice_no = $_POST['invoice_no'];
         if($_POST["payment_date"] != '')
@@ -86,8 +89,8 @@ class Order
         if($_POST["no_of_terms"] != '')
             $no_of_terms = $_POST['no_of_terms'];
 
-        $sql = "INSERT INTO orders(`id`,`order_no`,`date`,`customer_id`,`sales_officer_id`,`recovery_officer_id`,`payment`, `payment_date`, `no_of_terms`,invoice_no)
-                VALUES('','$order_no','$date','$customer_id','$sales_officer_id','$recovery_officer_id','$payment','$payment_date','$no_of_terms', '$invoice_no')";
+        $sql = "INSERT INTO orders(`id`,`order_no`,`date`,`customer_id`,`sales_officer_id`,`recovery_officer_id`,`payment`, `payment_date`, `no_of_terms`,invoice_no, discount)
+                VALUES('','$order_no','$date','$customer_id','$sales_officer_id','$recovery_officer_id','$payment','$payment_date','$no_of_terms', '$invoice_no', '$discount')";
         $data = $DbManager->save($sql);
         $order_id = $DbManager->getLastInsertId();
 
@@ -99,7 +102,7 @@ class Order
             $total = $total + ($value[4] * $value[3]);
         }
 
-        $payment_amount = round(( $total - $payment) / $no_of_terms , 2);
+        $payment_amount = round(( $total - $payment - $discount) / $no_of_terms , 2);
 
         $sql = "INSERT INTO  `payments` (`id`, `payment_date`, `amount`, `order_id`,`officer_id`)
                 VALUES ('', '', '0', '$order_id', '$sales_officer_id' )";
@@ -144,6 +147,7 @@ class Order
         $officer = new createOfficer();
 
         $payment = '';
+        $discount = 0;
         $payment_date = '';
         $no_of_terms = '';
         $date = '';
@@ -165,6 +169,8 @@ class Order
             $customer_id = $_POST['customer_id'];
         if($_POST["payment"] != '')
             $payment = $_POST['payment'];
+        if($_POST["discount"] != '')
+            $discount = $_POST['discount'];
         if($_POST["invoice_no"] != '')
             $invoice_no = $_POST['invoice_no'];
         if($_POST["payment_date"] != '')
@@ -189,7 +195,7 @@ class Order
 
         $DbManager = new DbManager();
 
-        $sql = "UPDATE orders SET order_no='$order_no', date='$date', customer_id ='$customer_id' , sales_officer_id = '$sales_officer_id', recovery_officer_id='$recovery_officer_id',payment='$payment',payment_date='$payment_date',no_of_terms='$no_of_terms', invoice_no='$invoice_no' WHERE id='$order_id'";
+        $sql = "UPDATE orders SET order_no='$order_no', discount='$discount', date='$date', customer_id ='$customer_id' , sales_officer_id = '$sales_officer_id', recovery_officer_id='$recovery_officer_id',payment='$payment',payment_date='$payment_date',no_of_terms='$no_of_terms', invoice_no='$invoice_no' WHERE id='$order_id'";
         $data = $DbManager->update($sql);
 
         $sql = "UPDATE `order_items` SET status=0 WHERE order_id='$order_id'";
@@ -206,7 +212,7 @@ class Order
         $sql = "UPDATE `payment_plan` SET status=0 WHERE order_id=$order_id AND `payment_amount` > 0";
         $data = $DbManager->update($sql);
 
-        $payment_amount = round(( $total - $payment) / $no_of_terms , 2);
+        $payment_amount = round(( $total - $payment - $discount) / $no_of_terms , 2);
 
         $sql = "INSERT INTO  `payment_plan` (`id`, `payment_date`, `payment_amount`, `term`, `order_id`)
                 VALUES ('', '$date', 0,0,'$order_id' )";
