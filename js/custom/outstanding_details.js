@@ -105,10 +105,11 @@ function getDetails(){
                 });
 
                 $('#itemTotal').val(itemTotal);
-                $('#itemBalance').val(itemTotal - data[0].payment);
-                ins = ((itemTotal - data[0].payment) / data[0].no_of_terms);
+                $('#itemBalance').val(itemTotal - data[0].payment - data[0].discount);
+                $('#discount').val(data[0].discount);
+                ins = ((itemTotal - data[0].payment  - data[0].discount) / data[0].no_of_terms);
                 $('#installment').val(ins.toFixed(2));
-                outstanding = itemTotal - data[0].payment;
+                outstanding = itemTotal - data[0].payment - data[0].discount;
 
             }
             if(data[2] != null ){
@@ -150,7 +151,7 @@ function updateBalance(){
         .toArray();
     $.each(plainArray,function(){sum+=parseFloat(this) || 0;});
     $('#itemTotal').val(sum);
-    balance =  sum - (parseFloat($('#itemPayment').val())||0);
+    balance =  sum - (parseFloat($('#itemPayment').val())||0) - (parseFloat($('#discount').val())||0);
     $('#itemBalance').val(balance);
 }
 

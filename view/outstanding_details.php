@@ -150,6 +150,10 @@ checkAndAllow('outstanding.php');
                                     <td><input width="20px" type="text" id="itemPayment"  style="text-align:right" disabled/></td>
                                 </tr>
                                 <tr>
+                                    <td>Discount</td>
+                                    <td><input width="20px" type="text" id="discount" name="discount" style="text-align:right" disabled /></td>
+                                </tr>
+                                <tr>
                                     <td>Balance</td>
                                     <td><input width="20px" type="text" id="itemBalance" value="0.00" style="text-align:right" disabled /></td>
                                 </tr>

@@ -61,7 +61,7 @@ class outstanding
 
         $where .= " AND p.payment_date <= '".$date."'";
 
-        $sql = "SELECT o.order_no, sum(p.amount) paied,  (outs.outstand - sum(p.amount) )  to_paied, c.nic, c.name
+        $sql = "SELECT o.order_no, sum(p.amount) paied,  (outs.outstand - sum(p.amount) )  to_paied, o.discount, c.nic, c.name
             FROM
                 payments p,
                 customer_details c,

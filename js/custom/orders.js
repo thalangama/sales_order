@@ -179,6 +179,10 @@ function formValidation() {
             "paymentDate": {
                 required: true,
                 date:true
+            },
+            "discount": {
+                required: true,
+                number:true
             }
         },
         errorElement: "div"
