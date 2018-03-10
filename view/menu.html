@@ -1,19 +1,13 @@
 <div class="col-sm-2 col-xs-6 sidebar-offcanvas" id="sidebar" role="navigation">
 	<div class="accordion" id="myAccordion"> 
+		<a href="dashboard.php" class="list-group-item ">
+			Dashboard
+		</a>
 		<a href="customer_creation.php" class="list-group-item ">
 			Customer
-		</a>		
-		<a href="officer_creation.php" class="list-group-item ">
-			Officers
-		</a> 
-		<a href="items.php" class="list-group-item">
-			Items
 		</a>
 		<a href="orders.php" class="list-group-item">
 			Orders
-		</a>
-		<a href="outstanding.php" class="list-group-item">
-			Outstanding
 		</a>
 		<a href="installment.php" class="list-group-item">
 			Installment
@@ -21,20 +15,34 @@
 		<a href="change_recovery_officer.php" class="list-group-item">
 			Change Recovery Officer
 		</a>
-		<a href="change_password.php" class="list-group-item">
-			Change Password
-		</a>
-		<a id="user_creation" href="user_creation.php" class="list-group-item">
-			User Creation
-		</a>
 	</div>
 
 	<div class="panel">
-		<a href="#" data-toggle="collapse" data-target="#collapsible-admin" data-parent="#myAccordion" class="list-group-item"><span class="glyphicon glyphicon-user"></span>Reports<small>+</small></a>
+		<a href="#" data-toggle="collapse" data-target="#collapsible-stock" data-parent="#myAccordion" class="list-group-item"><span class="glyphicon glyphicon-user"></span>Stock<small>+</small></a>
+		<div id="collapsible-stock" class="collapse sub-nav">
+			<a href="items.php" class="list-group-item">Add New Items</a>
+			<a href="warehouse_types.php" class="list-group-item">Warehouse</a>
+			<a href="new_inventory.php" class="list-group-item">New Inventory</a>
+			<a href="return_inventory.php" class="list-group-item">Return Inventory</a>
+		</div>
+	</div>
+
+	<div class="panel">
+		<a href="#" data-toggle="collapse" data-target="#collapsible-sales" data-parent="#myAccordion" class="list-group-item"><span class="glyphicon glyphicon-user"></span>Reports<small>+</small></a>
+		<div id="collapsible-sales" class="collapse sub-nav">
+			<a href="reports_sales.php" class="list-group-item">Sales Report</a>
+			<a href="reports_recoveries.php" class="list-group-item">Recoveries Report</a>
+			<a href="reports_ledger.php" class="list-group-item">Ledger Report</a>
+			<a href="outstanding.php" class="list-group-item">Outstanding Report</a>
+			<a href="reports_warehouse.php" class="list-group-item">Warehouse Report</a>
+		</div>
+	</div>
+	<div class="panel">
+		<a href="#" data-toggle="collapse" data-target="#collapsible-admin" data-parent="#myAccordion" class="list-group-item"><span class="glyphicon glyphicon-user"></span>Admin<small>+</small></a>
 		<div id="collapsible-admin" class="collapse sub-nav">
-			<a href="reports_sales.php" class="list-group-item">Sales</a>
-			<a href="reports_recoveries.php" class="list-group-item">Recoveries</a>
-			<a href="reports_ledger.php" class="list-group-item">Ledger</a>
+			<a href="change_password.php" class="list-group-item">Change Password</a>
+			<a id="user_creation" href="user_creation.php" class="list-group-item">User Creation</a>
+			<a href="officer_creation.php" class="list-group-item ">Officers</a>
 		</div>
 	</div>
 </div>

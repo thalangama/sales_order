@@ -57,14 +57,14 @@ if (isset($_POST['submit'])) {
                 if ($_POST['access'] != 'null') {
                     header('Location:' . $_POST['access']);
                 } else {
-                    header('Location:customer_creation.php');
+                    header('Location:dashboard.php');
                 }
             }
             if (strcmp($type, 'O') == 0) {
                 if ($_POST['access'] != 'null') {
                     header('Location:' . $_POST['access']);
                 } else {
-                    header('Location:items.php');
+                    header('Location:dashboard.php');
                 }
             }
         } else {
