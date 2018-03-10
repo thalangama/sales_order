@@ -25,7 +25,7 @@
             <a class="logo" href="#"><img src="../images/logo.png" class="img-responsive"> </a>
             <div class="pull-right head-notice col-sm-10 col-xs-9">
                 <!-- page header -->
-                <h1>Items</h1>
+                <h1>Warehouses Manage</h1>
                 <!-- /page header -->
                 <div class="nav-info">
                     <div class="dropdown">
@@ -56,10 +56,10 @@
                 </p>
                 <!-- common search -->
                 <div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box">
-                    <h2>Search Item</h2>
-					<form id="frmItemSearch" name="frmItemSearch" action="" method="POST">
+                    <h2>Search Warehouse</h2>
+					<form id="frmWarehouseSearch" name="frmWarehouseSearch" action="" method="POST">
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-							<label for="" class="col-sm-5 col-xs-5">Item Code<span class="mandatory">*</span></label>
+							<label for="" class="col-sm-5 col-xs-5">Warehouse Code<span class="mandatory">*</span></label>
 							<div class="col-sm-7 col-xs-7">
 								<input class="form-control" id="search_code" name="search_code" type="text"> </div>
 						</div>
@@ -68,8 +68,8 @@
                 </div>
 			
 			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
-				<form id="frmItemSave" name="frmItemSave" action="" method="POST">
-					<input class="form-control" id="item_id" name="item_id" type="hidden">
+				<form id="frmWarehouseSave" name="frmWarehouseSave" action="" method="POST">
+					<input class="form-control" id="warehouse_id" name="warehouse_id" type="hidden">
 					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 						<label for="" class="col-sm-5 col-xs-5">Code<span class="mandatory">*</span></label>
 						<div class="col-sm-7 col-xs-7">
@@ -106,7 +106,7 @@
 		<script src="../js/lib/w3.js"></script>
 		<script src="../js/lib/jquery.validate.js"></script>
 		<script src="../js/custom/common.js"></script>
-		<script src="../js/custom/items.js"></script>
+		<script src="../js/custom/warehouses.js"></script>
 		<script>
 			w3.includeHTML();
 		</script>

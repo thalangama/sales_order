@@ -1,1 +1,16 @@
 ALTER TABLE `orders` ADD `discount` DECIMAL(10,2) NOT NULL DEFAULT '0' AFTER `invoice_no`;
+ALTER TABLE `orders` ADD `warehouse_id` INT(5) NOT NULL AFTER `discount`;
+
+CREATE TABLE `warehouse_type` (
+  `id` int(5) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `description` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `warehouse_type`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `code` (`code`);
+
+
+ALTER TABLE `warehouse_type`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;COMMIT;
