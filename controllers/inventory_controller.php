@@ -9,4 +9,7 @@ if($_POST["REQUEST_TYPE"] == 'GET'){
 }elseif($_POST["REQUEST_TYPE"] == 'UPDATE'){
     $data = $Inventory->updateInventory();
     echo (json_encode($data));
+}elseif($_POST["REQUEST_TYPE"] == 'RETURN'){
+    $data = $Inventory->returnInventory();
+    echo (json_encode($data));
 }
