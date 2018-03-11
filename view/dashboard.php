@@ -25,7 +25,7 @@
             <a class="logo" href="#"><img src="../images/logo.png" class="img-responsive"> </a>
             <div class="pull-right head-notice col-sm-10 col-xs-9">
                 <!-- page header -->
-                <h1>Items</h1>
+                <h1>Dashboard</h1>
                 <!-- /page header -->
                 <div class="nav-info">
                     <div class="dropdown">
@@ -55,41 +55,25 @@
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"> <span class="glyphicon glyphicon-align-justify"></span> Navigation </button>
                 </p>
                 <!-- common search -->
-                <div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box">
-                    <h2>Search Item</h2>
-					<form id="frmItemSearch" name="frmItemSearch" action="" method="POST">
-						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-							<label for="" class="col-sm-5 col-xs-5">Item Code<span class="mandatory">*</span></label>
-							<div class="col-sm-7 col-xs-7">
-								<input class="form-control" id="search_code" name="search_code" type="text"> </div>
-						</div>
-						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
-                    </form>
+
+                <div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
+                    <h2>Inventory Details</h2>
+                    <table class="display table footable dataTable no-footer footable-loaded" id="tblInventory" role="grid" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr role="row">
+                            <th class="sorting_asc">No</th>
+                            <th class="sorting">Item Code</th>
+                            <th class="sorting">Item Description</th>
+                            <th class="sorting">Warehouse</th>
+                            <th class="sorting">Availability</th>
+                            <th class="sorting">Minimum Level</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
-			
-			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
-				<form id="frmItemSave" name="frmItemSave" action="" method="POST">
-					<input class="form-control" id="item_id" name="item_id" type="hidden">
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Code<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="code" name="code" type="text">
-						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Description<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="description" name="description" type="text">
-						</div>
-					</div>
-				</form>
-			</div>
-                <!-- /Expenses Details -->
-			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading ">
-                <a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
-                <a id="btnProcess" class="btn btn-next pull-right draft " href="#">Process</a>
-            </div>
-		</div>
+		    </div>
 		</div>
             <!--/detail panel-->
         </div>
@@ -106,7 +90,7 @@
 		<script src="../js/lib/w3.js"></script>
 		<script src="../js/lib/jquery.validate.js"></script>
 		<script src="../js/custom/common.js"></script>
-		<script src="../js/custom/items.js"></script>
+		<script src="../js/custom/dashboard.js"></script>
 		<script>
 			w3.includeHTML();
 		</script>

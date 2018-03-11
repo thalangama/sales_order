@@ -144,4 +144,22 @@ class Inventory
         return ($data);
 
     }
+
+    function getInventoryDashboard()
+    {
+
+        $DbManager = new DbManager();
+        $sql = "SELECT i.`code`, i.description, w.code warehouse, inv.`no_of_items`, inv.`min_item_level`
+                FROM
+                    `inventory` inv ,
+                    `items` i ,
+                    `warehouse_type` w
+                WHERE
+                  w . id = inv . warehouse_id
+                  AND i . id = inv . item_id
+                ORDER BY(inv . `no_of_items` - inv . `min_item_level`)
+                LIMIT 25";
+        $data = $DbManager->select($sql);
+        return ($data);
+    }
 }
