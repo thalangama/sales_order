@@ -157,8 +157,8 @@ function getInstallment(order_id){
                     tblInstallment.fnAddData([
                         row_count++,
                         item.amount,
-                        item.invoice_no,
                         item.payment_date,
+                        item.invoice_no,
                         item.officer_id,
                         '<a onclick="deletePayment('+ item.id +')" class="deleteFile pull-center" title="Delete" href="#"> </a>'
                     ]);
