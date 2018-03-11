@@ -15,4 +15,7 @@ if($_POST["REQUEST_TYPE"] == 'GET'){
 }elseif($_POST["REQUEST_TYPE"] == 'GET_INVENTORY_DASHBOARD'){
     $data = $Inventory->getInventoryDashboard();
     echo (json_encode($data));
+}elseif($_POST["REQUEST_TYPE"] == 'GET_INVENTORY_REPORT'){
+    $data = $Inventory->getInventoryReport();
+    echo (json_encode($data));
 }

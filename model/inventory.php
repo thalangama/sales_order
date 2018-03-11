@@ -162,4 +162,42 @@ class Inventory
         $data = $DbManager->select($sql);
         return ($data);
     }
+
+    function getInventoryReport()
+    {
+
+        $where = ' AND 1=1';
+        $itemCode = '';
+        $warehouseId = '';
+        $DbManager = new DbManager();
+
+        if($_POST["itemCode"] != '') {
+            $itemCode = explode('::' , $_POST["itemCode"]);
+            $sql = 'select id from items where code="'.$itemCode[0].'"';
+            $itemCode = $DbManager->select($sql);
+            $itemCode = $itemCode[0]['id'];
+            $where .= ' AND inv.item_id = '.$itemCode;
+        }
+        if($_POST["warehouseId"] != '') {
+            $warehouseId = explode('::', $_POST["warehouseId"]);
+            $sql = 'select id from warehouse_type where code="'.$warehouseId[0].'"';
+            $warehouseId = $DbManager->select($sql);
+            $warehouseId = $warehouseId[0]['id'];
+            $where .= ' AND inv.warehouse_id = '.$warehouseId;
+        }
+
+        $sql = "SELECT i.`code`, i.description, w.code warehouse, inv.`no_of_items`, inv.`min_item_level`, inv.price
+                FROM
+                    `inventory` inv ,
+                    `items` i ,
+                    `warehouse_type` w
+                WHERE
+                  w . id = inv . warehouse_id
+                  AND i . id = inv . item_id
+                  $where
+                ORDER BY(inv . `no_of_items` - inv . `min_item_level`)
+                LIMIT 25";
+        $data = $DbManager->select($sql);
+        return ($data);
+    }
 }
