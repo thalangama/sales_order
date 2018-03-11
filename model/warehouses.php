@@ -65,7 +65,7 @@ class Warehouses
         $sql = "UPDATE warehouse_type SET code='$code', description ='$description' WHERE id='$id'";
 
         $DbManager = new DbManager();
-        $data = $DbManager->updateOperator($sql);
+        $data = $DbManager->update($sql);
 
         return ($data);
     }

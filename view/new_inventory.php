@@ -1,6 +1,8 @@
 <?php
-    include '../controllers/session.php';
-    checkAndAllow('items.php');
+    include_once '../controllers/session.php';
+    include_once '../model/items.php';
+    include_once '../model/warehouses.php';
+    checkAndAllow('inventory.php');
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +18,7 @@
     <link rel="icon" type="image/png" href="images/alt_favicon.png" sizes="16x16" />
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/main_style.css" rel="stylesheet">
+    <link href="../css/jquery-ui/jquery-ui.css" rel="stylesheet">
     <script type="text/javascript" src="../js/lib/CreateHTML5Elements.js"></script>
 </head>
 
@@ -25,7 +28,7 @@
             <a class="logo" href="#"><img src="../images/logo.png" class="img-responsive"> </a>
             <div class="pull-right head-notice col-sm-10 col-xs-9">
                 <!-- page header -->
-                <h1>Items</h1>
+                <h1>Inventory</h1>
                 <!-- /page header -->
                 <div class="nav-info">
                     <div class="dropdown">
@@ -54,42 +57,57 @@
                 <p class="visible-xs">
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"> <span class="glyphicon glyphicon-align-justify"></span> Navigation </button>
                 </p>
-                <!-- common search -->
                 <div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box">
-                    <h2>Search Item</h2>
-					<form id="frmItemSearch" name="frmItemSearch" action="" method="POST">
-						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-							<label for="" class="col-sm-5 col-xs-5">Item Code<span class="mandatory">*</span></label>
-							<div class="col-sm-7 col-xs-7">
-								<input class="form-control" id="search_code" name="search_code" type="text"> </div>
-						</div>
-						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
+                    <h2>Add / Update Inventory</h2>
+                    <form id="frmInventorySearch" name="frmInventorySearch" action="" method="POST">
+                        <div class="form-group col-lg-6 col-sm-6 col-xs-12">
+                            <label for="" class="col-sm-5 col-xs-5">Item Code<span class="mandatory">*</span></label>
+                            <div class="col-sm-7 col-xs-7">
+                                <input class="form-control" id="itemCode" name="itemCode" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 col-sm-6 col-xs-12">
+                            <label for="" class="col-sm-5 col-xs-5">Warehouse<span class="mandatory">*</span></label>
+                            <div class="col-sm-7 col-xs-7">
+                                <input class="form-control" id="warehouseId" name="warehouseId" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
+                    </form>
+                    <form id="frmInventorySave" name="frmInventorySave" action="" method="POST">
+                        <input class="form-control" id="inventoryId" name="inventoryId" type="hidden" >
+                        <div class="form-group col-lg-6 col-sm-6 col-xs-12">
+                            <label for="" class="col-sm-5 col-xs-5">Available Items</label>
+                            <div class="col-sm-7 col-xs-7">
+                                <input class="form-control" id="availableItems" name="availableItems" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 col-sm-6 col-xs-12">
+                            <label for="" class="col-sm-5 col-xs-5">New Items<span class="mandatory">*</span></label>
+                            <div class="col-sm-7 col-xs-7">
+                                <input class="form-control" id="newItems" name="newItems" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 col-sm-6 col-xs-12">
+                            <label for="" class="col-sm-5 col-xs-5">Min Items Limit<span class="mandatory">*</span></label>
+                            <div class="col-sm-7 col-xs-7">
+                                <input class="form-control" id="minItemsLimit" name="minItemsLimit" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 col-sm-6 col-xs-12">
+                            <label for="" class="col-sm-5 col-xs-5">Items Price<span class="mandatory">*</span></label>
+                            <div class="col-sm-7 col-xs-7">
+                                <input class="form-control" id="price" name="price" type="text" disabled>
+                            </div>
+                        </div>
                     </form>
                 </div>
-			
-			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
-				<form id="frmItemSave" name="frmItemSave" action="" method="POST">
-					<input class="form-control" id="item_id" name="item_id" type="hidden">
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Code<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="code" name="code" type="text">
-						</div>
-					</div>
-					<div class="form-group col-lg-6 col-sm-6 col-xs-12">
-						<label for="" class="col-sm-5 col-xs-5">Description<span class="mandatory">*</span></label>
-						<div class="col-sm-7 col-xs-7">
-							<input class="form-control" id="description" name="description" type="text">
-						</div>
-					</div>
-				</form>
-			</div>
                 <!-- /Expenses Details -->
-			<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading ">
-                <a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
-                <a id="btnProcess" class="btn btn-next pull-right draft " href="#">Process</a>
+                <div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading ">
+                    <a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>
+                    <a id="btnProcess" class="btn btn-next pull-right draft " href="#">Process</a>
+                </div>
             </div>
-		</div>
 		</div>
             <!--/detail panel-->
         </div>
@@ -97,18 +115,22 @@
         <!-- bootdtrap-->
         <script src="../js/lib/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
-        <script src="../js/lib/bootstrap-datepicker.js"></script>
+        <script src="../js/lib/jquery-ui/jquery-ui.js"></script>
         <script src="../js/lib/jquery.dataTables.min.js"></script>
         <script src="../js/lib/footable.min.js"></script>
         <script src="../js/lib/modernizr.custom.js"></script>
         <script src="../js/lib/jquery.dlmenu.min.js"></script>
         <script src="../js/lib/bootstrap-multiselect.min.js"></script>
-		<script src="../js/lib/w3.js"></script>
-		<script src="../js/lib/jquery.validate.js"></script>
-		<script src="../js/custom/common.js"></script>
-		<script src="../js/custom/items.js"></script>
+        <script src="../js/lib/w3.js"></script>
+        <script src="../js/lib/jquery.validate.js"></script>
+        <script src="../js/custom/common.js"></script>
+		<script src="../js/custom/inventory.js"></script>
 		<script>
 			w3.includeHTML();
+            <?php $items = new Items() ?>
+            var item_code = <?php echo $items->getItemCode(); ?>;
+            <?php $warehouse_code = new Warehouses() ?>
+            var warehouse_code = <?php echo $warehouse_code->getWarehouseCode(); ?>;
 		</script>
 </body>
 <!-- Preloader -->
