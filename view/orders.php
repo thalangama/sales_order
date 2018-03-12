@@ -1,6 +1,8 @@
 <?php
 include_once '../controllers/session.php';
 include_once '../model/items.php';
+include_once '../model/officer_creation.php';
+include_once '../model/warehouses.php';
 
 checkAndAllow('orders.php');
 ?>
@@ -88,19 +90,19 @@ checkAndAllow('orders.php');
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 								<label for="" class="col-sm-5 col-xs-5">Name<span class="mandatory">*</span></label>
 								<div class="col-sm-7 col-xs-7">
-									<input class="form-control" id="name" name="name" type="text">
+									<input class="form-control" id="name" name="name" type="text" disabled>
 								</div>
 							</div>
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 								<label for="" class="col-sm-5 col-xs-5">Address<span class="mandatory">*</span></label>
 								<div class="col-sm-7 col-xs-7">
-									<input class="form-control" id="address" name="address" type="text">
+									<input class="form-control" id="address" name="address" type="text" disabled>
 								</div>
 							</div>
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 								<label for="" class="col-sm-5 col-xs-5">Phone No <span class="mandatory">*</span></label>
 								<div class="col-sm-7 col-xs-7">
-									<input class="form-control" id="phone_no" name="phone_no" type="text">
+									<input class="form-control" id="phone_no" name="phone_no" type="text" disabled>
 								</div>
 							</div>
 							<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
@@ -136,6 +138,12 @@ checkAndAllow('orders.php');
 							<label for="" class="col-sm-5 col-xs-5">Recovery Officer Id<span class="mandatory">*</span></label>
 							<div class="col-sm-7 col-xs-7">
 								<input class="form-control" id="recovery_officer_id" name="recovery_officer_id" type="text">
+							</div>
+						</div>
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Warehouse<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" type="text" id="warehouse" name="warehouse"  />
 							</div>
 						</div>
 					</form>
@@ -195,7 +203,7 @@ checkAndAllow('orders.php');
 									</tr>
 									<tr>
 										<td>Discount</td>
-										<td><input width="20px" type="text" id="discount" name="discount" style="text-align:right" /></td>
+										<td><input width="20px" type="text" id="discount" name="discount" value="0" style="text-align:right" /></td>
 									</tr>
 									<tr>
 										<td>Balance</td>
@@ -261,6 +269,10 @@ checkAndAllow('orders.php');
 			w3.includeHTML();
             <?php $items = new Items() ?>
             var item_code = <?php echo $items->getItemCode(); ?>;
+			<?php $warehouse_code = new Warehouses() ?>
+			var warehouse_code = <?php echo $warehouse_code->getWarehouseCode(); ?>;
+			<?php $officer_code = new createOfficer() ?>
+			var officer_code = <?php echo $officer_code->getOfficerCode(); ?>;
 
 		</script>
 </body>

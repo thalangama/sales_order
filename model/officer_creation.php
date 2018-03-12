@@ -81,4 +81,19 @@ class createOfficer
 
         return ($data);
     }
+
+    function getOfficerCode()
+    {
+        $sql = "SELECT * FROM officer";
+
+        $DbManager = new DbManager();
+        $data = $DbManager->select($sql);
+
+        $officer_code = '[';
+        foreach($data as $key => $val){
+            $officer_code .= '"' .$val['officer_id'].'", ';
+        }
+        $officer_code .= ']';
+        return ($officer_code);
+    }
 }

@@ -11,10 +11,23 @@ jQuery(document).ready(function () {
 
 function pageInit(){
 
+    $( "#recovery_officer_id" ).autocomplete({
+        source: officer_code
+    });
+
+    $( "#sales_officer_id" ).autocomplete({
+        source: officer_code
+    });
+
+    $( "#warehouse" ).autocomplete({
+        source: warehouse_code
+    });
+
     $( "#itemPayment" ).keyup(function() {
         $("#itemBalance").val($("#itemTotal").val() - $("#itemPayment").val() - $("#discount").val());
         $("#noOfterms").trigger('keyup');
     });
+
     $( "#discount" ).keyup(function() {
         $("#itemPayment").trigger('keyup');
     });
@@ -134,6 +147,9 @@ function formValidation() {
                 date:true
             },
             "recovery_officer_id": {
+                required: true
+            },
+            "warehouse": {
                 required: true
             }
         },
@@ -271,6 +287,7 @@ function getOrder(){
                 $('#noOfterms').val(data[0].no_of_terms);
                 $('#paymentDate').val(data[0].payment_date);
                 $('#invoiceNo').val(data[0].invoice_no);
+                $('#warehouse').val(data[0].warehouse);
 
                 row_count = 1;
                 itemTotal = 0;
@@ -342,6 +359,7 @@ function clearFields(){
     $('#paymentDate').val("");
     $('#itemTotal').val("");
     $('#discount').val("");
+    $('#warehouse').val("");
     $('#itemBalance').val("");
     $('#invoiceNo').val("");
     $('#item_code').val("");
@@ -431,6 +449,7 @@ function process() {
             items : tblAddItems.fnGetData(),
             payment : $('#itemPayment').val(),
             discount : $('#discount').val(),
+            warehouse : $('#warehouse').val(),
             no_of_terms : $('#noOfterms').val(),
             payment_date : $('#paymentDate').val(),
             invoice_no : $('#invoiceNo').val()

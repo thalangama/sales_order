@@ -11,12 +11,14 @@ class Order
                   o.id, o.order_no, o.date, o.discount, c.nic, c.id cus_id, c.name, c.address, c.phone_no, 
                   (select officer_id from officer where id = o.sales_officer_id) sales_officer_id, 
                   (select officer_id from officer where id = o.recovery_officer_id) recovery_officer_id,
-                   o.payment, o.payment_date, o.no_of_terms, o.invoice_no
+                   o.payment, o.payment_date, o.no_of_terms, o.invoice_no, CONCAT(w.code , '::' , w.description) warehouse
                 FROM 
                   orders o, 
-                  customer_details c
+                  customer_details c,
+                  warehouse_type w
                 WHERE 
                   c.id = o.customer_id
+                  AND w.id=o.warehouse_id
                   AND o.order_no = '". $_POST["order_no"] . "'";
 
         $DbManager = new DbManager();
@@ -51,6 +53,14 @@ class Order
         $invoice_no = '';
         $payment_date = '';
         $no_of_terms = '';
+        $warehouseId = '';
+
+        if($_POST["warehouse"] != '') {
+            $warehouseId = explode('::', $_POST["warehouse"]);
+            $sql = 'select id from warehouse_type where code="'.$warehouseId[0].'"';
+            $warehouseId = $DbManager->select($sql);
+            $warehouseId = $warehouseId[0]['id'];
+        }
 
         if($_POST["customer_id"] == ''){
             $cus = new createCustomer();
@@ -89,8 +99,8 @@ class Order
         if($_POST["no_of_terms"] != '')
             $no_of_terms = $_POST['no_of_terms'];
 
-        $sql = "INSERT INTO orders(`id`,`order_no`,`date`,`customer_id`,`sales_officer_id`,`recovery_officer_id`,`payment`, `payment_date`, `no_of_terms`,invoice_no, discount)
-                VALUES('','$order_no','$date','$customer_id','$sales_officer_id','$recovery_officer_id','$payment','$payment_date','$no_of_terms', '$invoice_no', '$discount')";
+        $sql = "INSERT INTO orders(`id`,`order_no`,`date`,`customer_id`,`sales_officer_id`,`recovery_officer_id`,`payment`, `payment_date`, `no_of_terms`,invoice_no, discount, warehouse_id)
+                VALUES('','$order_no','$date','$customer_id','$sales_officer_id','$recovery_officer_id','$payment','$payment_date','$no_of_terms', '$invoice_no', '$discount', '$warehouseId')";
         $data = $DbManager->save($sql);
         $order_id = $DbManager->getLastInsertId();
 
@@ -156,6 +166,16 @@ class Order
         $customer_id = '';
         $recovery_officer_id = '';
         $sales_officer_id = '';
+        $warehouseId = '';
+
+        $DbManager = new DbManager();
+
+        if($_POST["warehouse"] != '') {
+            $warehouseId = explode('::', $_POST["warehouse"]);
+            $sql = 'select id from warehouse_type where code="'.$warehouseId[0].'"';
+            $warehouseId = $DbManager->select($sql);
+            $warehouseId = $warehouseId[0]['id'];
+        }
 
         if($_POST["date"] != '')
             $date = $_POST['date'];
@@ -193,9 +213,7 @@ class Order
         $cus = new createCustomer();
         $cus->updateCustomer();
 
-        $DbManager = new DbManager();
-
-        $sql = "UPDATE orders SET order_no='$order_no', discount='$discount', date='$date', customer_id ='$customer_id' , sales_officer_id = '$sales_officer_id', recovery_officer_id='$recovery_officer_id',payment='$payment',payment_date='$payment_date',no_of_terms='$no_of_terms', invoice_no='$invoice_no' WHERE id='$order_id'";
+        $sql = "UPDATE orders SET order_no='$order_no', warehouse_id='$warehouseId', discount='$discount', date='$date', customer_id ='$customer_id' , sales_officer_id = '$sales_officer_id', recovery_officer_id='$recovery_officer_id',payment='$payment',payment_date='$payment_date',no_of_terms='$no_of_terms', invoice_no='$invoice_no' WHERE id='$order_id'";
         $data = $DbManager->update($sql);
 
         $sql = "UPDATE `order_items` SET status=0 WHERE order_id='$order_id'";
