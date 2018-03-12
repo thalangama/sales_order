@@ -1,5 +1,5 @@
 ALTER TABLE `orders` ADD `discount` DECIMAL(10,2) NOT NULL DEFAULT '0' AFTER `invoice_no`;
-ALTER TABLE `orders` ADD `warehouse_id` INT(5) NOT NULL AFTER `discount`;
+ALTER TABLE `orders` ADD `warehouse_id` INT(5) NOT NULL DEFAULT '1' AFTER `discount`;
 
 CREATE TABLE `warehouse_type` (
   `id` int(5) NOT NULL,

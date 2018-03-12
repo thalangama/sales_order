@@ -106,6 +106,9 @@ class Order
 
         $total = 0;
         foreach ($items as $key => $value){
+            $sql = "UPDATE `inventory` SET no_of_items= (no_of_items - '$value[3]') WHERE warehouse_id='$warehouseId' AND item_id=(SELECT id FROM `items` WHERE `code`= '$value[1]')";
+            $data = $DbManager->save($sql);
+
             $sql = "INSERT INTO `order_items` (`id`, `order_id`, `item_id`, `price`, `quantity` )
                     VALUES('','$order_id',(SELECT id FROM `items` WHERE `code`= '$value[1]'),'$value[4]','$value[3]')";
             $data = $DbManager->save($sql);
