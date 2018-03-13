@@ -216,14 +216,31 @@ class Order
         $cus = new createCustomer();
         $cus->updateCustomer();
 
+        $sql = "SELECT warehouse_id FROM `orders` WHERE id='$order_id'";
+        $old_warehouse = $DbManager->select($sql);
+        $old_warehouse = $old_warehouse[0]['warehouse_id'];
+
         $sql = "UPDATE orders SET order_no='$order_no', warehouse_id='$warehouseId', discount='$discount', date='$date', customer_id ='$customer_id' , sales_officer_id = '$sales_officer_id', recovery_officer_id='$recovery_officer_id',payment='$payment',payment_date='$payment_date',no_of_terms='$no_of_terms', invoice_no='$invoice_no' WHERE id='$order_id'";
         $data = $DbManager->update($sql);
+
+        $sql = "SELECT * FROM `order_items` WHERE status=1 AND order_id='$order_id'";
+        $update_items = $DbManager->select($sql);
+        foreach ($update_items as $key => $value){
+            $i_id = $value['item_id'];
+            $qt = $value['quantity'];
+            $sql = "UPDATE `inventory` SET no_of_items= (no_of_items + '$qt') WHERE warehouse_id='$old_warehouse' AND item_id='$i_id'";
+            $data = $DbManager->save($sql);
+        }
 
         $sql = "UPDATE `order_items` SET status=0 WHERE order_id='$order_id'";
         $data = $DbManager->update($sql);
 
         $total = 0;
         foreach ($items as $key => $value){
+
+            $sql = "UPDATE `inventory` SET no_of_items= (no_of_items - '$value[3]') WHERE warehouse_id='$warehouseId' AND item_id=(SELECT id FROM `items` WHERE `code`= '$value[1]')";
+            $data = $DbManager->save($sql);
+
             $sql = "INSERT INTO `order_items` (`id`, `order_id`, `item_id`, `price`, `quantity` )
                     VALUES('','$order_id',(SELECT id FROM `items` WHERE `code`= '$value[1]'),'$value[4]','$value[3]')";
             $data = $DbManager->save($sql);
