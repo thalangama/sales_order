@@ -99,6 +99,12 @@ class Order
         if($_POST["no_of_terms"] != '')
             $no_of_terms = $_POST['no_of_terms'];
 
+        foreach ($items as $key => $value) {
+            $hasItem = $this->hasItem($value[1], $warehouseId);
+            if(!$hasItem)
+                return "Item Not Available in Warehouse";
+        }
+
         $sql = "INSERT INTO orders(`id`,`order_no`,`date`,`customer_id`,`sales_officer_id`,`recovery_officer_id`,`payment`, `payment_date`, `no_of_terms`,invoice_no, discount, warehouse_id)
                 VALUES('','$order_no','$date','$customer_id','$sales_officer_id','$recovery_officer_id','$payment','$payment_date','$no_of_terms', '$invoice_no', '$discount', '$warehouseId')";
         $data = $DbManager->save($sql);
@@ -220,6 +226,12 @@ class Order
         $old_warehouse = $DbManager->select($sql);
         $old_warehouse = $old_warehouse[0]['warehouse_id'];
 
+        foreach ($items as $key => $value) {
+            $hasItem = $this->hasItem($value[1], $warehouseId);
+            if(!$hasItem)
+                return "Item Not Available in Warehouse";
+        }
+
         $sql = "UPDATE orders SET order_no='$order_no', warehouse_id='$warehouseId', discount='$discount', date='$date', customer_id ='$customer_id' , sales_officer_id = '$sales_officer_id', recovery_officer_id='$recovery_officer_id',payment='$payment',payment_date='$payment_date',no_of_terms='$no_of_terms', invoice_no='$invoice_no' WHERE id='$order_id'";
         $data = $DbManager->update($sql);
 
@@ -288,5 +300,22 @@ class Order
         $sql = "UPDATE `orders` SET status=0 WHERE order_no='". $_POST['order_no'] . "'";
         $data = $DbManager->update($sql);
         return ($data);
+    }
+
+    function hasItem($item_code, $warehouse_id){
+        $DbManager = new DbManager();
+        $sql = "SELECT COUNT(inv.id) cnt
+                FROM 
+                  `inventory` inv, 
+                  `items` it 
+                WHERE 
+                  inv.`item_id` = it.id 
+                  AND `warehouse_id` = $warehouse_id
+                  AND it.code='$item_code'";
+        $data = $DbManager->select($sql);
+        if ($data[0]['cnt'] > 0){
+            return true;
+        }
+        return false;
     }
 }
