@@ -129,6 +129,10 @@ function search() {
         success: function (data, textStatus) {
             $('#tblReportsSales').dataTable().fnClearTable();
             $('#totalSale').html("");
+            $('#download_sales_officer_id').val( $('#sales_officer_id').val());
+            $('#download_from_date').val(  $('#from_date').val());
+            $('#download_to_date').val(  $('#to_date').val());
+            $('#btnDownload').attr( 'disabled', false);
             var row_count = 1;
             var totalSale = 0;
             $.each(data, function (counter, item) {
