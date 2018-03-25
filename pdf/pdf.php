@@ -58,9 +58,9 @@ class PDF extends FPDF
         $this->Cell((isset($w[0] ) ? $w[0]  : 40 ), 10, 'Total', 'LRTB', 0, 'L', $fill);
         for ($i = 1; $i < count($header); $i++){
             if ($header[$i]['type'] == 'C'){
-                $this->Cell((isset($w[$i]) ? $w[$i] : 40), 10, number_format((double)$totalArray[$i], 2), 'LRTB', 0, 'R', true);
+                $this->Cell((isset($w[$i]) ? $w[$i] : 40), 10, number_format((double)$totalArray[$i], 2), 'LRTB', 0, 'R', $fill);
             } else {
-                $this->Cell((isset($w[$i]) ? $w[$i] : 40 ), 10, $totalArray[$i], 1, 0, 'C', true);
+                $this->Cell((isset($w[$i]) ? $w[$i] : 40 ), 10, $totalArray[$i], 1, 0, 'C', $fill);
             }
         }
         $this->Ln();
@@ -68,10 +68,10 @@ class PDF extends FPDF
         $this->Cell(array_sum($w), 0, '', 'T');
     }
 
-    function setPageTitle(){
+    function setPageTitle($title){
         $this->SetFont('Arial','B',16);
-        $this->Cell('100%',10,'Hello World!','', 0, 'C','');
-        $this->Ln();
+        $this->Cell('100%',10,$title,'', 0, 'C','');
+        $this->Ln(15);
     }
 
     function setSearchFields($feilds){

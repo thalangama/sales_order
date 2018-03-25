@@ -28,7 +28,7 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
     $fields = array(['code' => 'SALES OFFICER ID', 'value' => (!empty($_POST['sales_officer_id']) ? $_POST['sales_officer_id'] : 'ALL')], ['code' => 'FROM DATE', 'value' => $_POST['from_date']], ['code' => 'TO DATE', 'value' => $_POST['to_date']]);
 
     $pdf->AddPage('', 'a2');
-    $pdf->setPageTitle();
+    $pdf->setPageTitle('SALES REPORT');
     $pdf->setSearchFields($fields);
     $pdf->SetFont('Arial', '', 14);
     $w = array(15, 35, 40, 55, 35);
