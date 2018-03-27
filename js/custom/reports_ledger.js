@@ -136,6 +136,10 @@ function search() {
             $('#totalLedger').html("");
             $('#totalRecovery').html("");
             $('#totalOutstanding').html("");
+            $('#download_customer_nic').val( $('#customer_nic').val());
+            $('#download_from_date').val(  $('#from_date').val());
+            $('#download_to_date').val(  $('#to_date').val());
+            $('#btnDownload').attr( 'disabled', false);
             var row_count = 1;
             var totalLedger = 0;
             var totalRecovery = 0;

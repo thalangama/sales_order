@@ -41,11 +41,27 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
             }
         }
         $pdf = new PDF();
-        $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ORDER NO', 'type' => 'S'], ['value' => 'ORDER DATE', 'type' => 'S'], ['value' => 'SALES OFFICER ID', 'type' => 'S'], ['value' => 'AMOUNT', 'type' => 'C']);
-        $fields = array(['code' => 'SALES OFFICER ID', 'value' => (!empty($_POST['recovery_officer_id']) ? $_POST['recovery_officer_id'] : 'ALL')], ['code' => 'FROM DATE', 'value' => $_POST['from_date']], ['code' => 'TO DATE', 'value' => $_POST['to_date']]);
+        $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ORDER NO', 'type' => 'S'], ['value' => 'ORDER DATE', 'type' => 'S'], ['value' => 'RECOVERY OFFICER ID', 'type' => 'S'], ['value' => 'AMOUNT', 'type' => 'C']);
+        $fields = array(['code' => 'RECOVERY OFFICER ID', 'value' => (!empty($_POST['recovery_officer_id']) ? $_POST['recovery_officer_id'] : 'ALL')], ['code' => 'FROM DATE', 'value' => $_POST['from_date']], ['code' => 'TO DATE', 'value' => $_POST['to_date']]);
 
         $pdf->AddPage('', 'a2');
-        $pdf->setPageTitle('SALES REPORT');
+        $pdf->setPageTitle('RECOVERY REPORT');
+    }elseif($_POST["REPORT"] == 'LEDGER') {
+        $dataArray = $reports->getLedger();
+        $data = [];
+        foreach ($dataArray as $key => $value) {
+            $data[$key] = [];
+            $data[$key][] = $key + 1;
+            foreach ($value as $k => $val) {
+                $data[$key][] = $val;
+            }
+        }
+        $pdf = new PDF();
+        $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ORDER NO', 'type' => 'S'], ['value' => 'ORDER DATE', 'type' => 'S'], ['value' => 'CUSTOMER NIC', 'type' => 'S'], ['value' => 'AMOUNT', 'type' => 'C'], ['value' => 'PAYMENT', 'type' => 'C']);
+        $fields = array(['code' => 'CUSTOMER NIC', 'value' => (!empty($_POST['customer_nic']) ? $_POST['customer_nic'] : 'ALL')], ['code' => 'FROM DATE', 'value' => $_POST['from_date']], ['code' => 'TO DATE', 'value' => $_POST['to_date']]);
+
+        $pdf->AddPage('', 'a2');
+        $pdf->setPageTitle('LEDGER REPORT');
     }
     $pdf->setSearchFields($fields);
     $pdf->SetFont('Arial', '', 14);
