@@ -44,10 +44,10 @@ class Reports
             $where = " AND off.`officer_id` = '$recovery_officer_id'";
         }
         $query = "SELECT 
-                      P.`amount`, 
+                      O.`order_no`, 
                       P.`payment_date`,  
                       off.`officer_id`,
-                      O.`order_no`
+                      P.`amount`
                   FROM 
                       `payments` P,
                       `orders` O,

@@ -129,6 +129,10 @@ function search() {
         success: function (data, textStatus) {
             $('#tblReportsRecoveries').dataTable().fnClearTable();
             $('#totalRecovery').html("");
+            $('#download_recovery_officer_id').val( $('#recovery_officer_id').val());
+            $('#download_from_date').val(  $('#from_date').val());
+            $('#download_to_date').val(  $('#to_date').val());
+            $('#btnDownload').attr( 'disabled', false);
             var row_count = 1;
             var totalRecovery = 0;
             $.each(data, function (counter, item) {

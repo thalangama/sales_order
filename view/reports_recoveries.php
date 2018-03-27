@@ -99,6 +99,16 @@ checkAndAllow('orders.php');
                     </tbody>
                 </table>
                 <h3><div id="totalRecovery"></div></h3>
+                <div>
+                    <form target="_blank" action="../controllers/reports_controller.php" method="post">
+                        <input type="hidden" name="REQUEST_TYPE" id="REQUEST_TYPE" value="DOWNLOAD">
+                        <input type="hidden" name="REPORT" id="REPORT" value="RECOVERIES">
+                        <input type="hidden" name="recovery_officer_id" id="download_recovery_officer_id" value="">
+                        <input type="hidden" name="from_date" id="download_from_date" value="">
+                        <input type="hidden" name="to_date" id="download_to_date" value="">
+                        <button type="submit" id="btnDownload" class="btn btn-next pull-right draft " disabled >Download</button>
+                    </form>
+                </div>
             </div>
             <!-- /Expenses Details -->
         </div>
