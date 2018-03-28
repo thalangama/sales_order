@@ -1,5 +1,5 @@
 <?php
-include '../dbManager/dbManager.php';
+include_once '../dbManager/dbManager.php';
 
 class outstanding
 {
@@ -18,7 +18,7 @@ class outstanding
 
         $where .= " AND p.payment_date <= '".$date."'";
 
-        $sql = "SELECT o.order_no, sum(p.amount) paied, (outs.outstand - sum(p.amount) ) to_paied, c.nic, c.name
+        $sql = "SELECT o.order_no, c.nic, c.name, (outs.outstand - sum(p.amount) ) to_paied, sum(p.amount) paied
             FROM
                 payments p,
                 customer_details c,

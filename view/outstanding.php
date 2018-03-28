@@ -105,6 +105,17 @@ checkAndAllow('outstanding.php');
                             </tbody>
                         </table>
                     </div>
+                    <div>
+                        <form target="_blank" action="../controllers/reports_controller.php" method="post">
+                            <input type="hidden" name="REQUEST_TYPE" id="REQUEST_TYPE" value="DOWNLOAD">
+                            <input type="hidden" name="REPORT" id="REPORT" value="OUTSTANDING">
+                            <input type="hidden" name="customer_nic" id="download_customer_nic" value="">
+                            <input type="hidden" name="order_no" id="download_order_no" value="">
+                            <input type="hidden" name="recovery_officer_id" id="download_recovery_officer_id" value="">
+                            <input type="hidden" name="date" id="download_date" value="">
+                            <button type="submit" id="btnDownload" class="btn btn-next pull-right draft " disabled >Download</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <!--/detail panel-->

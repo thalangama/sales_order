@@ -82,6 +82,11 @@ function getOutstanding(){
         "bAutoWidth": false,
         success: function (data, textStatus) {
             if (data[0] != null && data[0].order_no != null) {
+                $('#download_customer_nic').val( $('#customer_nic').val());
+                $('#download_order_no').val(  $('#order_no').val());
+                $('#download_recovery_officer_id').val(  $('#recovery_officer_id').val());
+                $('#download_date').val(  $('#date').val());
+                $('#btnDownload').attr( 'disabled', false);
                 row_count = 1;
                 $.each(data, function (counter, item) {
                     out_amt = parseFloat(item.to_paied);

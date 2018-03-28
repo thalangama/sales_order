@@ -95,6 +95,15 @@
                         <tbody>
                         </tbody>
                     </table>
+                    <div>
+                        <form target="_blank" action="../controllers/reports_controller.php" method="post">
+                            <input type="hidden" name="REQUEST_TYPE" id="REQUEST_TYPE" value="DOWNLOAD">
+                            <input type="hidden" name="REPORT" id="REPORT" value="WAREHOUSE">
+                            <input type="hidden" name="warehouseId" id="download_warehouse_code" value="">
+                            <input type="hidden" name="itemCode" id="download_item_code" value="">
+                            <button type="submit" id="btnDownload" class="btn btn-next pull-right draft " disabled >Download</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 		</div>

@@ -69,6 +69,9 @@ function search() {
         "bAutoWidth": false,
         success: function (data, textStatus) {
             $('#tblInventory').dataTable().fnClearTable();
+            $('#download_item_code').val(  $('#item_code').val());
+            $('#download_warehouse_code').val(  $('#warehouse_code').val());
+            $('#btnDownload').attr( 'disabled', false);
             row_count = 1;
             $.each(data, function (counter, item) {
                 tblInventory.fnAddData([

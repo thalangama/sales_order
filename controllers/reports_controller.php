@@ -1,6 +1,8 @@
 <?php
 include_once '../model/reports.php';
 include_once '../pdf/pdf.php';
+include_once '../model/inventory.php';
+include_once '../model/outstanding.php';
 
 $reports = new Reports();
 
@@ -30,6 +32,7 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
 
         $pdf->AddPage('', 'a2');
         $pdf->setPageTitle('SALES REPORT');
+        $w = array(15, 35, 40, 55, 35);
     }elseif($_POST["REPORT"] == 'RECOVERIES') {
         $dataArray = $reports->getRecoveries();
         $data = [];
@@ -46,6 +49,7 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
 
         $pdf->AddPage('', 'a2');
         $pdf->setPageTitle('RECOVERY REPORT');
+        $w = array(15, 35, 40, 55, 35);
     }elseif($_POST["REPORT"] == 'LEDGER') {
         $dataArray = $reports->getLedger();
         $data = [];
@@ -62,10 +66,49 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
 
         $pdf->AddPage('', 'a2');
         $pdf->setPageTitle('LEDGER REPORT');
+        $w = array(15, 35, 40, 55, 35);
+    }elseif($_POST["REPORT"] == 'WAREHOUSE'){
+        $Inventory = new Inventory();
+        $dataArray = $Inventory->getInventoryReport();
+        $data = [];
+        foreach ($dataArray as $key => $value) {
+            $data[$key] = [];
+            $data[$key][] = $key + 1;
+            foreach ($value as $k => $val) {
+                $data[$key][] = $val;
+            }
+        }
+        $pdf = new PDF();
+        $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ITEM CODE', 'type' => 'S'], ['value' => 'ITEM DESCRIPTION', 'type' => 'S'], ['value' => 'WAREHOUSE', 'type' => 'S'], ['value' => 'AVAILABILITY', 'type' => 'N'], ['value' => 'MINIMUM LEVEL', 'type' => 'N'], ['value' => 'PRICE', 'type' => 'C']);
+        $fields = array(['code' => 'ITEM CODE', 'value' => (!empty($_POST['item_code']) ? $_POST['item_code'] : 'ALL')], ['code' => 'WAREHOUSE CODE', 'value' => (!empty($_POST['warehouse_code']) ? $_POST['warehouse_code'] : 'ALL')]);
+
+        $pdf->AddPage('', 'a2');
+        $pdf->setPageTitle('WAREHOUSE REPORT');
+        $w = array(15, 35, 100, 55, 40, 45, 35);
+    }elseif($_POST["REPORT"] == 'OUTSTANDING'){
+        $outstanding = new outstanding();
+        $dataArray = $outstanding->getOutstand();
+        $data = [];
+        foreach ($dataArray as $key => $value) {
+            $data[$key] = [];
+            $data[$key][] = $key + 1;
+            foreach ($value as $k => $val) {
+                $data[$key][] = $val;
+            }
+        }
+        $pdf = new PDF();
+        $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ORDER NO', 'type' => 'S'], ['value' => 'CUSTOMER NIC', 'type' => 'S'], ['value' => 'CUSTOMER NAME', 'type' => 'S'], ['value' => 'OUTSTANDING AMOUNT', 'type' => 'C']);
+        $fields = array(['code' => 'CUSTOMER NIC', 'value' => (!empty($_POST['customer_nic']) ? $_POST['customer_nic'] : 'ALL')],
+                        ['code' => 'ORDER NO', 'value' => (!empty($_POST['order_no']) ? $_POST['order_no'] : 'ALL')],
+                        ['code' => 'RECOVERY OFFICER ID', 'value' => (!empty($_POST['recovery_officer_id']) ? $_POST['recovery_officer_id'] : 'ALL')],
+                        ['code' => 'DATE', 'value' => (!empty($_POST['date']) ? $_POST['date'] : 'ALL')]);
+
+        $pdf->AddPage('', 'a2');
+        $pdf->setPageTitle('OUTSTANDING REPORT');
+        $w = array(15, 35, 55, 100, 65);
     }
     $pdf->setSearchFields($fields);
     $pdf->SetFont('Arial', '', 14);
-    $w = array(15, 35, 40, 55, 35);
     $pdf->setTable($header, $data, $w);
     $pdf->Output();
 }
