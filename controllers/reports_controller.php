@@ -30,7 +30,7 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
         $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ORDER NO', 'type' => 'S'], ['value' => 'ORDER DATE', 'type' => 'S'], ['value' => 'SALES OFFICER ID', 'type' => 'S'], ['value' => 'AMOUNT', 'type' => 'C']);
         $fields = array(['code' => 'SALES OFFICER ID', 'value' => (!empty($_POST['sales_officer_id']) ? $_POST['sales_officer_id'] : 'ALL')], ['code' => 'FROM DATE', 'value' => $_POST['from_date']], ['code' => 'TO DATE', 'value' => $_POST['to_date']]);
 
-        $pdf->AddPage('', 'a2');
+        $pdf->AddPage('', 'a4');
         $pdf->setPageTitle('SALES REPORT');
         $w = array(15, 35, 40, 55, 35);
     }elseif($_POST["REPORT"] == 'RECOVERIES') {
@@ -47,7 +47,7 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
         $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ORDER NO', 'type' => 'S'], ['value' => 'ORDER DATE', 'type' => 'S'], ['value' => 'RECOVERY OFFICER ID', 'type' => 'S'], ['value' => 'AMOUNT', 'type' => 'C']);
         $fields = array(['code' => 'RECOVERY OFFICER ID', 'value' => (!empty($_POST['recovery_officer_id']) ? $_POST['recovery_officer_id'] : 'ALL')], ['code' => 'FROM DATE', 'value' => $_POST['from_date']], ['code' => 'TO DATE', 'value' => $_POST['to_date']]);
 
-        $pdf->AddPage('', 'a2');
+        $pdf->AddPage('', 'a4');
         $pdf->setPageTitle('RECOVERY REPORT');
         $w = array(15, 35, 40, 55, 35);
     }elseif($_POST["REPORT"] == 'LEDGER') {
@@ -64,7 +64,7 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
         $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ORDER NO', 'type' => 'S'], ['value' => 'ORDER DATE', 'type' => 'S'], ['value' => 'CUSTOMER NIC', 'type' => 'S'], ['value' => 'AMOUNT', 'type' => 'C'], ['value' => 'PAYMENT', 'type' => 'C']);
         $fields = array(['code' => 'CUSTOMER NIC', 'value' => (!empty($_POST['customer_nic']) ? $_POST['customer_nic'] : 'ALL')], ['code' => 'FROM DATE', 'value' => $_POST['from_date']], ['code' => 'TO DATE', 'value' => $_POST['to_date']]);
 
-        $pdf->AddPage('', 'a2');
+        $pdf->AddPage('', [400,250]);
         $pdf->setPageTitle('LEDGER REPORT');
         $w = array(15, 35, 40, 55, 35);
     }elseif($_POST["REPORT"] == 'WAREHOUSE'){
@@ -80,9 +80,9 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
         }
         $pdf = new PDF();
         $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ITEM CODE', 'type' => 'S'], ['value' => 'ITEM DESCRIPTION', 'type' => 'S'], ['value' => 'WAREHOUSE', 'type' => 'S'], ['value' => 'AVAILABILITY', 'type' => 'N'], ['value' => 'MINIMUM LEVEL', 'type' => 'N'], ['value' => 'PRICE', 'type' => 'C']);
-        $fields = array(['code' => 'ITEM CODE', 'value' => (!empty($_POST['item_code']) ? $_POST['item_code'] : 'ALL')], ['code' => 'WAREHOUSE CODE', 'value' => (!empty($_POST['warehouse_code']) ? $_POST['warehouse_code'] : 'ALL')]);
+        $fields = array(['code' => 'ITEM CODE', 'value' => (!empty($_POST['itemCode']) ? $_POST['itemCode'] : 'ALL')], ['code' => 'WAREHOUSE CODE', 'value' => (!empty($_POST['warehouseId']) ? $_POST['warehouseId'] : 'ALL')]);
 
-        $pdf->AddPage('', 'a2');
+        $pdf->AddPage('', [400,350]);
         $pdf->setPageTitle('WAREHOUSE REPORT');
         $w = array(15, 35, 100, 55, 40, 45, 35);
     }elseif($_POST["REPORT"] == 'OUTSTANDING'){
@@ -103,7 +103,7 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
                         ['code' => 'RECOVERY OFFICER ID', 'value' => (!empty($_POST['recovery_officer_id']) ? $_POST['recovery_officer_id'] : 'ALL')],
                         ['code' => 'DATE', 'value' => (!empty($_POST['date']) ? $_POST['date'] : 'ALL')]);
 
-        $pdf->AddPage('', 'a2');
+        $pdf->AddPage('', [450,300]);
         $pdf->setPageTitle('OUTSTANDING REPORT');
         $w = array(15, 35, 55, 100, 65);
     }
