@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
     <link href="../css/main_style.css" rel="stylesheet">
     <script type="text/javascript" src="../js/lib/CreateHTML5Elements.js"></script>
 </head>
-<body>
+<body style="background: #e7e3e3">
 <div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading">
     <div class="login">
         <form action="user_login.php?logout=false" method="post">
@@ -131,12 +131,13 @@ if (isset($_POST['submit'])) {
                 ?>"/>
 
                 <p>
-                    <button class="form-control" type="sumbit" name=submit>Sign in</button>
+                    <button class="btn btn-next pull-right draft" type="sumbit" name=submit>Sign in</button>
                 </p>
 
             </fieldset>
         </form>
     </div>
+    <div style="margin: auto;width:400px">Copyright © 2018 Sameera Harshana. All rights reserved. </div>
 </div>
 <script src="../js/lib/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>

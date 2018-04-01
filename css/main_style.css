@@ -2786,7 +2786,7 @@
     }
 
     .login{
-        width:350px;margin:100px auto;
+        width:400px;margin-top: 100px!important; margin: auto; padding: 25px;background-color: #7a7a7a ; border-color: #2b2b2b;border-style: solid;border-radius: 15px;
     }
 
     #breadcrumb {
