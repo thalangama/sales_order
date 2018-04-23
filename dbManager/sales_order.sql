@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2018 at 03:28 PM
+-- Generation Time: Apr 23, 2018 at 05:09 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -36,6 +36,21 @@ CREATE TABLE `customer_details` (
   `name` varchar(150) NOT NULL,
   `address` varchar(150) NOT NULL,
   `phone_no` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `id` int(10) NOT NULL,
+  `item_id` int(10) NOT NULL,
+  `warehouse_id` int(10) NOT NULL,
+  `no_of_items` int(10) NOT NULL,
+  `min_item_level` int(10) NOT NULL,
+  `price` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -83,6 +98,8 @@ CREATE TABLE `orders` (
   `payment_date` date NOT NULL,
   `no_of_terms` int(11) NOT NULL,
   `invoice_no` varchar(10) NOT NULL,
+  `discount` int(10) NOT NULL DEFAULT '0',
+  `warehouse_id` int(5) NOT NULL,
   `status` int(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -156,6 +173,25 @@ INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `user_type`, `
 (1, 'udaya', 'Udaya', 'Kumara', 'M', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0),
 (2, 'harshana', 'sam', 'ss', 'O', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehouse_type`
+--
+
+CREATE TABLE `warehouse_type` (
+  `id` int(5) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `description` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `warehouse_type`
+--
+
+INSERT INTO `warehouse_type` (`id`, `code`, `description`) VALUES
+(1, 'w1', 'shop med');
+
 --
 -- Indexes for dumped tables
 --
@@ -166,6 +202,12 @@ INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `user_type`, `
 ALTER TABLE `customer_details`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nic` (`nic`);
+
+--
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `items`
@@ -215,6 +257,13 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Indexes for table `warehouse_type`
+--
+ALTER TABLE `warehouse_type`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `code` (`code`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -223,6 +272,11 @@ ALTER TABLE `users`
 --
 ALTER TABLE `customer_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `items`
 --
@@ -257,7 +311,12 @@ ALTER TABLE `payment_plan`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `warehouse_type`
+--
+ALTER TABLE `warehouse_type`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
