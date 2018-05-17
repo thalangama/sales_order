@@ -121,4 +121,47 @@ class outstanding
 
         return ($data);
     }
+
+    function arrearsDetails(){
+        $date = date("Y-m-d");
+        $DbManager = new DbManager();
+        $sql = "SELECT sum(p.amount) payment 
+                FROM 
+                  payments p, 
+                  orders o 
+                WHERE 
+                  p.order_id = o.id 
+                  AND p.record_status = 1 
+                  AND p.amount > 0 
+                  AND o.order_no= '".$_POST["order_no"]."'";
+        $payment = $DbManager->select($sql);
+        $total_payment = $payment[0]["payment"];
+        $sql = "SELECT 
+                  p.payment_amount outstand, 
+                  p.payment_date 
+                FROM 
+                  orders o, 
+                  payment_plan p 
+                WHERE 
+                  p.order_id = o.id 
+                  AND p.status = 1 
+                  AND p.payment_amount > 0 
+                  AND o.order_no = '".$_POST["order_no"]."' 
+                  AND p.payment_date <= '".$date."'";
+        $rentals = $DbManager->select($sql);
+        $dataArray = [];
+        $count = 0;
+        foreach ($rentals as $key => $value) {
+            $dataArray[$key] = [];
+            $dataArray[$key]['month'] = $value['payment_date'];
+            if($total_payment > $value["outstand"]){
+                $dataArray[$key]['arrears_amount'] = 0;
+                $total_payment = $total_payment - $value["outstand"];
+            }else{
+                $dataArray[$key]['arrears_amount'] = $value["outstand"] - $total_payment;
+                $total_payment = 0;
+            }
+        }
+        return ($dataArray);
+    }
 }

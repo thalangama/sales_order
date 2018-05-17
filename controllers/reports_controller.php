@@ -15,6 +15,10 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
 }elseif($_POST["REQUEST_TYPE"] == 'GET_LEDGER'){
     $data = $reports->getLedger();
     echo (json_encode($data));
+}elseif($_POST["REQUEST_TYPE"] == 'GET_ARREARS'){
+    $outstanding = new outstanding();
+    $data = $outstanding->arrearsDetails();
+    echo (json_encode($data));
 }elseif($_POST["REQUEST_TYPE"] == 'DOWNLOAD'){
     if($_POST["REPORT"] == 'SALES') {
         $dataArray = $reports->getSales();
@@ -106,7 +110,26 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
         $pdf->AddPage('', [450,300]);
         $pdf->setPageTitle('OUTSTANDING REPORT');
         $w = array(15, 35, 55, 100, 65);
+    } elseif($_POST["REPORT"] == 'ARREARS'){
+        $outstanding = new outstanding();
+        $dataArray = $outstanding->arrearsDetails();
+        $data = [];
+        foreach ($dataArray as $key => $value) {
+            $data[$key] = [];
+            $data[$key][] = $key + 1;
+            foreach ($value as $k => $val) {
+                $data[$key][] = $val;
+            }
+        }
+        $pdf = new PDF();
+        $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'MONTH', 'type' => 'S'],  ['value' => 'ARREARS AMOUNT', 'type' => 'C']);
+        $fields = array(['code' => 'ORDER NO', 'value' => (!empty($_POST['order_no']) ? $_POST['order_no'] : 'ALL')]);
+
+        $pdf->AddPage('', [450,300]);
+        $pdf->setPageTitle('ARREARS REPORT');
+        $w = array(15, 35, 55);
     }
+
     $pdf->setSearchFields($fields);
     $pdf->SetFont('Arial', '', 14);
     $pdf->setTable($header, $data, $w);
