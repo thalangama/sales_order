@@ -94,6 +94,12 @@
 								<input class="form-control" id="phone_no" name="phone_no" type="text">
 							</div>
 						</div>
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">Blacklist</label>
+							<div class="col-sm-7 col-xs-7">
+								<input class="form-control" id="is_blacklist" name="is_blacklist" type="checkbox">
+							</div>
+						</div>
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right">
 							<a id="btnProcess" class="btn btn-next pull-right draft " >Process</a>
 							<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()" >Clear</a>

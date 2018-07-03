@@ -392,7 +392,9 @@ function getCustomer(){
         timeout: 180000,
         "bAutoWidth": false,
         success: function (data, textStatus) {
-            if (data.nic != null) {
+            if(data.is_blacklist == 1){
+                showMsgError("Customer is blacklisted.");
+            }else if (data.nic != null) {
                 $('#customer_id').val(data.id );
                 $('#name').val(data.name );
                 $('#address').val(data.address );

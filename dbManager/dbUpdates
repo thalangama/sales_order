@@ -1,0 +1,2 @@
+ALTER TABLE `customer_details` ADD `is_blacklist` INT(1) NOT NULL DEFAULT '0' AFTER `phone_no`;
+

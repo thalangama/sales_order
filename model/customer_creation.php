@@ -32,8 +32,10 @@ class createCustomer
             $address = $_POST['address'];
         if($_POST["phone_no"] != '')
             $phone = $_POST['phone_no'];
+        if($_POST["is_blacklist"] != '')
+            $is_blacklist = $_POST['is_blacklist'];
 
-        $sql = "INSERT INTO customer_details(name,address,phone_no,nic) VALUES('$name','$address','$phone','$nic')";
+        $sql = "INSERT INTO customer_details(name,address,phone_no,nic,is_blacklist) VALUES('$name','$address','$phone','$nic',$is_blacklist)";
 
         $DbManager = new DbManager();
 		$data = $DbManager->save($sql);
@@ -61,8 +63,10 @@ class createCustomer
             $phone = $_POST['phone_no'];
         if($_POST["customer_id"] != '')
             $id = $_POST['customer_id'];
+        if($_POST["is_blacklist"] != '')
+            $is_blacklist = $_POST['is_blacklist'];
 
-        $sql = "UPDATE customer_details SET name='$name', address ='$address' , phone_no = '$phone', nic='$nic' WHERE id='$id'";
+        $sql = "UPDATE customer_details SET name='$name', address ='$address' , phone_no = '$phone', nic='$nic', is_blacklist=$is_blacklist WHERE id='$id'";
 
         $DbManager = new DbManager();
         $data = $DbManager->update($sql);

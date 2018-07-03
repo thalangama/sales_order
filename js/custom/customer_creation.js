@@ -13,6 +13,7 @@ function clearFields(){
     $('#address').val("");
     $('#phone_no').val("");
     $('#nic').val("");
+    $('#is_blacklist').prop('checked', false);
     return false;
 }
 
@@ -99,6 +100,9 @@ function getCustomer(){
                 $('#name').val(data.name );
                 $('#address').val(data.address );
                 $('#phone_no').val(data.phone_no );
+                $('#is_blacklist').prop('checked', false);
+                if(data.is_blacklist == 1)
+                    $('#is_blacklist').prop('checked', true);
             }else{
                 showMsgError( "No Customer Found.");
             }
@@ -137,7 +141,8 @@ function process() {
             customer_id : id,
             name: $('#name').val(),
             address : $('#address').val(),
-            phone_no : $('#phone_no').val()
+            phone_no : $('#phone_no').val(),
+            is_blacklist : $("input[type='checkbox']").is(":checked")
         }),
         dataType: "json",
         timeout: 180000,
