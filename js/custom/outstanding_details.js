@@ -130,6 +130,8 @@ function getDetails(){
             if(data[1] != null && data[1].length != 0 ){
                 $('#currentOutstanding').val(data[1][0].to_paied);
             }
+            if(outstanding == 0)
+                $('#currentOutstanding').val(0);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             showMsgError(textStatus);
