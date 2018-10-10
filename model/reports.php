@@ -80,10 +80,11 @@ class Reports
         }
         $query = "SELECT 
                     O.`order_no`, 
-                    O.`date`, 
+                    O.`date`,  
                     CD.`nic` ,
                     (SELECT SUM(OI.`price` * OI.`quantity`) FROM `order_items` OI WHERE OI.`status`=1 AND O.`id`= OI.`order_id` GROUP BY OI.`order_id` ) amount ,
-                    (O.`payment` + ( SELECT SUM(P.`amount`) FROM `payments` P WHERE P.`order_id` = O.`id` AND P.`record_status` = 1 GROUP BY P.`order_id`) ) payment
+                    (O.`payment` + ( SELECT SUM(P.`amount`) FROM `payments` P WHERE P.`order_id` = O.`id` AND P.`record_status` = 1 GROUP BY P.`order_id`) ) payment,
+                    O.`discount`
                   FROM 
                     `orders` O,
                     `officer` off,

@@ -91,6 +91,7 @@ checkAndAllow('orders.php');
                         <th class="sorting">Order No</th>
                         <th class="sorting">Order Date</th>
                         <th class="sorting">Amount</th>
+                        <th class="sorting">Discount</th>
                         <th class="sorting">Total Payment</th>
                         <th class="sorting">Customer NIC</th>
                         <th class="sorting">Action</th>
@@ -107,6 +108,10 @@ checkAndAllow('orders.php');
                     <tr>
                         <td>Total Recovery</td>
                         <td class="numericCol"><div id="totalRecovery">0</div></td>
+                    </tr>
+                    <tr>
+                        <td>Total Discount</td>
+                        <td class="numericCol"><div id="totalDiscount">0</div></td>
                     </tr>
                     <tr>
                         <td>Total Outstanding&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>

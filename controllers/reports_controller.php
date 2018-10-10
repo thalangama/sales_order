@@ -65,12 +65,12 @@ if($_POST["REQUEST_TYPE"] == 'GET_SALES'){
             }
         }
         $pdf = new PDF();
-        $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ORDER NO', 'type' => 'S'], ['value' => 'ORDER DATE', 'type' => 'S'], ['value' => 'CUSTOMER NIC', 'type' => 'S'], ['value' => 'AMOUNT', 'type' => 'C'], ['value' => 'PAYMENT', 'type' => 'C']);
+        $header = array(['value' => 'NO', 'type' => 'S'], ['value' => 'ORDER NO', 'type' => 'S'], ['value' => 'ORDER DATE', 'type' => 'S'], ['value' => 'CUSTOMER NIC', 'type' => 'S'], ['value' => 'AMOUNT', 'type' => 'C'], ['value' => 'PAYMENT', 'type' => 'C'], ['value' => 'DISCOUNT', 'type' => 'C']);
         $fields = array(['code' => 'CUSTOMER NIC', 'value' => (!empty($_POST['customer_nic']) ? $_POST['customer_nic'] : 'ALL')], ['code' => 'FROM DATE', 'value' => $_POST['from_date']], ['code' => 'TO DATE', 'value' => $_POST['to_date']]);
 
-        $pdf->AddPage('', [400,250]);
+        $pdf->AddPage('', [400,285]);
         $pdf->setPageTitle('LEDGER REPORT');
-        $w = array(15, 35, 40, 55, 35);
+        $w = array(15, 35, 40, 55, 35, 35);
     }elseif($_POST["REPORT"] == 'WAREHOUSE'){
         $Inventory = new Inventory();
         $dataArray = $Inventory->getInventoryReport();

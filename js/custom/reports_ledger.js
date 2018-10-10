@@ -30,12 +30,13 @@ function pageInit(){
             {"sClass": ""},
             {"sClass": "numericCol "},
             {"sClass": "numericCol "},
+            {"sClass": "numericCol "},
             {"sClass": ""},
             {"sClass": ""}
         ],
         "aoColumnDefs":[
             // { "bVisible":false, "aTargets":[7] },
-            { "bSortable": false, "aTargets":[ 0,1,2,3,4,5,6] }
+            { "bSortable": false, "aTargets":[ 0,1,2,3,4,5,6,7] }
         ],
         "oLanguage":{"sEmptyTable":"<div class='info-text'></div>"}
     });
@@ -143,18 +144,21 @@ function search() {
             var row_count = 1;
             var totalLedger = 0;
             var totalRecovery = 0;
+            var totalDiscount = 0;
             $.each(data, function (counter, item) {
                 tblReportsLedger.fnAddData([
                     row_count++,
                     item.order_no,
                     item.date,
                     item.amount,
+                    item.discount,
                     item.payment,
                     item.nic,
                     '<a class="detail-open pull-center" title="Remove" target="_blank" href="outstanding_details.php?order_no=' + item.order_no + '"> </a>'
                 ]);
                 totalLedger = parseFloat(totalLedger) + parseFloat(item.amount);
                 totalRecovery = parseFloat(totalRecovery) + parseFloat(item.payment);
+                totalDiscount = parseFloat(totalDiscount) + parseFloat(item.discount);
             });
             clearMsg();
             clearFields();
@@ -162,7 +166,8 @@ function search() {
                 showMsgSuccess("No records found.");
             $('#totalLedger').html(totalLedger);
             $('#totalRecovery').html(totalRecovery);
-            $('#totalOutstanding').html(totalLedger - totalRecovery);
+            $('#totalDiscount').html(totalDiscount);
+            $('#totalOutstanding').html(totalLedger - totalRecovery - totalDiscount);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             showMsgError(textStatus);
