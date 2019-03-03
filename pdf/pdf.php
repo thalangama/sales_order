@@ -67,6 +67,48 @@ class PDF extends FPDF
         // Closing line
         $this->Cell(array_sum($w), 0, '', 'T');
     }
+    function setPrintTable($header, $data, $w)
+    {
+        $totalArray = [];
+        // Colors, line width and bold font
+        $this->SetTextColor(0);
+        $this->SetDrawColor(0, 0, 0);
+        $this->SetLineWidth(0);
+        $this->SetFont('', 'B');
+        // Header
+
+        for ($i = 0; $i < count($header); $i++)
+            $this->Cell((isset($w[$i]) ? $w[$i] : 40 ), 15, $header[$i]['value'], 1, 0, 'C', true);
+        $this->Ln();
+        // Color and font restoration
+        $this->SetTextColor(0);
+        $this->SetFont('');
+        // Data
+        $fill = false;
+        foreach ($data as $key => $row) {
+            for ($i = 0; $i < count($header); $i++) {
+                if ($header[$i]['type'] == 'S') {
+                    if(!isset($totalArray[$i]))
+                        $totalArray[$i] = '';
+                    $this->Cell((isset($w[$i]) ? $w[$i] : 40), 8, $row[$i], 'LRTB', 0, 'L', $fill);
+                } elseif ($header[$i]['type'] == 'N'){
+                    if(!isset($totalArray[$i]))
+                        $totalArray[$i] = '';
+                    $this->Cell((isset($w[$i]) ? $w[$i] : 40), 8, number_format((int)$row[$i]), 'LRTB', 0, 'R', $fill);
+                } elseif ($header[$i]['type'] == 'C'){
+                    $this->Cell((isset($w[$i]) ? $w[$i] : 40), 8, number_format((double)$row[$i], 2), 'LRTB', 0, 'R', $fill);
+                    if(!isset($totalArray[$i]))
+                        $totalArray[$i] = 0;
+                    $totalArray[$i] = $totalArray[$i] + (double)$row[$i];
+                }
+            }
+            $this->Ln();
+            $fill = !$fill;
+        }
+
+        // Closing line
+        $this->Cell(array_sum($w), 0, '', 'T');
+    }
 
     function setPageTitle($title){
         $this->SetFont('Arial','B',16);
@@ -86,6 +128,15 @@ class PDF extends FPDF
             $this->Cell(50, 6, $feilds[$i]['value'], '', 0, 'L', '');
             $this->Ln();
         }
+        $this->Ln();
+    }
+
+    function setText($text){
+        $this->SetFillColor(255, 255, 255);
+        $this->SetTextColor(0);
+        $this->SetFont('');
+
+        $this->Cell(75, 6, $text, '', 0, 'L', '');
         $this->Ln();
     }
 }

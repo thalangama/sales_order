@@ -274,6 +274,7 @@ function getOrder(){
             if (data[0] != null && data[0].id != null) {
                 customerSerched = true;
                 $('#order_id').val(data[0].id);
+                $('#print_order_no').val(data[0].order_no);
                 $('#order_no').val(data[0].order_no);
                 $('#customer_id').val(data[0].cus_id );
                 $('#nic').val(data[0].nic);
@@ -350,6 +351,7 @@ function clearFields(){
     $('#address').val("");
     $('#phone_no').val("");
     $('#order_id').val("");
+    $('#print_order_no').val("");
     $('#order_no').val("");
     $('#sales_officer_id').val("");
     $('#recovery_officer_id').val("");

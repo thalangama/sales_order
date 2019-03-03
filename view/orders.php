@@ -245,6 +245,11 @@ checkAndAllow('orders.php');
 				<div class="col-12 col-sm-12 col-xs-12 col-lg-12 common-box without-heading ">
 					<a id="btnClear" class="btn btn-next pull-right draft " onclick="clearFields()">Clear</a>
 					<a id="btnProcess" class="btn btn-next pull-right draft " href="#">Process</a>
+					<form target="_blank" action="../controllers/orders_controller.php" method="post">
+						<input type="hidden" name="REQUEST_TYPE" id="REQUEST_TYPE" value="PRINT">
+						<input class="form-control" id="print_order_no" name="print_order_no" type="hidden">
+						<button type="submit" id="btnPrint" class="btn btn-next pull-right draft " >Print</button>
+					</form>
 				</div>
 			</div>
 		</div>
