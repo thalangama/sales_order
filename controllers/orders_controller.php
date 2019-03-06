@@ -15,6 +15,7 @@ if($_POST["REQUEST_TYPE"] == 'GET'){
     $data = $Order->updateOrder();
     echo (json_encode($data));
 }elseif($_POST["REQUEST_TYPE"] == 'PRINT') {
+    $total = 0;
     $_POST["order_no"] = $_POST["print_order_no"];
     $dataArray = $Order->getOrder();
 
@@ -29,6 +30,7 @@ if($_POST["REQUEST_TYPE"] == 'GET'){
         $data[$key][1] = $value['description'];
         $data[$key][2] = $value['price'];
         $data[$key][3] = $value['quantity'] * $value['price'];
+        $total += $data[$key][3];
     }
     $pdf = new PDF();
 
@@ -55,5 +57,12 @@ if($_POST["REQUEST_TYPE"] == 'GET'){
 
     $pdf->SetFont('Arial', '', 14);
     $pdf->setPrintTable($header, $data, $w);
+
+    $pdf->setPageTitle(' ');
+
+    $pdf->setText('                                                                                TOTAL          :  ' . $total);
+    $pdf->setText('                                                                                DISCOUNT   :  ' . $dataArray[0]["discount"]);
+    $pdf->setText('                                                                                TOTAL          :  ' . ($total - $dataArray[0]["discount"]));
+
     $pdf->Output();
 }
