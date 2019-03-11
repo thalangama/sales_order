@@ -139,4 +139,14 @@ class PDF extends FPDF
         $this->Cell(75, 6, $text, '', 0, 'L', '');
         $this->Ln();
     }
+
+    function setTextNew($text, $position = 75, $newLine = 0, $align = 'L'){
+        $this->SetFillColor(255, 255, 255);
+        $this->SetTextColor(0);
+        $this->SetFont('');
+
+        $this->Cell($position, 6, $text, '', 0,$align , '');
+        if($newLine)
+            $this->Ln();
+    }
 }

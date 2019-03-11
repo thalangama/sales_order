@@ -44,9 +44,12 @@ if($_POST["REQUEST_TYPE"] == 'GET'){
     $pdf->setPageTitle(' ');
     $w = array(15, 150, 40, 50);
 
-    $pdf->setText('NALEEN HARDWARE                                            SHYATECH INTERNATIONAL (PVT) LTD');
-    $pdf->setText('AMBAGASWEWA                                                   MAIN STREET MEDIRIGIRIYA');
-    $pdf->setText('                                                                                027 2248166');
+    $pdf->setTextNew($dataArray[0]['name'], 120);
+    $pdf->setTextNew('SHYATECH INTERNATIONAL (PVT) LTD', 100, 1, 'L');
+    $pdf->setTextNew($dataArray[0]['address'], 120);
+    $pdf->setTextNew('MAIN STREET MEDIRIGIRIYA', 100, 1 , 'L');
+    $pdf->setTextNew($dataArray[0]['phone_no'],120);
+    $pdf->setTextNew('027 2248166', 0, 100, 'L');
 
     $pdf->setPageTitle(' ');
 
