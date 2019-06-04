@@ -17,6 +17,39 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/main_style.css" rel="stylesheet">
     <script type="text/javascript" src="../js/lib/CreateHTML5Elements.js"></script>
+
+	<style>
+		h1 {
+			font-size: 20px;
+			color: #111;
+		}
+
+		.content {
+			width: 80%;
+			margin: 0 auto;
+			margin-top: 50px;
+		}
+
+		.tt-hint{
+			border: 2px solid #CCCCCC;
+			border-radius: 8px 8px 8px 8px;
+			outline: medium none;
+		}
+
+		.tt-dropdown-menu {
+			width: 250px;
+			margin-top: 5px;
+			padding: 8px 12px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border: 1px solid rgba(0, 0, 0, 0.2);
+			border-radius: 8px 8px 8px 8px;
+			font-size: 18px;
+			color: #111;
+			/*background-color: #F1F1F1;*/
+		}
+	</style>
+
 </head>
 
 <body>
@@ -63,6 +96,12 @@
 							<div class="col-sm-7 col-xs-7">
 								<input class="form-control" id="nic" name="nic" type="text"> </div>
 						</div>
+						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
+							<label for="" class="col-sm-5 col-xs-5">NAME<span class="mandatory">*</span></label>
+							<div class="col-sm-7 col-xs-7">
+								<input type="text" name="name" size="30" class="name" placeholder="Please Enter Customer Name"> </div>
+						</div>
+
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
 					</form>
                 </div>
@@ -114,6 +153,7 @@
         <!--/.container-->
         <!-- bootdtrap-->
         <script src="../js/lib/jquery.min.js"></script>
+        <script src="../js/lib/typeahead.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script src="../js/lib/bootstrap-datepicker.js"></script>
         <script src="../js/lib/jquery.dataTables.min.js"></script>

@@ -18,6 +18,14 @@ function clearFields(){
 }
 
 function pageInit(){
+    $('input.name').typeahead({
+        name: 'city',
+        remote: CUSTOMER_URL + '?REQUEST_TYPE=GET_SUGGESTION&name=%QUERY',
+        autocompleted: function (event, ui) {
+            alert(ui.item.id);
+            return false;
+        }
+    });
 }
 
 function formValidation() {

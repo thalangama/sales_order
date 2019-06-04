@@ -73,4 +73,28 @@ class createCustomer
 
         return ($data);
     }
+
+    function getCustomerSuggestion()
+    {
+
+        $name = '';
+
+        if($_GET["name"] != '')
+            $name = $_GET['name'];
+
+        $sql = "SELECT nic,name from customer_details WHERE name LIKE '".$name."%'";
+
+        $DbManager = new DbManager();
+        $data = $DbManager->select($sql);
+
+        foreach ($data as $key => $value) {
+            $array[] = array (
+                'label' => $value['nic'],
+                'value' => $value['name'],
+            );
+        }
+
+        return ($array);
+    }
+
 }
