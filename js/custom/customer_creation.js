@@ -18,13 +18,39 @@ function clearFields(){
 }
 
 function pageInit(){
-    $('input.name').typeahead({
-        name: 'city',
-        remote: CUSTOMER_URL + '?REQUEST_TYPE=GET_SUGGESTION&name=%QUERY',
-        autocompleted: function (event, ui) {
-            alert(ui.item.id);
-            return false;
-        }
+
+    $('#name').autocomplete({
+        serviceUrl: CUSTOMER_URL + '?REQUEST_TYPE=GET_SUGGESTION' ,
+        onSelect: function (suggestion) {
+
+            console.log(suggestion);
+            $("#nic").val(suggestion.data);
+        },
+        onSearchStart: function (query) {
+            query.rid = new Date().getTime();
+            $("#nic").val("");
+        },
+        onSearchError: function (query, jqXHR, textStatus, errorThrown) {
+            $('#name').val('');
+            $('#name').val('');
+        },
+        transformResult: function(response) {
+            if(JSON.parse(response).length > 0){
+                return {
+                    suggestions: $.map(JSON.parse(response), function(dataItem) {
+                        return { value: dataItem.value, data: dataItem.label };
+                    })
+                }
+            }else{
+                $('#name').val('');
+                $('#nic').val('');
+                return {
+                    suggestions:[]
+                }
+            }
+        },
+        minChars: 3,
+        noCache: true
     });
 }
 

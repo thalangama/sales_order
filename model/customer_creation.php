@@ -79,8 +79,8 @@ class createCustomer
 
         $name = '';
 
-        if($_GET["name"] != '')
-            $name = $_GET['name'];
+        if($_GET["query"] != '')
+            $name = $_GET['query'];
 
         $sql = "SELECT nic,name from customer_details WHERE name LIKE '".$name."%'";
 

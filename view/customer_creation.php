@@ -99,7 +99,7 @@
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12">
 							<label for="" class="col-sm-5 col-xs-5">NAME<span class="mandatory">*</span></label>
 							<div class="col-sm-7 col-xs-7">
-								<input type="text" name="name" size="30" class="name" placeholder="Please Enter Customer Name"> </div>
+								<input type="text" name="name" id="name" size="30" class="name" placeholder="Please Enter Customer Name"> </div>
 						</div>
 
 						<div class="form-group col-lg-6 col-sm-6 col-xs-12 pull-right"> <a id="btnSearch" class="btn btn-add pull-right" href="#">Search <span class="glyphicon glyphicon glyphicon-search"></span></a> </div>
@@ -153,7 +153,7 @@
         <!--/.container-->
         <!-- bootdtrap-->
         <script src="../js/lib/jquery.min.js"></script>
-        <script src="../js/lib/typeahead.js"></script>
+        <script src="../js/lib/jquery.autocomplete.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script src="../js/lib/bootstrap-datepicker.js"></script>
         <script src="../js/lib/jquery.dataTables.min.js"></script>
