@@ -23,6 +23,7 @@ class createCustomer
         $nic = '';
         $address = '';
         $phone = '';
+        $is_blacklist = 0;
 
         if($_POST["name"] != '')
             $name = $_POST['name'];
@@ -32,13 +33,13 @@ class createCustomer
             $address = $_POST['address'];
         if($_POST["phone_no"] != '')
             $phone = $_POST['phone_no'];
-        if($_POST["is_blacklist"] != '')
+        if(isset($_POST["is_blacklist"]) && $_POST["is_blacklist"] != '')
             $is_blacklist = $_POST['is_blacklist'];
 
         $sql = "INSERT INTO customer_details(name,address,phone_no,nic,is_blacklist) VALUES('$name','$address','$phone','$nic',$is_blacklist)";
 
         $DbManager = new DbManager();
-		$data = $DbManager->save($sql);
+        $data = $DbManager->save($sql);
 
         return ($data);
     }
