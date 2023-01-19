@@ -1,4 +1,5 @@
 <?php
+
 include_once '../controllers/session.php';
 checkAndAllow('orders.php');
 ?>
